@@ -78,6 +78,14 @@
             left: auto !important;
         }
         
+       .text-muted {
+    color: rgb(0 0 0) !important;
+    font-size: larger;
+}
+        .border-light {
+    --bs-border-opacity: 1;
+    border-color: #6c757d5e !important;
+}
         @keyframes dropdownSlide {
             from {
                 opacity: 0;
@@ -223,6 +231,45 @@
             object-fit: cover;
         }
         
+        /* توحيد أحجام النصوص في الجدول */
+        .table td, .table th {
+            vertical-align: middle;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .table .fs-6 {
+            font-size: 14px !important;
+        }
+        
+        .table .fw-semibold {
+            font-weight: 600;
+        }
+        
+        .badge {
+           font-size: 0.75rem;
+           color: black !important;
+        }
+        .table .badge {
+            font-size: 12px;
+            padding: 0.35em 0.65em;
+        }
+        
+        /* تحسين البحث */
+        .position-relative .fa-search {
+            color: #6c757d;
+            z-index: 3;
+        }
+        
+        .form-control.ps-5 {
+            padding-right: 2.5rem;
+        }
+        
+        .form-control {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    text-align: right;
+}
         .badge {
             font-size: 0.75rem;
         }
@@ -234,7 +281,7 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg border-bottom bg-white sticky-top">
+    <nav class="navbar navbar-expand-lg border-bottom  sticky-top">
         <div class="container-xxl px-3">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
                 <span class="navbar-toggler-icon"></span>
@@ -265,7 +312,7 @@
         </div>
     </nav>
 
-    <header class="bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+    <header class="" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
         <div class="container-xxl px-3 py-4">
             <h1 class="h4 m-0 fw-bold">📦 إدارة المنتجات</h1>
             <p class="mb-0 opacity-75">إدارة وتتبع جميع منتجات المتجر</p>
@@ -277,34 +324,40 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h6 class="mb-0">🛒 جميع المنتجات</h6>
                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productModal">
-                    ➕ إنشاء منتج جديد
+                    إنشاء منتج جديد
                 </button>
             </div>
             <div class="card-body">
-                <!-- فلتر البحث -->
-                <div class="row g-2 mb-3">
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="البحث عن منتج..." id="searchProduct">
+                <!-- فلتر البحث المحسن -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="position-relative">
+                            <input type="text" class="form-control ps-5" placeholder="البحث في المنتجات (الاسم، الباركود، الوصف...)" id="searchProduct">
+                            <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                        </div>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-control" id="categoryFilter">
-                            <option value="">جميع الفئات</option>
-                            <option value="electronics">إلكترونيات</option>
-                            <option value="clothing">ملابس</option>
-                            <option value="food">طعام</option>
-                            <option value="books">كتب</option>
+                        <select class="form-select" id="categoryFilter">
+                            <option value="">جميع التصنيفات</option>
+                            <option value="dairy">ألبان ومشتقاتها</option>
+                            <option value="meat">لحوم وأسماك</option>
+                            <option value="vegetables">خضار وفواكه</option>
+                            <option value="snacks">سناكات ومقرمشات</option>
+                            <option value="beverages">مشروبات</option>
+                            <option value="bakery">مخبوزات وحلويات</option>
+                            <option value="frozen">أطعمة مجمدة</option>
+                            <option value="canned">معلبات ومحفوظات</option>
+                            <option value="spices">بهارات وتوابل</option>
+                            <option value="cleaning">منظفات ومواد تنظيف</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-control" id="statusFilter">
+                        <select class="form-select" id="statusFilter">
                             <option value="">جميع الحالات</option>
-                            <option value="active">نشط</option>
-                            <option value="archived">مؤرشف</option>
+                            <option value="available">متوفر</option>
+                            <option value="low">قليل</option>
                             <option value="out_of_stock">نفد المخزون</option>
                         </select>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-outline-primary w-100" onclick="filterProducts()">🔍 بحث</button>
                     </div>
                 </div>
 
@@ -313,45 +366,45 @@
                     <table class="table table-hover align-middle table-mobile">
                         <thead class="table-light">
                             <tr>
-                                <th>صورة المنتج</th>
-                                <th>رقم المنتج/الباركود</th>
-                                <th>التصنيف</th>
-                                <th>اسم المنتج</th>
-                                <th>وصف المنتج</th>
-                                <th>السعر</th>
-                                <th>الوزن/الأبعاد</th>
-                                <th>الكمية</th>
-                                <th>حالة التوفر</th>
-                                <th>الإجراءات</th>
+                                <th style="width: 80px;">صورة المنتج</th>
+                                <th style="width: 140px;">رقم المنتج/الباركود</th>
+                                <th style="width: 120px;">التصنيف</th>
+                                <th style="width: 200px;">اسم المنتج</th>
+                                <th style="width: 250px;">وصف المنتج</th>
+                                <th style="width: 100px;">السعر</th>
+                                <th style="width: 120px;">الوزن/الحجم</th>
+                                <th style="width: 100px;">الكمية</th>
+                                <th style="width: 110px;">حالة التوفر</th>
+                                <th style="width: 130px;">الإجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="product-row">
                                 <td>
-                                    <img src="https://via.placeholder.com/50x50/007bff/ffffff?text=📱" 
+                                    <img src="https://i.pinimg.com/736x/50/c3/0e/50c30efb040a092fb169a0e877e63e2c.jpg" 
                                          alt="صورة المنتج" class="rounded product-image">
                                 </td>
                                 <td>
-                                    <span class="badge bg-info text-dark">1234567890123</span>
+                                    <span class="badge  text-dark fs-6">1234567890123</span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-secondary">إلكترونيات</span>
+                                    <span class="fs-6">ألبان ومشتقاتها</span>
                                 </td>
                                 <td>
-                                    <div class="fw-bold">جهاز سامسونج جالاكسي S23</div>
+                                    <div class="fw-semibold fs-6">حليب طازج كامل الدسم</div>
                                 </td>
                                 <td>
-                                    <small class="text-muted">هاتف ذكي بشاشة 6.1 بوصة وكاميرا متطورة</small>
+                                    <span class="text-muted fs-6">حليب بقري طازج كامل الدسم - 1 لتر</span>
                                 </td>
-                                <td class="fw-bold text-primary">899.99 د.أ</td>
+                                <td class="fw-bold text-success fs-6">2.50 د.أ</td>
                                 <td>
-                                    <small>168g<br>146.3×70.9×7.6mm</small>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">15 قطعة</span>
+                                    <span class="fs-6">1 لتر<br>1000 مل</span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-success">متوفر</span>
+                                    <span class="badge fs-6">25 قطعة</span>
+                                </td>
+                                <td>
+                                    <span class="badge fs-6">متوفر</span>
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group">
@@ -367,32 +420,32 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="product-row">
                                 <td>
-                                    <img src="https://via.placeholder.com/50x50/28a745/ffffff?text=👕" 
+                                    <img src="https://i.pinimg.com/736x/bd/cb/91/bdcb915dfb03f4169a473025a180ef30.jpg" 
                                          alt="صورة المنتج" class="rounded product-image">
                                 </td>
                                 <td>
-                                    <span class="badge bg-info text-dark">9876543210987</span>
+                                    <span class="badge  text-dark fs-6">9876543210987</span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-secondary">ملابس</span>
+                                    <span class="badge  fs-6">لحوم وأسماك</span>
                                 </td>
                                 <td>
-                                    <div class="fw-bold">قميص قطني أزرق</div>
+                                    <div class="fw-semibold fs-6">لحم بقري مفروم</div>
                                 </td>
                                 <td>
-                                    <small class="text-muted">قميص رجالي من القطن الخالص مقاس L</small>
+                                    <span class="text-muted fs-6">لحم بقري طازج مفروم ناعم - محلي</span>
                                 </td>
-                                <td class="fw-bold text-primary">45.00 د.أ</td>
+                                <td class="fw-bold text-success fs-6">18.00 د.أ</td>
                                 <td>
-                                    <small>200g<br>مقاس L</small>
-                                </td>
-                                <td>
-                                    <span class="badge bg-warning text-dark">3 قطع</span>
+                                    <span class="fs-6">1 كيلو<br>1000 جم</span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-warning">قليل</span>
+                                    <span class="badge text-dark fs-6">8 قطع</span>
+                                </td>
+                                <td>
+                                    <span class="badge fs-6">قليل</span>
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group">
@@ -403,6 +456,47 @@
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <button class="btn btn-outline-danger" onclick="deleteProduct(2)" title="حذف">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="product-row">
+                                <td>
+                                    <img src="https://i.pinimg.com/736x/48/e7/60/48e7605f18e17b8e92acb10a206fea11.jpg" 
+                                         alt="صورة المنتج" class="rounded product-image">
+                                </td>
+                                <td>
+                                    <span class="badge  text-dark fs-6">5432167890123</span>
+                                </td>
+                                <td>
+                                    <span class="badge    fs-6">خضار وفواكه</span>
+                                </td>
+                                <td>
+                                    <div class="fw-semibold fs-6">تفاح أحمر طبيعي</div>
+                                </td>
+                                <td>
+                                    <span class="text-muted fs-6">تفاح أحمر طازج من المزارع المحلية</span>
+                                </td>
+                                <td class="fw-bold text-success fs-6">4.50 د.أ</td>
+                                <td>
+                                    <span class="fs-6">1 كيلو<br>تقريباً 6-8 حبات</span>
+                                </td>
+                                <td>
+                                    <span class="badge    fs-6">50 قطعة</span>
+                                </td>
+                                <td>
+                                    <span class="badge    fs-6">متوفر</span>
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <button class="btn btn-outline-info" onclick="viewProduct(3)" title="عرض">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline-warning" onclick="editProduct(3)" title="تعديل">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger" onclick="deleteProduct(3)" title="حذف">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -420,12 +514,12 @@
                                  alt="صورة المنتج" class="rounded me-3" width="50" height="50">
                             <div>
                                 <div class="fw-bold">جهاز سامسونج جالاكسي S23</div>
-                                <span class="badge bg-secondary">إلكترونيات</span>
+                                <span class="badge ">إلكترونيات</span>
                             </div>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">رقم المنتج:</span>
-                            <span class="info-value"><span class="badge bg-info text-dark">1234567890123</span></span>
+                            <span class="info-value"><span class="badge  text-dark">1234567890123</span></span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الوصف:</span>
@@ -441,11 +535,11 @@
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الكمية:</span>
-                            <span class="info-value"><span class="badge bg-success">15 قطعة</span></span>
+                            <span class="info-value"><span class="badge   ">15 قطعة</span></span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">حالة التوفر:</span>
-                            <span class="info-value"><span class="badge bg-success">متوفر</span></span>
+                            <span class="info-value"><span class="badge   ">متوفر</span></span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الإجراءات:</span>
@@ -471,12 +565,12 @@
                                  alt="صورة المنتج" class="rounded me-3" width="50" height="50">
                             <div>
                                 <div class="fw-bold">قميص قطني أزرق</div>
-                                <span class="badge bg-secondary">ملابس</span>
+                                <span class="badge ">ملابس</span>
                             </div>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">رقم المنتج:</span>
-                            <span class="info-value"><span class="badge bg-info text-dark">9876543210987</span></span>
+                            <span class="info-value"><span class="badge  text-dark">9876543210987</span></span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الوصف:</span>
@@ -492,11 +586,11 @@
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الكمية:</span>
-                            <span class="info-value"><span class="badge bg-warning text-dark">3 قطع</span></span>
+                            <span class="info-value"><span class="badge   text-dark">3 قطع</span></span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">حالة التوفر:</span>
-                            <span class="info-value"><span class="badge bg-warning">قليل</span></span>
+                            <span class="info-value"><span class="badge  ">قليل</span></span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الإجراءات:</span>
@@ -524,9 +618,9 @@
     <div class="modal fade" id="productModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">إنشاء منتج جديد</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <div class="modal-header text-white text-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h5 class="modal-title w-100">إنشاء منتج جديد</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <form id="productForm">
@@ -547,18 +641,37 @@
                                 <textarea class="form-control" name="description" rows="3"></textarea>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">الفئة *</label>
+                                <label class="form-label">التصنيف *</label>
                                 <select class="form-control" name="category" required>
-                                    <option value="">اختر الفئة</option>
-                                    <option value="electronics">إلكترونيات</option>
-                                    <option value="clothing">ملابس</option>
-                                    <option value="food">طعام</option>
-                                    <option value="books">كتب</option>
+                                    <option value="">اختر التصنيف</option>
+                                    <option value="dairy">ألبان ومشتقاتها</option>
+                                    <option value="meat">لحوم وأسماك</option>
+                                    <option value="vegetables">خضار وفواكه</option>
+                                    <option value="snacks">سناكات ومقرمشات</option>
+                                    <option value="beverages">مشروبات</option>
+                                    <option value="bakery">مخبوزات وحلويات</option>
+                                    <option value="frozen">أطعمة مجمدة</option>
+                                    <option value="canned">معلبات ومحفوظات</option>
+                                    <option value="spices">بهارات وتوابل</option>
+                                    <option value="cleaning">منظفات ومواد تنظيف</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">الكمية المتوفرة</label>
-                                <input type="number" class="form-control" name="quantity" min="0">
+                                <label class="form-label">الكمية المتوفرة *</label>
+                                <input type="number" class="form-control" name="quantity" min="0" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الوزن/الحجم</label>
+                                <input type="text" class="form-control" name="weight" placeholder="مثال: 1 كيلو، 500 مل">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">حالة التوفر *</label>
+                                <select class="form-control" name="status" required>
+                                    <option value="">اختر الحالة</option>
+                                    <option value="available">متوفر</option>
+                                    <option value="low">قليل</option>
+                                    <option value="out_of_stock">نفد المخزون</option>
+                                </select>
                             </div>
                             <div class="col-12">
                                 <label class="form-label">الباركود</label>
@@ -570,15 +683,21 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <label class="form-label">صور المنتج</label>
-                                <input type="file" class="form-control" name="productImages" multiple accept="image/*">
+                                <label class="form-label">صورة المنتج</label>
+                                <input type="file" class="form-control" name="productImage" accept="image/*">
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-                    <button type="button" class="btn btn-primary" onclick="saveProduct()">💾 حفظ المنتج</button>
+                <div class="modal-footer justify-content-center">
+                    <div class="d-flex gap-3">
+                        <button type="button" class="btn btn-primary px-4 py-2 fw-semibold" onclick="saveProduct()">
+                            💾 حفظ المنتج
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary px-4 py-2 fw-semibold" data-bs-dismiss="modal">
+                            إلغاء
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -594,45 +713,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="text-center mb-4">
-                        <p class="text-muted">اختر طريقة إضافة الباركود:</p>
-                    </div>
-                    
-                    <!-- Manual Input Tab -->
-                    <div class="d-grid gap-2 mb-3">
-                        <button class="btn btn-outline-primary" onclick="showManualInput()">
-                            ✏️ إدخال الكود يدوياً
-                        </button>
-                        <button class="btn btn-outline-success" onclick="showCameraScanner()">
-                            📷 مسح الكاميرا
-                        </button>
-                    </div>
-
-                    <!-- Manual Input Section -->
-                    <div id="manualSection" class="d-none">
-                        <div class="mb-3">
-                            <label class="form-label">رقم الباركود</label>
-                            <input type="text" class="form-control" id="manualBarcode" placeholder="أدخل رقم الباركود...">
-                        </div>
-                        <button type="button" class="btn btn-primary w-100" onclick="addManualBarcode()">
-                            ✅ إضافة الباركود
-                        </button>
+                        <p class="text-muted">يرجى توجيه الكاميرا نحو الباركود:</p>
                     </div>
 
                     <!-- Camera Scanner Section -->
-                    <div id="cameraSection" class="d-none">
+                    <div id="cameraSection">
                         <div class="text-center mb-3">
-                            <div id="cameraPreview" class="camera-preview">
-                                📷 الكاميرا غير مفعلة
-                            </div>
-                            <video id="cameraVideo" class="d-none" width="100%" height="250" style="border-radius: 8px;"></video>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button type="button" class="btn btn-success" onclick="startCamera()" id="startCameraBtn">
-                                🎥 تشغيل الكاميرا
-                            </button>
-                            <button type="button" class="btn btn-danger d-none" onclick="stopCamera()" id="stopCameraBtn">
-                                🛑 إيقاف الكاميرا
-                            </button>
+                            <video id="cameraVideo" autoplay playsinline width="100%" height="250" style="border-radius: 8px; border: 1px solid #ddd;"></video>
                         </div>
                         <div id="scanResult" class="mt-3 d-none">
                             <div class="alert alert-success" role="alert">
@@ -645,9 +732,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const cameraModal = document.getElementById('barcodeModal');
+                        const video = document.getElementById('cameraVideo');
+
+                        cameraModal.addEventListener('show.bs.modal', () => {
+                            navigator.mediaDevices.getUserMedia({ video: true })
+                                .then((stream) => {
+                                    video.srcObject = stream;
+                                })
+                                .catch((err) => {
+                                    console.error('Error accessing camera:', err);
+                                });
+                        });
+
+                        cameraModal.addEventListener('hide.bs.modal', () => {
+                            const stream = video.srcObject;
+                            if (stream) {
+                                const tracks = stream.getTracks();
+                                tracks.forEach((track) => track.stop());
+                                video.srcObject = null;
+                            }
+                        });
+
+                        // Fix modal not hiding properly
+                        document.querySelectorAll('.btn-primary.btn-sm').forEach(button => {
+                            button.addEventListener('click', () => {
+                                const modal = bootstrap.Modal.getInstance(cameraModal);
+                                modal.hide();
+                            });
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>
@@ -689,9 +806,15 @@
                     </div>
                     <p class="text-muted">يمكن طباعة هذا الباركود ولصقه على المنتج</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                    <button type="button" class="btn btn-primary" onclick="printBarcode()">🖨️ طباعة</button>
+                <div class="modal-footer justify-content-center">
+                    <div class="d-flex gap-3">
+                        <button type="button" class="btn btn-primary px-4 py-2 fw-semibold" onclick="printBarcode()">
+                            🖨️ طباعة
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary px-4 py-2 fw-semibold" data-bs-dismiss="modal">
+                            إلغاء
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -814,10 +937,26 @@
 
         // Product Management Functions
         function filterProducts() {
-            const searchTerm = document.getElementById('searchProduct').value;
-            const category = document.getElementById('categoryFilter').value;
-            const status = document.getElementById('statusFilter').value;
-            console.log('Filtering products:', { searchTerm, category, status });
+            const searchTerm = document.getElementById('searchProduct').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            
+            const productRows = document.querySelectorAll('.product-row');
+            productRows.forEach(row => {
+                const productName = row.querySelector('.product-name').textContent.toLowerCase();
+                const productCategory = row.querySelector('.product-category').dataset.category;
+                const productStatus = row.querySelector('.product-status').dataset.status;
+
+                const matchesSearch = productName.includes(searchTerm);
+                const matchesCategory = !categoryFilter || productCategory === categoryFilter;
+                const matchesStatus = !statusFilter || productStatus === statusFilter;
+
+                if (matchesSearch && matchesCategory && matchesStatus) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
         }
 
         function editProduct(id) {
@@ -873,9 +1012,45 @@
         function saveProduct() {
             const form = document.getElementById('productForm');
             const formData = new FormData(form);
+            
+            // التحقق من صحة البيانات
+            const productName = formData.get('productName');
+            const price = formData.get('price');
+            const category = formData.get('category');
+            const quantity = formData.get('quantity');
+            const status = formData.get('status');
+            
+            if (!productName || !price || !category || !quantity || !status) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'خطأ!',
+                    text: 'يرجى ملء جميع الحقول المطلوبة',
+                    confirmButtonText: 'حسناً',
+                    confirmButtonColor: '#dc3545'
+                });
+                return;
+            }
+            
             console.log('Saving product:', Object.fromEntries(formData));
-            alert('تم حفظ المنتج بنجاح!');
+            
+            // إغلاق المودال
             bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();
+            
+            // إظهار رسالة نجاح
+            Swal.fire({
+                icon: 'success',
+                title: 'تم بنجاح!',
+                text: 'تم حفظ المنتج الجديد بنجاح',
+                confirmButtonText: 'حسناً',
+                confirmButtonColor: '#28a745',
+                timer: 3000,
+                timerProgressBar: true
+            });
+            
+            // إعادة تعيين النموذج
+            form.reset();
+            
+            // هنا يمكن إضافة كود لإرسال البيانات للخادم وإضافة المنتج للجدول
         }
     </script>
 
@@ -965,5 +1140,452 @@
             }
         }
     </style>
+
+    <!-- مودال عرض تفاصيل المنتج -->
+    <div class="modal fade" id="viewProductModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-white text-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h5 class="modal-title w-100">تفاصيل المنتج</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- صورة المنتج -->
+                    <div class="text-center mb-4">
+                        <div class="position-relative d-inline-block">
+                            <img id="viewProductImage" src="" alt="صورة المنتج" 
+                                 class="img-fluid rounded-3 shadow-sm border" 
+                                 style="width: 180px; height: 180px; object-fit: cover;">
+                        </div>
+                    </div>
+
+                    <!-- تفاصيل المنتج -->
+                    <div class="row g-3">
+                        <!-- اسم المنتج -->
+                        <div class="col-12">
+                            <div class="p-3 border border-light rounded-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-box text-primary me-2"></i>
+                                    <small class="text-muted text-uppercase fw-semibold">اسم المنتج</small>
+                                </div>
+                                <p id="viewProductName" class="mb-0 fw-bold"></p>
+                            </div>
+                        </div>
+
+                        <!-- التصنيف والباركود -->
+                        <div class="col-md-6">
+                            <div class="p-3 border border-light rounded-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-tags text-success me-2"></i>
+                                    <small class="text-muted text-uppercase fw-semibold">التصنيف</small>
+                                </div>
+                                <p id="viewProductCategory" class="mb-0 text-dark"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border border-light rounded-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-barcode text-info me-2"></i>
+                                    <small class="text-muted text-uppercase fw-semibold">الباركود</small>
+                                </div>
+                                <p id="viewProductBarcode" class="mb-0 text-dark font-monospace"></p>
+                            </div>
+                        </div>
+
+                        <!-- السعر والكمية -->
+                        <div class="col-md-6">
+                            <div class="p-3 border border-light rounded-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-dollar-sign text-warning me-2"></i>
+                                    <small class="text-muted text-uppercase fw-semibold">السعر</small>
+                                </div>
+                                <p id="viewProductPrice" class="mb-0 text-dark"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border border-light rounded-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-cubes text-danger me-2"></i>
+                                    <small class="text-muted text-uppercase fw-semibold">الكمية المتوفرة</small>
+                                </div>
+                                <p id="viewProductQuantity" class="mb-0 text-dark"></p>
+                            </div>
+                        </div>
+
+                        <!-- الوزن وحالة التوفر -->
+                        <div class="col-md-6">
+                            <div class="p-3 border border-light rounded-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-weight text-secondary me-2"></i>
+                                    <small class="text-muted text-uppercase fw-semibold">الوزن/الحجم</small>
+                                </div>
+                                <p id="viewProductWeight" class="mb-0 text-dark"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border border-light rounded-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                    <small class="text-muted text-uppercase fw-semibold">حالة التوفر</small>
+                                </div>
+                                <p id="viewProductStatus" class="mb-0 text-dark"></p>
+                            </div>
+                        </div>
+
+                        <!-- وصف المنتج -->
+                        <div class="col-12">
+                            <div class="p-3 border border-light rounded-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-align-left text-muted me-2"></i>
+                                    <small class="text-muted text-uppercase fw-semibold">وصف المنتج</small>
+                                </div>
+                                <p id="viewProductDescription" class="mb-0 text-dark lh-lg"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0 pb-4 px-4 justify-content-center">
+                    <div class="d-flex gap-3">
+                        <button type="button" class="btn btn-primary px-4 py-2 fw-semibold" onclick="editProductFromView()">
+                            <i class="fas fa-edit me-2"></i>تعديل المنتج
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary px-4 py-2 fw-semibold" data-bs-dismiss="modal">
+                            إلغاء
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال تعديل المنتج -->
+    <div class="modal fade" id="editProductModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-white text-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h5 class="modal-title w-100">تعديل المنتج</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm">
+                        <input type="hidden" id="editProductId">
+                        <div class="text-center mb-4">
+                            <div class="position-relative d-inline-block">
+                                <img id="editProductImagePreview" src="" alt="صورة المنتج" class="rounded shadow" style="width: 150px; height: 150px; object-fit: cover;">
+                                <button type="button" class="btn btn-sm btn-primary position-absolute bottom-0 end-0" onclick="document.getElementById('editProductImageInput').click()">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                                <input type="file" id="editProductImageInput" accept="image/*" style="display: none;" onchange="previewEditImage(this)">
+                            </div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark fs-6">اسم المنتج <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control fs-6" id="editProductNameInput" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark fs-6">التصنيف <span class="text-danger">*</span></label>
+                                <select class="form-select fs-6" id="editProductCategoryInput" required>
+                                    <option value="">اختر التصنيف</option>
+                                    <option value="dairy">ألبان ومشتقاتها</option>
+                                    <option value="meat">لحوم وأسماك</option>
+                                    <option value="vegetables">خضار وفواكه</option>
+                                    <option value="snacks">سناكات ومقرمشات</option>
+                                    <option value="beverages">مشروبات</option>
+                                    <option value="bakery">مخبوزات وحلويات</option>
+                                    <option value="frozen">أطعمة مجمدة</option>
+                                    <option value="canned">معلبات ومحفوظات</option>
+                                    <option value="spices">بهارات وتوابل</option>
+                                    <option value="cleaning">منظفات ومواد تنظيف</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark fs-6">وصف المنتج</label>
+                                <textarea class="form-control fs-6" id="editProductDescriptionInput" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-4 ms-auto">
+                                <label class="form-label fw-bold text-dark fs-6">السعر (د.أ) <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control fs-6" id="editProductPriceInput" step="0.01" min="0" required>
+                            </div>
+                            <div class="col-md-4 ms-auto">
+                                <label class="form-label fw-bold text-dark fs-6">الكمية <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control fs-6" id="editProductQuantityInput" min="0" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold text-dark fs-6">الوزن/الحجم</label>
+                                <input type="text" class="form-control fs-6" id="editProductWeightInput" placeholder="مثال: 1 كيلو">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark fs-6">رقم المنتج/الباركود</label>
+                                <input type="text" class="form-control font-monospace fs-6" id="editProductBarcodeInput" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-0 pt-0 pb-4 px-4 justify-content-center">
+                    <button type="button" class="btn btn-success text-white px-4 py-2 fw-semibold" onclick="saveChanges()">
+                        <i class="fas fa-save me-2"></i>حفظ التغييرات
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary px-4 py-2 fw-semibold" data-bs-dismiss="modal">
+                        إلغاء
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- تضمين Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // بيانات المنتجات التجريبية
+        const products = {
+            1: {
+                id: 1,
+                name: "حليب طازج كامل الدسم",
+                category: "dairy",
+                categoryName: "ألبان ومشتقاتها",
+                description: "حليب بقري طازج كامل الدسم - 1 لتر",
+                price: 2.50,
+                quantity: 25,
+                weight: "1 لتر - 1000 مل",
+                barcode: "1234567890123",
+                status: "available",
+                statusName: "متوفر",
+                image: "https://i.pinimg.com/736x/50/c3/0e/50c30efb040a092fb169a0e877e63e2c.jpg"
+            },
+            2: {
+                id: 2,
+                name: "لحم بقري مفروم",
+                category: "meat",
+                categoryName: "لحوم وأسماك",
+                description: "لحم بقري طازج مفروم ناعم - محلي",
+                price: 18.00,
+                quantity: 8,
+                weight: "1 كيلو - 1000 جم",
+                barcode: "9876543210987",
+                status: "low",
+                statusName: "قليل",
+                image: "https://i.pinimg.com/736x/bd/cb/91/bdcb915dfb03f4169a473025a180ef30.jpg"
+            },
+            3: {
+                id: 3,
+                name: "تفاح أحمر طبيعي",
+                category: "vegetables",
+                categoryName: "خضار وفواكه",
+                description: "تفاح أحمر طازج من المزارع المحلية",
+                price: 4.50,
+                quantity: 50,
+                weight: "1 كيلو - تقريباً 6-8 حبات",
+                barcode: "5432167890123",
+                status: "available",
+                statusName: "متوفر",
+                image: "https://i.pinimg.com/736x/48/e7/60/48e7605f18e17b8e92acb10a206fea11.jpg"
+            },
+        };
+
+        // وظيفة عرض تفاصيل المنتج
+        function viewProduct(productId) {
+            const product = products[productId];
+            if (!product) return;
+
+            // ملء البيانات في المودال
+            document.getElementById('viewProductImage').src = product.image;
+            document.getElementById('viewProductName').textContent = product.name;
+            document.getElementById('viewProductCategory').innerHTML = `<span>${product.categoryName}</span>`;
+            document.getElementById('viewProductDescription').textContent = product.description;
+            document.getElementById('viewProductPrice').textContent = `${product.price} د.أ`;
+            document.getElementById('viewProductQuantity').innerHTML = `${product.quantity} قطعة`;
+            document.getElementById('viewProductStatus').innerHTML = `${product.statusName}`;
+            document.getElementById('viewProductWeight').textContent = product.weight;
+            document.getElementById('viewProductBarcode').textContent = product.barcode;
+
+            // حفظ ID المنتج للتعديل اللاحق
+            document.getElementById('viewProductModal').setAttribute('data-product-id', productId);
+
+            // إظهار المودال
+            new bootstrap.Modal(document.getElementById('viewProductModal')).show();
+        }
+
+        // وظيفة تعديل المنتج
+        function editProduct(productId) {
+            const product = products[productId];
+            if (!product) return;
+
+            // ملء البيانات في مودال التعديل
+            document.getElementById('editProductId').value = productId;
+            document.getElementById('editProductImagePreview').src = product.image;
+            document.getElementById('editProductNameInput').value = product.name;
+            document.getElementById('editProductCategoryInput').value = product.category;
+            document.getElementById('editProductDescriptionInput').value = product.description;
+            document.getElementById('editProductPriceInput').value = product.price;
+            document.getElementById('editProductQuantityInput').value = product.quantity;
+            document.getElementById('editProductWeightInput').value = product.weight;
+            document.getElementById('editProductBarcodeInput').value = product.barcode;
+
+            // إظهار مودال التعديل
+            new bootstrap.Modal(document.getElementById('editProductModal')).show();
+        }
+
+        // وظيفة التعديل من مودال العرض
+        function editProductFromView() {
+            const productId = document.getElementById('viewProductModal').getAttribute('data-product-id');
+            // إغلاق مودال العرض
+            bootstrap.Modal.getInstance(document.getElementById('viewProductModal')).hide();
+            // فتح مودال التعديل
+            setTimeout(() => editProduct(productId), 300);
+        }
+
+        // وظيفة معاينة الصورة الجديدة
+        function previewEditImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('editProductImagePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // وظيفة حفظ التعديلات
+        function saveEditedProduct() {
+            const productId = document.getElementById('editProductId').value;
+            const form = document.getElementById('editProductForm');
+            
+            // التحقق من صحة البيانات
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // محاكاة حفظ البيانات
+            const updatedProduct = {
+                name: document.getElementById('editProductNameInput').value,
+                category: document.getElementById('editProductCategoryInput').value,
+                description: document.getElementById('editProductDescriptionInput').value,
+                price: parseFloat(document.getElementById('editProductPriceInput').value),
+                quantity: parseInt(document.getElementById('editProductQuantityInput').value),
+                weight: document.getElementById('editProductWeightInput').value
+            };
+
+            // إغلاق المودال
+            bootstrap.Modal.getInstance(document.getElementById('editProductModal')).hide();
+
+            // إظهار رسالة نجاح
+            Swal.fire({
+                icon: 'success',
+                title: 'تم بنجاح!',
+                text: 'تم تحديث بيانات المنتج بنجاح',
+                confirmButtonText: 'حسناً',
+                confirmButtonColor: '#28a745',
+                timer: 3000,
+                timerProgressBar: true
+            });
+
+            // هنا يمكن إضافة كود لإرسال البيانات للخادم
+            console.log('Updated product:', updatedProduct);
+        }
+
+        // وظيفة حذف المنتج
+        function deleteProduct(productId) {
+            const product = products[productId];
+            if (!product) return;
+
+            Swal.fire({
+                title: 'هل أنت متأكد؟',
+                text: `سيتم حذف "${product.name}" نهائياً ولا يمكن التراجع عن هذا الإجراء`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'نعم، احذف المنتج',
+                cancelButtonText: 'إلغاء',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // محاكاة عملية الحذف
+                    setTimeout(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'تم الحذف!',
+                            text: 'تم حذف المنتج بنجاح',
+                            confirmButtonText: 'حسناً',
+                            confirmButtonColor: '#28a745',
+                            timer: 3000,
+                            timerProgressBar: true
+                        });
+
+                        // هنا يمكن إضافة كود لحذف المنتج من الجدول
+                        console.log('Deleted product:', productId);
+                    }, 1000);
+                }
+            });
+        }
+
+        // وظيفة البحث والفلترة
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchProduct').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            
+            console.log('Filtering products:', { searchTerm, categoryFilter, statusFilter });
+            
+            const productRows = document.querySelectorAll('tbody .product-row');
+            let visibleCount = 0;
+            
+            productRows.forEach(row => {
+                // الحصول على بيانات المنتج من الخلايا
+                const cells = row.querySelectorAll('td');
+                if (cells.length < 9) return; // تأكد من وجود جميع الخلايا
+                
+                const productName = cells[3].textContent.toLowerCase().trim(); // اسم المنتج
+                const productBarcode = cells[1].textContent.toLowerCase().trim(); // الباركود
+                const productDescription = cells[4].textContent.toLowerCase().trim(); // الوصف
+                const productCategory = cells[2].textContent.trim(); // التصنيف
+                const productStatus = cells[8].textContent.trim(); // حالة التوفر
+                
+                // تحقق من البحث (في الاسم أو الباركود أو الوصف)
+                const matchesSearch = !searchTerm || 
+                    productName.includes(searchTerm) || 
+                    productBarcode.includes(searchTerm) || 
+                    productDescription.includes(searchTerm);
+                
+                // تحقق من التصنيف
+                const matchesCategory = !categoryFilter || 
+                    (categoryFilter === 'dairy' && productCategory === 'ألبان ومشتقاتها') ||
+                    (categoryFilter === 'meat' && productCategory === 'لحوم وأسماك') ||
+                    (categoryFilter === 'vegetables' && productCategory === 'خضار وفواكه') ||
+                    (categoryFilter === 'snacks' && productCategory === 'سناكات ومقرمشات') ||
+                    (categoryFilter === 'beverages' && productCategory === 'مشروبات') ||
+                    (categoryFilter === 'bakery' && productCategory === 'مخبوزات وحلويات') ||
+                    (categoryFilter === 'frozen' && productCategory === 'أطعمة مجمدة') ||
+                    (categoryFilter === 'canned' && productCategory === 'معلبات ومحفوظات') ||
+                    (categoryFilter === 'spices' && productCategory === 'بهارات وتوابل') ||
+                    (categoryFilter === 'cleaning' && productCategory === 'منظفات ومواد تنظيف');
+                
+                // تحقق من حالة التوفر
+                const matchesStatus = !statusFilter || 
+                    (statusFilter === 'available' && productStatus === 'متوفر') ||
+                    (statusFilter === 'low' && productStatus === 'قليل') ||
+                    (statusFilter === 'out_of_stock' && productStatus === 'نفد المخزون');
+                
+                // إظهار أو إخفاء الصف
+                if (matchesSearch && matchesCategory && matchesStatus) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            
+            console.log(`عدد المنتجات المعروضة: ${visibleCount}`);
+        }
+
+        // إضافة مستمع للبحث المباشر
+        document.getElementById('searchProduct').addEventListener('input', filterProducts);
+        document.getElementById('categoryFilter').addEventListener('change', filterProducts);
+        document.getElementById('statusFilter').addEventListener('change', filterProducts);
+    </script>
 </body>
 </html>
