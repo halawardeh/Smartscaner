@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-                                <th>المنتج</th>
+                                <th>السعر</th>
+                                <th>الباركود</th>
+                                <th>الكمية</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>    <meta name="viewport" content="width=                                <td class="fw-bold text-primary">45.00 د.أ</td>
+                                <td>
+                                    <span class="badge bg-info text-dark">9876543210987</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-warning text-dark">3 قطع</span>
+                                </td>ce-width, initial-scale=1.0, viewport-fit=cover">
+    <title>المنتجات - لوحة الأدمن</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg border-bottom bg-white sticky-top">
+        <div class="container-xxl px-3">
+            <a class="navbar-brand fw-bold" href="index.html">لوحة الأدمن</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMain">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="products.html">المنتجات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="slider.html">السلايدر</a></li>
+                    <li class="nav-item"><a class="nav-link" href="account.html">إدارة الحساب</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-white border-bottom">
+        <div class="container-xxl px-3 py-3">
+            <h1 class="h4 m-0">إدارة المنتجات</h1>
+        </div>
+    </header>
+
+    <main class="container-xxl px-3 my-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="mb-0">🛒 جميع المنتجات</h6>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productModal">
+                    ➕ إنشاء منتج جديد
+                </button>
+            </div>
+            <div class="card-body">
+                <!-- فلتر البحث -->
+                <div class="row g-2 mb-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="البحث عن منتج..." id="searchProduct">
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" id="categoryFilter">
+                            <option value="">جميع الفئات</option>
+                            <option value="electronics">إلكترونيات</option>
+                            <option value="clothing">ملابس</option>
+                            <option value="food">طعام</option>
+                            <option value="books">كتب</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" id="statusFilter">
+                            <option value="">جميع الحالات</option>
+                            <option value="active">نشط</option>
+                            <option value="archived">مؤرشف</option>
+                            <option value="out_of_stock">نفد المخزون</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-outline-primary w-100" onclick="filterProducts()">🔍 بحث</button>
+                    </div>
+                </div>
+
+                <!-- جدول المنتجات -->
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>الصورة</th>
+                                <th>اسم المنتج</th>
+                                <th>السعر</th>
+                                <th>الكمية</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="product-image">📱</div>
+                                </td>
+                                <td>
+                                    <div class="fw-bold">جهاز سامسونج جالاكسي</div>
+                                    <div class="text-muted small">إلكترونيات</div>
+                                </td>
+                                <td class="fw-bold text-primary">899.99 د.أ</td>
+                                <td>
+                                    <span class="badge bg-info text-dark">1234567890123</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-success">15 قطعة</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-success">نشط</span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                            إجراءات
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="editProduct(1)">✏️ تعديل</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="viewBarcode(1)">📱 عرض الباركود</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="archiveProduct(1)">📦 أرشفة</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#" onclick="deleteProduct(1)">🗑️ حذف</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="product-image">👕</div>
+                                </td>
+                                <td>
+                                    <div class="fw-bold">قميص قطني أزرق</div>
+                                    <div class="text-muted small">ملابس</div>
+                                </td>
+                                <td class="fw-bold text-primary">45.00 د.أ</td>
+                                <td>
+                                    <span class="badge bg-warning">3 قطع</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-warning">مؤرشف</span>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                                            إجراءات
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#" onclick="editProduct(2)">✏️ تعديل</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="viewBarcode(2)">📱 عرض الباركود</a></li>
+                                            <li><a class="dropdown-item" href="#" onclick="unarchiveProduct(2)">📤 إلغاء الأرشفة</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-danger" href="#" onclick="deleteProduct(2)">🗑️ حذف</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إنشاء منتج جديد</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="productForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">اسم المنتج *</label>
+                                <input type="text" class="form-control" name="productName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">السعر *</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="price" step="0.01" required>
+                                    <span class="input-group-text">د.أ</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">وصف المنتج</label>
+                                <textarea class="form-control" name="description" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الفئة *</label>
+                                <select class="form-control" name="category" required>
+                                    <option value="">اختر الفئة</option>
+                                    <option value="electronics">إلكترونيات</option>
+                                    <option value="clothing">ملابس</option>
+                                    <option value="food">طعام</option>
+                                    <option value="books">كتب</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الكمية المتوفرة</label>
+                                <input type="number" class="form-control" name="quantity" min="0">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">الباركود</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="barcode" placeholder="أدخل رقم الباركود..." readonly>
+                                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
+                                        📷 إضافة باركود
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">صور المنتج</label>
+                                <input type="file" class="form-control" name="productImages" multiple accept="image/*">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="saveProduct()">💾 حفظ المنتج</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barcode Modal -->
+    <div class="modal fade" id="barcodeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إضافة باركود للمنتج</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <p class="text-muted">اختر طريقة إضافة الباركود:</p>
+                    </div>
+                    
+                    <!-- Manual Input Tab -->
+                    <div class="d-grid gap-2 mb-3">
+                        <button class="btn btn-outline-primary" onclick="showManualInput()">
+                            ✏️ إدخال الكود يدوياً
+                        </button>
+                        <button class="btn btn-outline-success" onclick="showCameraScanner()">
+                            📷 مسح الكاميرا
+                        </button>
+                    </div>
+
+                    <!-- Manual Input Section -->
+                    <div id="manualSection" class="d-none">
+                        <div class="mb-3">
+                            <label class="form-label">رقم الباركود</label>
+                            <input type="text" class="form-control" id="manualBarcode" placeholder="أدخل رقم الباركود...">
+                        </div>
+                        <button type="button" class="btn btn-primary w-100" onclick="addManualBarcode()">
+                            ✅ إضافة الباركود
+                        </button>
+                    </div>
+
+                    <!-- Camera Scanner Section -->
+                    <div id="cameraSection" class="d-none">
+                        <div class="text-center mb-3">
+                            <div id="cameraPreview" class="camera-preview">
+                                📷 الكاميرا غير مفعلة
+                            </div>
+                            <video id="cameraVideo" class="d-none" width="100%" height="250" style="border-radius: 8px;"></video>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-success" onclick="startCamera()" id="startCameraBtn">
+                                🎥 تشغيل الكاميرا
+                            </button>
+                            <button type="button" class="btn btn-danger d-none" onclick="stopCamera()" id="stopCameraBtn">
+                                🛑 إيقاف الكاميرا
+                            </button>
+                        </div>
+                        <div id="scanResult" class="mt-3 d-none">
+                            <div class="alert alert-success" role="alert">
+                                <strong>تم المسح بنجاح!</strong>
+                                <p class="mb-2">الباركود: <span id="scannedCode"></span></p>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="confirmScannedBarcode()">
+                                    ✅ تأكيد الباركود
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barcode View Modal -->
+    <div class="modal fade" id="barcodeViewModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">باركود المنتج</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <h6 id="productNameDisplay" class="mb-3">اسم المنتج</h6>
+                    <div class="barcode-display mb-3">
+                        <div class="barcode-lines">
+                            <div class="line"></div>
+                            <div class="line wide"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line wide"></div>
+                            <div class="line"></div>
+                            <div class="line wide"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line wide"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line wide"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line wide"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line wide"></div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="barcode-number" id="barcodeNumber">1234567890123</div>
+                    </div>
+                    <p class="text-muted">يمكن طباعة هذا الباركود ولصقه على المنتج</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                    <button type="button" class="btn btn-primary" onclick="printBarcode()">🖨️ طباعة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Barcode Variables
+        let cameraStream = null;
+        let scanningInterval = null;
+
+        // Barcode Functions
+        function showManualInput() {
+            document.getElementById('manualSection').classList.remove('d-none');
+            document.getElementById('cameraSection').classList.add('d-none');
+            stopCamera();
+        }
+
+        function showCameraScanner() {
+            document.getElementById('cameraSection').classList.remove('d-none');
+            document.getElementById('manualSection').classList.add('d-none');
+        }
+
+        function addManualBarcode() {
+            const barcode = document.getElementById('manualBarcode').value.trim();
+            if (barcode) {
+                document.querySelector('input[name="barcode"]').value = barcode;
+                bootstrap.Modal.getInstance(document.getElementById('barcodeModal')).hide();
+                alert('تم إضافة الباركود بنجاح!');
+                resetBarcodeModal();
+            } else {
+                alert('يرجى إدخال رقم الباركود');
+            }
+        }
+
+        async function startCamera() {
+            try {
+                const constraints = {
+                    video: {
+                        facingMode: 'environment',
+                        width: { ideal: 640 },
+                        height: { ideal: 480 }
+                    }
+                };
+                
+                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                const video = document.getElementById('cameraVideo');
+                video.srcObject = cameraStream;
+                video.play();
+                
+                document.getElementById('cameraPreview').classList.add('d-none');
+                video.classList.remove('d-none');
+                document.getElementById('startCameraBtn').classList.add('d-none');
+                document.getElementById('stopCameraBtn').classList.remove('d-none');
+                
+                // محاكاة مسح الباركود
+                setTimeout(() => {
+                    simulateBarcodeScan();
+                }, 3000);
+                
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                alert('لا يمكن الوصول للكاميرا. يرجى التأكد من الصلاحيات.');
+            }
+        }
+
+        function stopCamera() {
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
+            }
+            
+            const video = document.getElementById('cameraVideo');
+            video.classList.add('d-none');
+            document.getElementById('cameraPreview').classList.remove('d-none');
+            document.getElementById('startCameraBtn').classList.remove('d-none');
+            document.getElementById('stopCameraBtn').classList.add('d-none');
+            
+            if (scanningInterval) {
+                clearInterval(scanningInterval);
+                scanningInterval = null;
+            }
+        }
+
+        function simulateBarcodeScan() {
+            // محاكاة نتيجة مسح باركود حقيقي
+            const mockBarcodes = [
+                '1234567890123',
+                '9876543210987',
+                '5555555555555',
+                '1111111111111'
+            ];
+            
+            const randomBarcode = mockBarcodes[Math.floor(Math.random() * mockBarcodes.length)];
+            document.getElementById('scannedCode').textContent = randomBarcode;
+            document.getElementById('scanResult').classList.remove('d-none');
+            stopCamera();
+        }
+
+        function confirmScannedBarcode() {
+            const scannedCode = document.getElementById('scannedCode').textContent;
+            document.querySelector('input[name="barcode"]').value = scannedCode;
+            bootstrap.Modal.getInstance(document.getElementById('barcodeModal')).hide();
+            alert('تم إضافة الباركود المسوح بنجاح!');
+            resetBarcodeModal();
+        }
+
+        function resetBarcodeModal() {
+            document.getElementById('manualSection').classList.add('d-none');
+            document.getElementById('cameraSection').classList.add('d-none');
+            document.getElementById('scanResult').classList.add('d-none');
+            document.getElementById('manualBarcode').value = '';
+            stopCamera();
+        }
+
+        // Reset modal when closed
+        document.getElementById('barcodeModal').addEventListener('hidden.bs.modal', function () {
+            resetBarcodeModal();
+        });
+
+        // Product Management Functions
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchProduct').value;
+            const category = document.getElementById('categoryFilter').value;
+            const status = document.getElementById('statusFilter').value;
+            console.log('Filtering products:', { searchTerm, category, status });
+        }
+
+        function editProduct(id) {
+            console.log('Editing product:', id);
+            document.getElementById('productModal').querySelector('.modal-title').textContent = 'تعديل المنتج';
+            new bootstrap.Modal(document.getElementById('productModal')).show();
+        }
+
+        function viewBarcode(id) {
+            // محاكاة بيانات المنتج
+            const productData = {
+                1: { name: 'جهاز سامسونج جالاكسي', barcode: '1234567890123' },
+                2: { name: 'قميص قطني أزرق', barcode: '9876543210987' }
+            };
+            
+            const product = productData[id] || { name: 'منتج غير معروف', barcode: '0000000000000' };
+            
+            document.getElementById('productNameDisplay').textContent = product.name;
+            document.getElementById('barcodeNumber').textContent = product.barcode;
+            
+            new bootstrap.Modal(document.getElementById('barcodeViewModal')).show();
+        }
+
+        function printBarcode() {
+            window.print();
+        }
+
+        function archiveProduct(id) {
+            if (confirm('هل أنت متأكد من أرشفة هذا المنتج؟')) {
+                console.log('Archiving product:', id);
+                alert('تم أرشفة المنتج بنجاح!');
+            }
+        }
+
+        function unarchiveProduct(id) {
+            if (confirm('هل تريد إلغاء أرشفة هذا المنتج؟')) {
+                console.log('Unarchiving product:', id);
+                alert('تم إلغاء أرشفة المنتج!');
+            }
+        }
+
+        function deleteProduct(id) {
+            if (confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) {
+                console.log('Deleting product:', id);
+                alert('تم حذف المنتج!');
+            }
+        }
+
+        function viewBarcode(id) {
+            alert('عرض باركود المنتج رقم: ' + id);
+        }
+
+        function saveProduct() {
+            const form = document.getElementById('productForm');
+            const formData = new FormData(form);
+            console.log('Saving product:', Object.fromEntries(formData));
+            alert('تم حفظ المنتج بنجاح!');
+            bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();
+        }
+    </script>
+
+    <style>
+        .product-image {
+            width: 60px;
+            height: 60px;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .camera-preview {
+            width: 100%;
+            height: 250px;
+            background: #f8f9fa;
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #6c757d;
+        }
+
+        #cameraVideo {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 2px solid #28a745;
+        }
+
+        #barcodeModal .modal-body {
+            min-height: 300px;
+        }
+
+        .input-group .btn {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .barcode-display {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .barcode-lines {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 80px;
+            background: white;
+            border: 1px solid #dee2e6;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .barcode-lines .line {
+            width: 2px;
+            height: 60px;
+            background: #000;
+            margin: 0 1px;
+        }
+
+        .barcode-lines .line.wide {
+            width: 4px;
+        }
+
+        .barcode-number {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #333;
+        }
+
+        @media print {
+            .barcode-display {
+                max-width: none;
+            }
+            
+            .modal-header, .modal-footer {
+                display: none;
+            }
+        }
+    </style>
+</body>
+</html>

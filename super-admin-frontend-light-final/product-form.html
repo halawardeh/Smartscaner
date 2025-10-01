@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>إضافة/تعديل منتج</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg border-bottom bg-white sticky-top">
+  <div class="container-xxl px-3">
+    <a class="navbar-brand fw-bold" href="index.html">لوحة السوبر آدمن</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
+        <li class="nav-item"><a class="nav-link" href="stores.html">المتاجر</a></li>
+        <li class="nav-item"><a class="nav-link" href="ads.html">الإعلانات</a></li>
+        <li class="nav-item"><a class="nav-link" href="offers.html">العروض</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="bg-white border-bottom">
+  <div class="container-xxl px-3 py-3"><h1 class="h4 m-0">إضافة/تعديل منتج</h1></div>
+</header>
+
+<main class="container-xxl px-3 my-4">
+  <div class="d-flex align-items-center justify-content-between mb-2">
+    <h5 class="mb-0">🛒 إضافة/تعديل منتج</h5>
+    <a href="store-details.html" class="btn btn-outline-primary btn-sm">رجوع</a>
+  </div>
+
+  <!-- صار عنده id="scanForm" -->
+  <form id="scanForm" class="card p-3" onsubmit="event.preventDefault(); alert('تم حفظ المنتج (واجهة أمامية فقط).');">
+    <div class="mb-2">
+      <label class="form-label">اسم المنتج</label>
+      <input type="text" class="form-control" required>
+    </div>
+    <div class="mb-2">
+      <label class="form-label">وصف</label>
+      <textarea class="form-control" rows="3"></textarea>
+    </div>
+    <div class="row">
+      <div class="col-6 mb-2">
+        <label class="form-label">السعر</label>
+        <input type="number" step="0.01" class="form-control" required>
+      </div>
+      <div class="col-6 mb-2">
+        <label class="form-label">الفئة</label>
+        <select class="form-select">
+          <option>عام</option>
+          <option>أدوية</option>
+          <option>أغذية</option>
+        </select>
+      </div>
+    </div>
+    <div class="mb-2">
+      <label class="form-label">صورة المنتج</label>
+      <input type="file" class="form-control">
+    </div>
+    <div class="mb-2">
+      <label class="form-label">باركود المنتج</label>
+      <div class="input-group">
+        <input id="barcodeInput" type="text" class="form-control" name="barcode" placeholder="امسح الباركود أو اكتب القيمة">
+        <button id="btnScan" class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#scanBox">📷 مسح</button>
+      </div>
+    </div>
+
+    <div id="scanBox" class="collapse">
+      <div class="card p-2 mt-2">
+        <video id="preview" autoplay playsinline style="width:100%;max-height:260px;border-radius:12px;border:1px solid #ccc"></video>
+        <div class="d-flex gap-2 mt-2">
+          <button id="btnStart" type="button" class="btn btn-primary flex-fill">بدء المسح</button>
+          <button id="btnStop"  type="button" class="btn btn-secondary flex-fill">إيقاف</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-grid mt-3">
+      <button class="btn btn-primary" type="submit">💾 حفظ المنتج</button>
+    </div>
+  </form>
+</main>
+
+<!-- مكتبة ZXing بالترتيب -->
+<script src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
+<script src="https://unpkg.com/@zxing/browser@latest/umd/index.min.js"></script>
+
+<script>
+(() => {
+  if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+    alert('افتح عبر HTTPS أو localhost'); 
+    return;
+  }
+
+  const ZX = window.ZXingBrowser || window.ZXing;
+  if (!ZX) { alert('ZXing لم يُحمَّل'); return; }
+
+  const { DecodeHintType, BarcodeFormat } = ZX;
+  const hints = new Map();
+  hints.set(DecodeHintType.POSSIBLE_FORMATS, [
+    BarcodeFormat.DATA_MATRIX,
+    BarcodeFormat.QR_CODE,
+    BarcodeFormat.PDF_417,
+    BarcodeFormat.AZTEC,
+    BarcodeFormat.EAN_13,
+    BarcodeFormat.EAN_8,
+    BarcodeFormat.UPC_A,
+    BarcodeFormat.UPC_E
+  ]);
+
+  const reader   = new ZX.BrowserMultiFormatReader(hints);
+  const videoEl  = document.getElementById('preview');
+  const formEl   = document.getElementById('scanForm');
+  const inputEl  = document.getElementById('barcodeInput');
+  const scanBox  = document.getElementById('scanBox');
+
+  let running = false;
+
+  async function start() {
+    if (running) return;
+    running = true;
+    try {
+      await reader.decodeFromConstraints(
+        { video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } } },
+        videoEl,
+        (result, err) => {
+          if (!result) return;
+          const text = result.getText();
+          inputEl.value = text;
+          stop();
+          scanBox.classList.remove('show');
+          alert('تم مسح الباركود: ' + text);
+        }
+      );
+    } catch (e) {
+      running = false;
+      console.error(e);
+      alert('تعذّر تشغيل المسح: ' + e.message);
+    }
+  }
+
+  function stop() {
+    try { reader.reset(); } catch {}
+    running = false;
+  }
+
+  document.getElementById('btnStart').addEventListener('click', start);
+  document.getElementById('btnStop').addEventListener('click',  stop);
+  window.addEventListener('beforeunload', stop);
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

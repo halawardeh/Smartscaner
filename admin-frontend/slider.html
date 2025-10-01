@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>السلايدر - لوحة الأدمن</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg border-bottom bg-white sticky-top">
+        <div class="container-xxl px-3">
+            <a class="navbar-brand fw-bold" href="index.html">لوحة الأدمن</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMain">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">المنتجات</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="slider.html">السلايدر</a></li>
+                    <li class="nav-item"><a class="nav-link" href="account.html">إدارة الحساب</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-white border-bottom">
+        <div class="container-xxl px-3 py-3">
+            <h1 class="h4 m-0">إدارة السلايدر</h1>
+        </div>
+    </header>
+
+    <main class="container-xxl px-3 my-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h6 class="mb-0">🎡 شرائح السلايدر</h6>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#sliderModal">
+                    ➕ إضافة شريحة جديدة
+                </button>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-3">السلايدر يظهر في الصفحة الرئيسية للمتجر ويعرض العروض والإعلانات المهمة</p>
+                
+                <!-- شرائح السلايدر -->
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card slider-item">
+                            <div class="slide-preview">🎉</div>
+                            <div class="card-body">
+                                <h6 class="card-title">عرض خاص - خصم 50%</h6>
+                                <p class="card-text text-muted">على جميع المنتجات الالكترونية</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                        <label class="form-check-label">مفعل</label>
+                                    </div>
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary" onclick="editSlide(1)">✏️ تعديل</button>
+                                        <button class="btn btn-outline-danger" onclick="deleteSlide(1)">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card slider-item">
+                            <div class="slide-preview">🆕</div>
+                            <div class="card-body">
+                                <h6 class="card-title">منتجات جديدة</h6>
+                                <p class="card-text text-muted">تشكيلة واسعة من أحدث المنتجات</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox">
+                                        <label class="form-check-label">معطل</label>
+                                    </div>
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary" onclick="editSlide(2)">✏️ تعديل</button>
+                                        <button class="btn btn-outline-danger" onclick="deleteSlide(2)">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card slider-item">
+                            <div class="slide-preview">🛍️</div>
+                            <div class="card-body">
+                                <h6 class="card-title">تخفيضات نهاية الموسم</h6>
+                                <p class="card-text text-muted">خصومات تصل إلى 70% على الملابس</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" checked>
+                                        <label class="form-check-label">مفعل</label>
+                                    </div>
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary" onclick="editSlide(3)">✏️ تعديل</button>
+                                        <button class="btn btn-outline-danger" onclick="deleteSlide(3)">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card slider-item">
+                            <div class="slide-preview">📱</div>
+                            <div class="card-body">
+                                <h6 class="card-title">أحدث الهواتف الذكية</h6>
+                                <p class="card-text text-muted">اكتشف مجموعة الهواتف الجديدة</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox">
+                                        <label class="form-check-label">معطل</label>
+                                    </div>
+                                    <div class="btn-group btn-group-sm">
+                                        <button class="btn btn-outline-primary" onclick="editSlide(4)">✏️ تعديل</button>
+                                        <button class="btn btn-outline-danger" onclick="deleteSlide(4)">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Slider Modal -->
+    <div class="modal fade" id="sliderModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">إضافة شريحة جديدة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="sliderForm">
+                        <div class="mb-3">
+                            <label class="form-label">العنوان</label>
+                            <input type="text" class="form-control" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">الوصف</label>
+                            <textarea class="form-control" name="description" rows="2"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">صورة الشريحة</label>
+                            <input type="file" class="form-control" name="slideImage" accept="image/*" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">رابط الشريحة (اختياري)</label>
+                            <input type="url" class="form-control" name="slideLink">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="isActive" checked>
+                            <label class="form-check-label">تفعيل الشريحة</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="saveSlide()">💾 حفظ الشريحة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Slider Functions
+        function editSlide(id) {
+            console.log('Editing slide:', id);
+            document.getElementById('sliderModal').querySelector('.modal-title').textContent = 'تعديل الشريحة';
+            new bootstrap.Modal(document.getElementById('sliderModal')).show();
+        }
+
+        function deleteSlide(id) {
+            if (confirm('هل أنت متأكد من حذف هذه الشريحة؟')) {
+                console.log('Deleting slide:', id);
+                alert('تم حذف الشريحة!');
+            }
+        }
+
+        function saveSlide() {
+            const form = document.getElementById('sliderForm');
+            const formData = new FormData(form);
+            console.log('Saving slide:', Object.fromEntries(formData));
+            alert('تم حفظ الشريحة بنجاح!');
+            bootstrap.Modal.getInstance(document.getElementById('sliderModal')).hide();
+        }
+    </script>
+
+    <style>
+        .slider-item .slide-preview {
+            width: 100%;
+            height: 120px;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+    </style>
+</body>
+</html>
