@@ -3,14 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>السلايدر - لوحة الأدمن</title>
+    <title>الألوان والشعار - لوحة الأدمن</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
         .navbar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
             padding: 0.75rem 0;
         }
@@ -76,7 +88,7 @@
         }
         .dropdown-item:hover {
             background-color: #f8f9fa;
-            color: #667eea !important;
+            color: var(--primary-color) !important;
         }
         .navbar-toggler {
             border: 2px solid rgba(255,255,255,0.3);
@@ -84,6 +96,317 @@
         }
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        
+        .settings-card {
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: none;
+            margin-bottom: 1.5rem;
+            height: 100%;
+        }
+        
+        .color-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .color-preview:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .logo-preview {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .logo-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .logo-preview .placeholder {
+            font-size: 36px;
+            color: #adb5bd;
+        }
+        
+        .upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .upload-area:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            margin: 0 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.active {
+            border-color: #fff;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.5);
+        }
+        
+        .preset-colors {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        /* أداة اختيار الألوان المتقدمة */
+        .color-picker-container {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+        }
+        
+        .color-palette {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            cursor: crosshair;
+            position: relative;
+            background: linear-gradient(to top, #000, transparent), 
+                        linear-gradient(to right, #fff, transparent);
+        }
+        
+        .hue-slider {
+            width: 100%;
+            height: 20px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            background: linear-gradient(to right, 
+                #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+        }
+        
+        .color-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .color-values {
+            flex: 1;
+        }
+        
+        .color-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+        
+        .color-input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .color-input-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #495057;
+            min-width: 30px;
+        }
+        
+        .color-input-group input {
+            width: 60px;
+            padding: 0.25rem;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .selected-color {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+        }
+        
+        .color-picker-indicator {
+            width: 12px;
+            height: 12px;
+            border: 2px solid white;
+            border-radius: 50%;
+            position: absolute;
+            pointer-events: none;
+            box-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        
+        .hue-slider-indicator {
+            width: 16px;
+            height: 16px;
+            border: 2px solid white;
+            border-radius: 50%;
+            position: absolute;
+            margin-top: -18px;
+            pointer-events: none;
+            box-shadow: 0 0 2px rgba(0,0,0,0.5);
+        }
+        
+        .advanced-color-toggle {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .color-picker-section {
+            display: none;
+            margin-top: 1rem;
+        }
+        
+        .color-picker-section.active {
+            display: block;
+        }
+        
+        .save-button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 2rem auto 0;
+            font-size: 1.1rem;
+            min-width: 200px;
+        }
+        
+        .save-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* تحسينات التصميم */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+        
+        .settings-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .card-header {
+            background-color: rgba(0,0,0,0.03);
+            border-bottom: 1px solid rgba(0,0,0,0.125);
+            padding: 1rem 1.25rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .text-muted {
+            font-size: 0.875rem;
+        }
+        
+        .form-control-color {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .form-control-color::-webkit-color-swatch {
+            border: none;
+            border-radius: 6px;
+        }
+        
+        .form-control-color::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        
+        .logo-upload-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .logo-input-container {
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem 0;
+            }
+            
+            .color-controls {
+                flex-direction: column;
+            }
+            
+            .selected-color {
+                width: 100%;
+                height: 80px;
+            }
+            
+            .settings-container {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -97,7 +420,7 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
                     <li class="nav-item"><a class="nav-link" href="products.html">ادارة المنتجات</a></li>
-                    <li class="nav-item"><a class="nav-link" href="store-details.html">ادارة العروض</a></li>
+                    <li class="nav-item"><a class="nav-link" href="offers.html">ادارة العروض</a></li>
                     <li class="nav-item"><a class="nav-link active" href="slider.html">الالوان والشعار</a></li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -121,184 +444,466 @@
 
     <header class="bg-white border-bottom">
         <div class="container-xxl px-3 py-3">
-            <h1 class="h4 m-0">إدارة السلايدر</h1>
+            <h1 class="h4 m-0 text-center">🎨 الألوان والشعار</h1>
         </div>
     </header>
 
-    <main class="container-xxl px-3 my-4">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h6 class="mb-0">🎡 شرائح السلايدر</h6>
-                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#sliderModal">
-                    ➕ إضافة شريحة جديدة
-                </button>
-            </div>
-            <div class="card-body">
-                <p class="text-muted mb-3">السلايدر يظهر في الصفحة الرئيسية للمتجر ويعرض العروض والإعلانات المهمة</p>
-                
-                <!-- شرائح السلايدر -->
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <div class="card slider-item">
-                            <div class="slide-preview">🎉</div>
-                            <div class="card-body">
-                                <h6 class="card-title">عرض خاص - خصم 50%</h6>
-                                <p class="card-text text-muted">على جميع المنتجات الالكترونية</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                        <label class="form-check-label">مفعل</label>
+    <main class="container-xxl px-3 my-4 main-content">
+        <div class="settings-container">
+            <div class="row g-4 justify-content-center">
+                <!-- إعدادات الألوان والشعار جنباً إلى جنب -->
+                <div class="col-lg-6">
+                    <div class="card settings-card">
+                        <div class="card-header">
+                            <h6 class="mb-0">🎨 تخصيص الألوان</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-4">
+                                <!-- اللون الأساسي -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">اللون الأساسي</label>
+                                    <p class="text-muted small mb-2">اللون الرئيسي المستخدم في التصميم</p>
+                                    <div class="d-flex align-items-center gap-3 mb-3">
+                                        <input type="color" class="form-control form-control-color" id="primaryColor" value="#667eea" title="اختر اللون الأساسي">
+                                        <div class="color-preview" id="primaryPreview" style="background-color: #667eea;"></div>
                                     </div>
-                                    <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-outline-primary" onclick="editSlide(1)">✏️ تعديل</button>
-                                        <button class="btn btn-outline-danger" onclick="deleteSlide(1)">🗑️</button>
+                                    
+                                    <button class="advanced-color-toggle" onclick="toggleAdvancedPicker('primary')">
+                                        <i class="fas fa-sliders-h"></i> أداة الألوان المتقدمة
+                                    </button>
+                                    
+                                    <div class="color-picker-section" id="primaryColorPicker">
+                                        <div class="color-picker-container">
+                                            <div class="color-palette" id="primaryPalette" style="background-color: hsl(230, 70%, 65%);">
+                                                <div class="color-picker-indicator" id="primaryIndicator" style="left: 70%; top: 30%;"></div>
+                                            </div>
+                                            <div class="hue-slider" id="primaryHueSlider">
+                                                <div class="hue-slider-indicator" id="primaryHueIndicator" style="left: 64%;"></div>
+                                            </div>
+                                            
+                                            <div class="color-controls">
+                                                <div class="selected-color" id="primarySelectedColor" style="background-color: #667eea;"></div>
+                                                <div class="color-values">
+                                                    <div class="color-inputs">
+                                                        <div class="color-input-group">
+                                                            <label>HEX</label>
+                                                            <input type="text" id="primaryHex" value="#667eea" maxlength="7">
+                                                        </div>
+                                                        <div class="color-input-group">
+                                                            <label>RGB</label>
+                                                            <input type="text" id="primaryRgb" value="102,126,234">
+                                                        </div>
+                                                        <div class="color-input-group">
+                                                            <label>HSL</label>
+                                                            <input type="text" id="primaryHsl" value="230,75%,65%">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="card slider-item">
-                            <div class="slide-preview">🆕</div>
-                            <div class="card-body">
-                                <h6 class="card-title">منتجات جديدة</h6>
-                                <p class="card-text text-muted">تشكيلة واسعة من أحدث المنتجات</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox">
-                                        <label class="form-check-label">معطل</label>
+                                
+                                <!-- اللون الثانوي -->
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">اللون الثانوي</label>
+                                    <p class="text-muted small mb-2">اللون المستخدم للتدرجات والتأكيد</p>
+                                    <div class="d-flex align-items-center gap-3 mb-3">
+                                        <input type="color" class="form-control form-control-color" id="secondaryColor" value="#764ba2" title="اختر اللون الثانوي">
+                                        <div class="color-preview" id="secondaryPreview" style="background-color: #764ba2;"></div>
                                     </div>
-                                    <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-outline-primary" onclick="editSlide(2)">✏️ تعديل</button>
-                                        <button class="btn btn-outline-danger" onclick="deleteSlide(2)">🗑️</button>
+                                    
+                                    <button class="advanced-color-toggle" onclick="toggleAdvancedPicker('secondary')">
+                                        <i class="fas fa-sliders-h"></i> أداة الألوان المتقدمة
+                                    </button>
+                                    
+                                    <div class="color-picker-section" id="secondaryColorPicker">
+                                        <div class="color-picker-container">
+                                            <div class="color-palette" id="secondaryPalette" style="background-color: hsl(270, 40%, 50%);">
+                                                <div class="color-picker-indicator" id="secondaryIndicator" style="left: 60%; top: 40%;"></div>
+                                            </div>
+                                            <div class="hue-slider" id="secondaryHueSlider">
+                                                <div class="hue-slider-indicator" id="secondaryHueIndicator" style="left: 75%;"></div>
+                                            </div>
+                                            
+                                            <div class="color-controls">
+                                                <div class="selected-color" id="secondarySelectedColor" style="background-color: #764ba2;"></div>
+                                                <div class="color-values">
+                                                    <div class="color-inputs">
+                                                        <div class="color-input-group">
+                                                            <label>HEX</label>
+                                                            <input type="text" id="secondaryHex" value="#764ba2" maxlength="7">
+                                                        </div>
+                                                        <div class="color-input-group">
+                                                            <label>RGB</label>
+                                                            <input type="text" id="secondaryRgb" value="118,75,162">
+                                                        </div>
+                                                        <div class="color-input-group">
+                                                            <label>HSL</label>
+                                                            <input type="text" id="secondaryHsl" value="270,40%,50%">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card slider-item">
-                            <div class="slide-preview">🛍️</div>
-                            <div class="card-body">
-                                <h6 class="card-title">تخفيضات نهاية الموسم</h6>
-                                <p class="card-text text-muted">خصومات تصل إلى 70% على الملابس</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" checked>
-                                        <label class="form-check-label">مفعل</label>
-                                    </div>
-                                    <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-outline-primary" onclick="editSlide(3)">✏️ تعديل</button>
-                                        <button class="btn btn-outline-danger" onclick="deleteSlide(3)">🗑️</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card slider-item">
-                            <div class="slide-preview">📱</div>
-                            <div class="card-body">
-                                <h6 class="card-title">أحدث الهواتف الذكية</h6>
-                                <p class="card-text text-muted">اكتشف مجموعة الهواتف الجديدة</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox">
-                                        <label class="form-check-label">معطل</label>
-                                    </div>
-                                    <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-outline-primary" onclick="editSlide(4)">✏️ تعديل</button>
-                                        <button class="btn btn-outline-danger" onclick="deleteSlide(4)">🗑️</button>
+                                
+                                <!-- ألوان جاهزة -->
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">ألوان جاهزة</label>
+                                    <p class="text-muted small mb-2">اختر من مجموعة الألوان الجاهزة</p>
+                                    <div class="preset-colors">
+                                        <div class="color-option active" style="background: linear-gradient(135deg, #667eea, #764ba2);" data-primary="#667eea" data-secondary="#764ba2"></div>
+                                        <div class="color-option" style="background: linear-gradient(135deg, #f093fb, #f5576c);" data-primary="#f093fb" data-secondary="#f5576c"></div>
+                                        <div class="color-option" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" data-primary="#4facfe" data-secondary="#00f2fe"></div>
+                                        <div class="color-option" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" data-primary="#43e97b" data-secondary="#38f9d7"></div>
+                                        <div class="color-option" style="background: linear-gradient(135deg, #fa709a, #fee140);" data-primary="#fa709a" data-secondary="#fee140"></div>
+                                        <div class="color-option" style="background: linear-gradient(135deg, #a8edea, #fed6e3);" data-primary="#a8edea" data-secondary="#fed6e3"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- إعدادات الشعار -->
+                <div class="col-lg-6">
+                    <div class="card settings-card">
+                        <div class="card-header">
+                            <h6 class="mb-0">🏢 شعار المتجر</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="logo-upload-section">
+                                <div class="logo-preview mb-3" id="logoPreview">
+                                    <img src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-shopping-mall-logo-image_2235997.jpg" alt="شعار المتجر الحالي" id="logoImage">
+                                </div>
+                                <div class="logo-input-container">
+                                    <input type="file" class="form-control" id="logoInput" accept="image/*">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- زر الحفظ في المنتصف أسفل البطاقات -->
+            <div class="text-center">
+                <button class="save-button" onclick="saveChanges()">
+                    <i class="fas fa-save"></i> حفظ التعديلات
+                </button>
             </div>
         </div>
     </main>
 
-    <!-- Slider Modal -->
-    <div class="modal fade" id="sliderModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">إضافة شريحة جديدة</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="sliderForm">
-                        <div class="mb-3">
-                            <label class="form-label">العنوان</label>
-                            <input type="text" class="form-control" name="title" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">الوصف</label>
-                            <textarea class="form-control" name="description" rows="2"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">صورة الشريحة</label>
-                            <input type="file" class="form-control" name="slideImage" accept="image/*" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">رابط الشريحة (اختياري)</label>
-                            <input type="url" class="form-control" name="slideLink">
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="isActive" checked>
-                            <label class="form-check-label">تفعيل الشريحة</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-                    <button type="button" class="btn btn-primary" onclick="saveSlide()">💾 حفظ الشريحة</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Slider Functions
-        function editSlide(id) {
-            console.log('Editing slide:', id);
-            document.getElementById('sliderModal').querySelector('.modal-title').textContent = 'تعديل الشريحة';
-            new bootstrap.Modal(document.getElementById('sliderModal')).show();
+        // متغيرات الألوان
+        let primaryHue = 230;
+        let primarySaturation = 75;
+        let primaryLightness = 65;
+        
+        let secondaryHue = 270;
+        let secondarySaturation = 40;
+        let secondaryLightness = 50;
+        
+        // تحديث الألوان في الوقت الحقيقي
+        function updateColors() {
+            const primaryColor = document.getElementById('primaryColor').value;
+            const secondaryColor = document.getElementById('secondaryColor').value;
+            
+            // تحديث المعاينات
+            document.getElementById('primaryPreview').style.backgroundColor = primaryColor;
+            document.getElementById('secondaryPreview').style.backgroundColor = secondaryColor;
+            
+            // تحديث التصميم في الوقت الحقيقي
+            document.documentElement.style.setProperty('--primary-color', primaryColor);
+            document.documentElement.style.setProperty('--secondary-color', secondaryColor);
+            
+            // تحديث النافبار
+            document.querySelector('.navbar').style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+            
+            // تحديث زر الحفظ
+            document.querySelector('.save-button').style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
         }
-
-        function deleteSlide(id) {
-            if (confirm('هل أنت متأكد من حذف هذه الشريحة؟')) {
-                console.log('Deleting slide:', id);
-                alert('تم حذف الشريحة!');
+        
+        // أداة الألوان المتقدمة
+        function setupAdvancedColorPicker(type) {
+            const palette = document.getElementById(`${type}Palette`);
+            const hueSlider = document.getElementById(`${type}HueSlider`);
+            const indicator = document.getElementById(`${type}Indicator`);
+            const hueIndicator = document.getElementById(`${type}HueIndicator`);
+            const selectedColor = document.getElementById(`${type}SelectedColor`);
+            const hexInput = document.getElementById(`${type}Hex`);
+            const rgbInput = document.getElementById(`${type}Rgb`);
+            const hslInput = document.getElementById(`${type}Hsl`);
+            const colorInput = document.getElementById(`${type}Color`);
+            
+            // تحديث لوحة الألوان بناءً على Hue
+            function updatePalette(hue) {
+                palette.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
             }
+            
+            // تحديث اللون المختار
+            function updateSelectedColor(hue, saturation, lightness) {
+                const hex = hslToHex(hue, saturation, lightness);
+                const rgb = hslToRgb(hue, saturation, lightness);
+                
+                selectedColor.style.backgroundColor = hex;
+                hexInput.value = hex;
+                rgbInput.value = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+                hslInput.value = `${hue},${saturation}%,${lightness}%`;
+                colorInput.value = hex;
+                
+                updateColors();
+            }
+            
+            // معالجة النقر على لوحة الألوان
+            palette.addEventListener('click', function(e) {
+                const rect = palette.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const saturation = Math.round((x / rect.width) * 100);
+                const lightness = 100 - Math.round((y / rect.height) * 100);
+                
+                if (type === 'primary') {
+                    primarySaturation = saturation;
+                    primaryLightness = lightness;
+                    updateSelectedColor(primaryHue, primarySaturation, primaryLightness);
+                } else {
+                    secondarySaturation = saturation;
+                    secondaryLightness = lightness;
+                    updateSelectedColor(secondaryHue, secondarySaturation, secondaryLightness);
+                }
+                
+                indicator.style.left = `${saturation}%`;
+                indicator.style.top = `${100 - lightness}%`;
+            });
+            
+            // معالجة النقر على شريط Hue
+            hueSlider.addEventListener('click', function(e) {
+                const rect = hueSlider.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const hue = Math.round((x / rect.width) * 360);
+                
+                if (type === 'primary') {
+                    primaryHue = hue;
+                    updatePalette(primaryHue);
+                    updateSelectedColor(primaryHue, primarySaturation, primaryLightness);
+                } else {
+                    secondaryHue = hue;
+                    updatePalette(secondaryHue);
+                    updateSelectedColor(secondaryHue, secondarySaturation, secondaryLightness);
+                }
+                
+                hueIndicator.style.left = `${(hue / 360) * 100}%`;
+            });
+            
+            // تحديث من المدخلات النصية
+            hexInput.addEventListener('change', function() {
+                const hex = this.value;
+                if (/^#[0-9A-F]{6}$/i.test(hex)) {
+                    const hsl = hexToHsl(hex);
+                    if (type === 'primary') {
+                        primaryHue = hsl.h;
+                        primarySaturation = hsl.s;
+                        primaryLightness = hsl.l;
+                    } else {
+                        secondaryHue = hsl.h;
+                        secondarySaturation = hsl.s;
+                        secondaryLightness = hsl.l;
+                    }
+                    updatePalette(hsl.h);
+                    updateSelectedColor(hsl.h, hsl.s, hsl.l);
+                    hueIndicator.style.left = `${(hsl.h / 360) * 100}%`;
+                    indicator.style.left = `${hsl.s}%`;
+                    indicator.style.top = `${100 - hsl.l}%`;
+                }
+            });
+            
+            // التهيئة الأولية
+            updatePalette(type === 'primary' ? primaryHue : secondaryHue);
         }
-
-        function saveSlide() {
-            const form = document.getElementById('sliderForm');
-            const formData = new FormData(form);
-            console.log('Saving slide:', Object.fromEntries(formData));
-            alert('تم حفظ الشريحة بنجاح!');
-            bootstrap.Modal.getInstance(document.getElementById('sliderModal')).hide();
+        
+        // تحويل HSL إلى Hex
+        function hslToHex(h, s, l) {
+            s /= 100;
+            l /= 100;
+            
+            let c = (1 - Math.abs(2 * l - 1)) * s;
+            let x = c * (1 - Math.abs((h / 60) % 2 - 1));
+            let m = l - c / 2;
+            let r = 0, g = 0, b = 0;
+            
+            if (0 <= h && h < 60) {
+                r = c; g = x; b = 0;
+            } else if (60 <= h && h < 120) {
+                r = x; g = c; b = 0;
+            } else if (120 <= h && h < 180) {
+                r = 0; g = c; b = x;
+            } else if (180 <= h && h < 240) {
+                r = 0; g = x; b = c;
+            } else if (240 <= h && h < 300) {
+                r = x; g = 0; b = c;
+            } else if (300 <= h && h < 360) {
+                r = c; g = 0; b = x;
+            }
+            
+            r = Math.round((r + m) * 255);
+            g = Math.round((g + m) * 255);
+            b = Math.round((b + m) * 255);
+            
+            return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
         }
+        
+        // تحويل HSL إلى RGB
+        function hslToRgb(h, s, l) {
+            s /= 100;
+            l /= 100;
+            
+            let c = (1 - Math.abs(2 * l - 1)) * s;
+            let x = c * (1 - Math.abs((h / 60) % 2 - 1));
+            let m = l - c / 2;
+            let r = 0, g = 0, b = 0;
+            
+            if (0 <= h && h < 60) {
+                r = c; g = x; b = 0;
+            } else if (60 <= h && h < 120) {
+                r = x; g = c; b = 0;
+            } else if (120 <= h && h < 180) {
+                r = 0; g = c; b = x;
+            } else if (180 <= h && h < 240) {
+                r = 0; g = x; b = c;
+            } else if (240 <= h && h < 300) {
+                r = x; g = 0; b = c;
+            } else if (300 <= h && h < 360) {
+                r = c; g = 0; b = x;
+            }
+            
+            return {
+                r: Math.round((r + m) * 255),
+                g: Math.round((g + m) * 255),
+                b: Math.round((b + m) * 255)
+            };
+        }
+        
+        // تحويل Hex إلى HSL
+        function hexToHsl(hex) {
+            let r = parseInt(hex.slice(1, 3), 16) / 255;
+            let g = parseInt(hex.slice(3, 5), 16) / 255;
+            let b = parseInt(hex.slice(5, 7), 16) / 255;
+            
+            let max = Math.max(r, g, b);
+            let min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0;
+            } else {
+                let d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                
+                h /= 6;
+            }
+            
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+        
+        // تبديل أداة الألوان المتقدمة
+        function toggleAdvancedPicker(type) {
+            const pickerSection = document.getElementById(`${type}ColorPicker`);
+            pickerSection.classList.toggle('active');
+        }
+        
+        // اختيار الألوان الجاهزة
+        function setupColorPresets() {
+            const colorOptions = document.querySelectorAll('.color-option');
+            
+            colorOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // إزالة النشط من جميع الخيارات
+                    colorOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // إضافة النشط للخيار المحدد
+                    this.classList.add('active');
+                    
+                    // تحديث ألوان المدخلات
+                    const primary = this.getAttribute('data-primary');
+                    const secondary = this.getAttribute('data-secondary');
+                    
+                    document.getElementById('primaryColor').value = primary;
+                    document.getElementById('secondaryColor').value = secondary;
+                    
+                    // تحديث الألوان
+                    updateColors();
+                });
+            });
+        }
+        
+        // رفع الشعار
+        function setupLogoUpload() {
+            const logoInput = document.getElementById('logoInput');
+            const logoPreview = document.getElementById('logoPreview');
+            
+            logoInput.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        logoPreview.innerHTML = `<img src="${e.target.result}" alt="شعار المتجر">`;
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        
+        // حفظ الإعدادات
+        function saveChanges() {
+            const primaryColor = document.getElementById('primaryColor').value;
+            const secondaryColor = document.getElementById('secondaryColor').value;
+            
+            const settings = {
+                primaryColor: primaryColor,
+                secondaryColor: secondaryColor,
+                logo: document.querySelector('#logoPreview img') ? document.querySelector('#logoPreview img').src : null
+            };
+            
+            // في الواقع، هنا سيتم إرسال البيانات للخادم
+            console.log('Saving settings:', settings);
+            
+            // عرض رسالة نجاح
+            alert('تم حفظ الإعدادات بنجاح!');
+        }
+        
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // إعداد مستمعي الأحداث للألوان
+            document.getElementById('primaryColor').addEventListener('input', updateColors);
+            document.getElementById('secondaryColor').addEventListener('input', updateColors);
+            
+            // إعداد الألوان الجاهزة
+            setupColorPresets();
+            
+            // إعداد رفع الشعار
+            setupLogoUpload();
+            
+            // إعداد أدوات الألوان المتقدمة
+            setupAdvancedColorPicker('primary');
+            setupAdvancedColorPicker('secondary');
+        });
     </script>
-
-    <style>
-        .slider-item .slide-preview {
-            width: 100%;
-            height: 120px;
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-        }
-    </style>
 </body>
 </html>

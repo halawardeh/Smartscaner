@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>تفاصيل المتجر - لوحة الأدمن</title>
+    <title>إدارة العروض - لوحة الأدمن</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="../assets/css/style.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
         .navbar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
             padding: 0.75rem 0;
         }
@@ -76,7 +85,7 @@
         }
         .dropdown-item:hover {
             background-color: #f8f9fa;
-            color: #667eea !important;
+            color: var(--primary-color) !important;
         }
         .navbar-toggler {
             border: 2px solid rgba(255,255,255,0.3);
@@ -85,6 +94,159 @@
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
+        
+        .offer-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .offer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .offer-image {
+            height: 200px;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .offer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .offer-card:hover .offer-image img {
+            transform: scale(1.05);
+        }
+        
+        .offer-image .placeholder {
+            font-size: 48px;
+            color: #adb5bd;
+        }
+        
+        .offer-content {
+            padding: 1.25rem;
+        }
+        
+        .offer-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #343a40;
+        }
+        
+        .offer-description {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .offer-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .status-badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-inactive {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .form-switch {
+            padding-right: 2.5em;
+        }
+        
+        .form-switch .form-check-input {
+            width: 3em;
+            margin-right: -2.5em;
+        }
+        
+        .upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .upload-area:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .offer-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .offer-discount {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+        
+        .no-results i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #dee2e6;
+        }
+        .black-checkbox {
+  accent-color: black; /* اللون الأسود */
+}
+
     </style>
 </head>
 <body>
@@ -97,7 +259,7 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
                     <li class="nav-item"><a class="nav-link" href="products.html">ادارة المنتجات</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="store-details.html">ادارة العروض</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="offers.html">ادارة العروض</a></li>
                     <li class="nav-item"><a class="nav-link" href="slider.html">الالوان والشعار</a></li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -121,472 +283,360 @@
 
     <header class="bg-white border-bottom">
         <div class="container-xxl px-3 py-3">
-            <h1 class="h4 m-0">الصفحة الرئيسية - إدارة المتجر</h1>
+            <h1 class="h4 m-0">إدارة العروض</h1>
         </div>
     </header>
 
     <main class="container-xxl px-3 my-4">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-            <h5 class="mb-0">🏪 إدارة متجر "اسم المتجر"</h5>
-            <a href="stores.html" class="btn btn-outline-primary btn-sm">رجوع للمتاجر</a>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h5 class="mb-0">🎁 إدارة عروض المتجر</h5>
+           
         </div>
 
-        <!-- Navigation Tabs -->
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item">
-                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#products" type="button">🛒 المنتجات</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#barcode" type="button">📱 باركود المنتجات</button>
-            </li>
-        </ul>
+        <!-- فلتر البحث -->
+        <div class="row g-2 mb-4">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="البحث عن عرض..." id="searchOffer" onkeyup="filterOffers()">
+            </div>
+            <div class="col-md-3">
+                <select class="form-control" id="statusFilter" onchange="filterOffers()">
+                    <option value="">جميع الحالات</option>
+                    <option value="active">نشط</option>
+                    <option value="inactive">غير نشط</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-control" id="categoryFilter" onchange="filterOffers()">
+                    <option value="">جميع الفئات</option>
+                    <option value="discount">خصومات</option>
+                    <option value="bundle">عروض مجمعة</option>
+                    <option value="seasonal">عروض موسمية</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-outline-primary w-100" onclick="filterOffers()">🔍 بحث</button>
+            </div>
+        </div>
 
-        <div class="tab-content">
-            <!-- تبويبة المنتجات -->
-            <div class="tab-pane fade show active" id="products">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">🛒 إدارة المنتجات</h6>
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productModal">
-                            ➕ إنشاء منتج جديد
-                        </button>
+        <!-- شبكة العروض -->
+        <div class="row g-4" id="offersGrid">
+            <!-- عرض 1 -->
+            <div class="col-md-6 col-lg-4 offer-item" data-status="active" data-category="discount" data-title="عرض نهاية الموسم">
+                <div class="card offer-card">
+                    <div class="offer-image">
+                        <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="عرض خاص على الإلكترونيات">
+                        <span class="offer-badge">عرض حصري</span>
+                        <span class="offer-discount">50% خصم</span>
                     </div>
-                    <div class="card-body">
-                        <!-- فلتر البحث -->
-                        <div class="row g-2 mb-3">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="البحث عن منتج..." id="searchProduct">
+                    <div class="offer-content">
+                        <h5 class="offer-title">عرض نهاية الموسم</h5>
+                        <p class="offer-description">خصم 50% على جميع المنتجات الإلكترونية لمدة محدودة. استفد من هذا العرض قبل نفاذ الكمية.</p>
+                        <div class="offer-status">
+                            <span class="status-badge status-active">نشط</span>
+                            <div class="form-check form-switch">
+<input class="form-check-input black-checkbox" type="checkbox" checked onchange="toggleOfferStatus(1, this)">
                             </div>
-                            <div class="col-md-3">
-                                <select class="form-control" id="categoryFilter">
-                                    <option value="">جميع الفئات</option>
-                                    <option value="electronics">إلكترونيات</option>
-                                    <option value="clothing">ملابس</option>
-                                    <option value="food">طعام</option>
-                                    <option value="books">كتب</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-control" id="statusFilter">
-                                    <option value="">جميع الحالات</option>
-                                    <option value="active">نشط</option>
-                                    <option value="archived">مؤرشف</option>
-                                    <option value="out_of_stock">نفد المخزون</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-outline-primary w-100" onclick="filterProducts()">🔍 بحث</button>
-                            </div>
-                        </div>
-
-                        <!-- جدول المنتجات -->
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>الصورة</th>
-                                        <th>اسم المنتج</th>
-                                        <th>السعر</th>
-                                        <th>الكمية</th>
-                                        <th>الحالة</th>
-                                        <th>الإجراءات</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="product-image">📱</div>
-                                        </td>
-                                        <td>
-                                            <div class="fw-bold">جهاز سامسونج جالاكسي</div>
-                                            <div class="text-muted small">إلكترونيات</div>
-                                        </td>
-                                        <td class="fw-bold text-primary">899.99 د.أ</td>
-                                        <td>
-                                            <span class="badge bg-success">15 قطعة</span>
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-success">نشط</span>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
-                                                    إجراءات
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#" onclick="editProduct(1)">✏️ تعديل</a></li>
-                                                    <li><a class="dropdown-item" href="#" onclick="viewBarcode(1)">📱 عرض الباركود</a></li>
-                                                    <li><a class="dropdown-item" href="#" onclick="archiveProduct(1)">📦 أرشفة</a></li>
-                                                    <li><hr class="dropdown-divider"></li>
-                                                    <li><a class="dropdown-item text-danger" href="#" onclick="deleteProduct(1)">🗑️ حذف</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="product-image">👕</div>
-                                        </td>
-                                        <td>
-                                            <div class="fw-bold">قميص قطني أزرق</div>
-                                            <div class="text-muted small">ملابس</div>
-                                        </td>
-                                        <td class="fw-bold text-primary">45.00 د.أ</td>
-                                        <td>
-                                            <span class="badge bg-warning">3 قطع</span>
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-warning">مؤرشف</span>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown">
-                                                    إجراءات
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#" onclick="editProduct(2)">✏️ تعديل</a></li>
-                                                    <li><a class="dropdown-item" href="#" onclick="viewBarcode(2)">📱 عرض الباركود</a></li>
-                                                    <li><a class="dropdown-item" href="#" onclick="unarchiveProduct(2)">📤 إلغاء الأرشفة</a></li>
-                                                    <li><hr class="dropdown-divider"></li>
-                                                    <li><a class="dropdown-item text-danger" href="#" onclick="deleteProduct(2)">🗑️ حذف</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- تبويبة باركود المتجر -->
-            <div class="tab-pane fade" id="barcode">
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="mb-0">📱 باركود المتجر</h6>
+            
+            <!-- عرض 2 -->
+            <div class="col-md-6 col-lg-4 offer-item" data-status="inactive" data-category="bundle" data-title="عرض 2 مقابل 1">
+                <div class="card offer-card">
+                    <div class="offer-image">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="عرض 2 مقابل 1">
+                        <span class="offer-badge">عرض مميز</span>
                     </div>
-                    <div class="card-body text-center">
-                        <div class="qr-container mx-auto mb-3">
-                            <div class="qr-placeholder">
-                                📱
+                    <div class="offer-content">
+                        <h5 class="offer-title">عرض 2 مقابل 1</h5>
+                        <p class="offer-description">اشترِ منتجين واحصل على الثالث مجاناً. العرض ساري على جميع المنتجات المنزلية.</p>
+                        <div class="offer-status">
+                            <span class="status-badge status-inactive">غير نشط</span>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" onchange="toggleOfferStatus(2, this)">
                             </div>
-                        </div>
-                        <h6 class="mb-2">كود QR الخاص بالمتجر</h6>
-                        <p class="text-muted mb-3">يمكن للعملاء مسح هذا الكود للوصول مباشرة لمتجرك</p>
-                        
-                        <div class="d-flex justify-content-center gap-2 mb-3">
-                            <button class="btn btn-primary btn-sm" onclick="downloadQR()">⬇️ تحميل</button>
-                            <button class="btn btn-outline-primary btn-sm" onclick="printQR()">🖨️ طباعة</button>
-                            <button class="btn btn-outline-secondary btn-sm" onclick="shareQR()">📤 مشاركة</button>
-                        </div>
-                        
-                        <div class="alert alert-info">
-                            <strong>رابط المتجر:</strong><br>
-                            <code id="store-url">https://mystore.com/shop/123456</code>
-                            <button class="btn btn-link btn-sm p-0 ms-1" onclick="copyStoreURL()">📋 نسخ</button>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- عرض 3 -->
+            <div class="col-md-6 col-lg-4 offer-item" data-status="active" data-category="seasonal" data-title="عروض الصيف الحصرية">
+                <div class="card offer-card">
+                    <div class="offer-image">
+                        <img src="https://copon5sm.com/wp-content/uploads/2024/07/%D8%B9%D8%B1%D9%88%D8%B6-%D8%A7%D9%84%D8%B5%D9%8A%D9%81.jpg" alt="عروض الصيف">
+                        <span class="offer-badge">عرض موسمي</span>
+                        <span class="offer-discount">50% خصم</span>
+                    </div>
+                    <div class="offer-content">
+                        <h5 class="offer-title">عروض الصيف الحصرية</h5>
+                        <p class="offer-description">خصومات تصل إلى 50% على منتجات الصيف. تشمل الملابس الصيفية، المنتجات البحرية والمزيد.</p>
+                        <div class="offer-status">
+                            <span class="status-badge status-active">نشط</span>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked onchange="toggleOfferStatus(3, this)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- عرض 4 -->
+            <div class="col-md-6 col-lg-4 offer-item" data-status="inactive" data-category="gift" data-title="عرض الهدايا المجانية">
+                <div class="card offer-card">
+                    <div class="offer-image">
+                        <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="عرض الهدايا">
+                        <span class="offer-badge">هدية مجانية</span>
+                    </div>
+                    <div class="offer-content">
+                        <h5 class="offer-title">عرض الهدايا المجانية</h5>
+                        <p class="offer-description">احصل على هدية مجانية مع كل عملية شراء تزيد عن 100 دينار. اختر من بين مجموعة الهدايا المتاحة.</p>
+                        <div class="offer-status">
+                            <span class="status-badge status-inactive">غير نشط</span>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" onchange="toggleOfferStatus(4, this)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- عرض 5 -->
+            <div class="col-md-6 col-lg-4 offer-item" data-status="active" data-category="discount" data-title="خصم 20% على الملابس">
+                <div class="card offer-card">
+                    <div class="offer-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAh124t0QIrW4fn4-Df0-ukGiyhR-ajyJayw&s" alt="خصم على الملابس">
+                        <span class="offer-badge">عرض محدود</span>
+                        <span class="offer-discount">20% خصم</span>
+                    </div>
+                    <div class="offer-content">
+                        <h5 class="offer-title">خصم 20% على الملابس</h5>
+                        <p class="offer-description">استفد من خصم 20% على جميع الملابس لمدة أسبوع فقط. العرض يشمل جميع الفئات والأحجام.</p>
+                        <div class="offer-status">
+                            <span class="status-badge status-active">نشط</span>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked onchange="toggleOfferStatus(5, this)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- عرض 6 -->
+            <div class="col-md-6 col-lg-4 offer-item" data-status="inactive" data-category="free_shipping" data-title="توصيل مجاني">
+                <div class="card offer-card">
+                    <div class="offer-image">
+                        <img src="https://www.easy-orders.net/blog/wp-content/uploads/2023/02/free-shipping-delivery-service-logo-badge-vector-780x470.webp" alt="توصيل مجاني">
+                        <span class="offer-badge">توصيل مجاني</span>
+                    </div>
+                    <div class="offer-content">
+                        <h5 class="offer-title">توصيل مجاني</h5>
+                        <p class="offer-description">توصيل مجاني لجميع الطلبات التي تزيد عن 50 دينار. استمتع بالتسوق بدون أي تكاليف إضافية.</p>
+                        <div class="offer-status">
+                            <span class="status-badge status-inactive">غير نشط</span>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" onchange="toggleOfferStatus(6, this)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- رسالة عدم وجود نتائج -->
+        <div id="noResults" class="no-results d-none">
+            <i class="fas fa-search"></i>
+            <h5>لا توجد عروض تطابق معايير البحث</h5>
+            <p class="text-muted">جرب تغيير كلمات البحث أو معايير التصفية</p>
         </div>
     </main>
 
-    <!-- Product Modal -->
-    <div class="modal fade" id="productModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">إنشاء منتج جديد</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="productForm">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">اسم المنتج *</label>
-                                <input type="text" class="form-control" name="productName" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">السعر *</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" name="price" step="0.01" required>
-                                    <span class="input-group-text">د.أ</span>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">وصف المنتج</label>
-                                <textarea class="form-control" name="description" rows="3"></textarea>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">الفئة *</label>
-                                <select class="form-control" name="category" required>
-                                    <option value="">اختر الفئة</option>
-                                    <option value="electronics">إلكترونيات</option>
-                                    <option value="clothing">ملابس</option>
-                                    <option value="food">طعام</option>
-                                    <option value="books">كتب</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">الكمية المتوفرة</label>
-                                <input type="number" class="form-control" name="quantity" min="0">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">صور المنتج</label>
-                                <input type="file" class="form-control" name="productImages" multiple accept="image/*">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-                    <button type="button" class="btn btn-primary" onclick="saveProduct()">💾 حفظ المنتج</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slider Modal -->
-    <div class="modal fade" id="sliderModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">إضافة شريحة جديدة</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="sliderForm">
-                        <div class="mb-3">
-                            <label class="form-label">العنوان</label>
-                            <input type="text" class="form-control" name="title" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">الوصف</label>
-                            <textarea class="form-control" name="description" rows="2"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">صورة الشريحة</label>
-                            <input type="file" class="form-control" name="slideImage" accept="image/*" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">رابط الشريحة (اختياري)</label>
-                            <input type="url" class="form-control" name="slideLink">
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="isActive" checked>
-                            <label class="form-check-label">تفعيل الشريحة</label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-                    <button type="button" class="btn btn-primary" onclick="saveSlide()">💾 حفظ الشريحة</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Modal إضافة عرض جديد -->
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Product Management Functions
-        function filterProducts() {
-            const searchTerm = document.getElementById('searchProduct').value;
-            const category = document.getElementById('categoryFilter').value;
-            const status = document.getElementById('statusFilter').value;
-            console.log('Filtering products:', { searchTerm, category, status });
-        }
-
-        function editProduct(id) {
-            console.log('Editing product:', id);
-            document.getElementById('productModal').querySelector('.modal-title').textContent = 'تعديل المنتج';
-            new bootstrap.Modal(document.getElementById('productModal')).show();
-        }
-
-        function archiveProduct(id) {
-            if (confirm('هل أنت متأكد من أرشفة هذا المنتج؟')) {
-                console.log('Archiving product:', id);
-                alert('تم أرشفة المنتج بنجاح!');
+        // بيانات العروض
+        const offers = [
+            {
+                id: 1,
+                title: "عرض نهاية الموسم",
+                description: "خصم 50% على جميع المنتجات الإلكترونية لمدة محدودة. استفد من هذا العرض قبل نفاذ الكمية.",
+                status: "active",
+                category: "discount",
+                image: "https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 2,
+                title: "عرض 2 مقابل 1",
+                description: "اشترِ منتجين واحصل على الثالث مجاناً. العرض ساري على جميع المنتجات المنزلية.",
+                status: "inactive",
+                category: "bundle",
+                image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 3,
+                title: "عروض الصيف الحصرية",
+                description: "خصومات تصل إلى 50% على منتجات الصيف. تشمل الملابس الصيفية، المنتجات البحرية والمزيد.",
+                status: "active",
+                category: "seasonal",
+                image: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 4,
+                title: "عرض الهدايا المجانية",
+                description: "احصل على هدية مجانية مع كل عملية شراء تزيد عن 100 دينار. اختر من بين مجموعة الهدايا المتاحة.",
+                status: "inactive",
+                category: "gift",
+                image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 5,
+                title: "خصم 20% على الملابس",
+                description: "استفد من خصم 20% على جميع الملابس لمدة أسبوع فقط. العرض يشمل جميع الفئات والأحجام.",
+                status: "active",
+                category: "discount",
+                image: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 6,
+                title: "توصيل مجاني",
+                description: "توصيل مجاني لجميع الطلبات التي تزيد عن 50 دينار. استمتع بالتسوق بدون أي تكاليف إضافية.",
+                status: "inactive",
+                category: "free_shipping",
+                image: "https://www.easy-orders.net/blog/wp-content/uploads/2023/02/free-shipping-delivery-service-logo-badge-vector-780x470.webp"
             }
-        }
+        ];
 
-        function unarchiveProduct(id) {
-            if (confirm('هل تريد إلغاء أرشفة هذا المنتج؟')) {
-                console.log('Unarchiving product:', id);
-                alert('تم إلغاء أرشفة المنتج!');
-            }
-        }
-
-        function deleteProduct(id) {
-            if (confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) {
-                console.log('Deleting product:', id);
-                alert('تم حذف المنتج!');
-            }
-        }
-
-        function viewBarcode(id) {
-            alert('عرض باركود المنتج رقم: ' + id);
-        }
-
-        function saveProduct() {
-            const form = document.getElementById('productForm');
-            const formData = new FormData(form);
-            console.log('Saving product:', Object.fromEntries(formData));
-            alert('تم حفظ المنتج بنجاح!');
-            bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();
-        }
-
-        // QR Code Functions
-        function downloadQR() {
-            console.log('Downloading QR code');
-            alert('تم تحميل كود QR!');
-        }
-
-        function printQR() {
-            console.log('Printing QR code');
-            alert('سيتم طباعة كود QR!');
-        }
-
-        function shareQR() {
-            console.log('Sharing QR code');
-            alert('مشاركة كود QR!');
-        }
-
-        function copyStoreURL() {
-            const url = document.getElementById('store-url').textContent;
-            navigator.clipboard.writeText(url).then(() => {
-                alert('تم نسخ رابط المتجر!');
+        // فلتر العروض
+        function filterOffers() {
+            const searchTerm = document.getElementById('searchOffer').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            
+            const offerItems = document.querySelectorAll('.offer-item');
+            let visibleCount = 0;
+            
+            offerItems.forEach(item => {
+                const title = item.getAttribute('data-title').toLowerCase();
+                const status = item.getAttribute('data-status');
+                const category = item.getAttribute('data-category');
+                
+                const matchesSearch = title.includes(searchTerm);
+                const matchesStatus = !statusFilter || status === statusFilter;
+                const matchesCategory = !categoryFilter || category === categoryFilter;
+                
+                if (matchesSearch && matchesStatus && matchesCategory) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
             });
-        }
-
-        // Slider Functions
-        function editSlide(id) {
-            console.log('Editing slide:', id);
-            document.getElementById('sliderModal').querySelector('.modal-title').textContent = 'تعديل الشريحة';
-            new bootstrap.Modal(document.getElementById('sliderModal')).show();
-        }
-
-        function deleteSlide(id) {
-            if (confirm('هل أنت متأكد من حذف هذه الشريحة؟')) {
-                console.log('Deleting slide:', id);
-                alert('تم حذف الشريحة!');
+            
+            // إظهار أو إخفاء رسالة عدم وجود نتائج
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                noResults.classList.remove('d-none');
+            } else {
+                noResults.classList.add('d-none');
             }
         }
 
-        function saveSlide() {
-            const form = document.getElementById('sliderForm');
+        function toggleOfferStatus(id, checkbox) {
+            const statusBadge = checkbox.closest('.offer-status').querySelector('.status-badge');
+            
+            if (checkbox.checked) {
+                // تفعيل العرض
+                statusBadge.textContent = 'نشط';
+                statusBadge.classList.remove('status-inactive');
+                statusBadge.classList.add('status-active');
+                
+                // تحديث البيانات
+                const offer = offers.find(o => o.id === id);
+                if (offer) offer.status = 'active';
+                
+                console.log('Activated offer:', id);
+            } else {
+                // تعطيل العرض
+                statusBadge.textContent = 'غير نشط';
+                statusBadge.classList.remove('status-active');
+                statusBadge.classList.add('status-inactive');
+                
+                // تحديث البيانات
+                const offer = offers.find(o => o.id === id);
+                if (offer) offer.status = 'inactive';
+                
+                console.log('Deactivated offer:', id);
+            }
+        }
+
+        function saveOffer() {
+            const form = document.getElementById('offerForm');
             const formData = new FormData(form);
-            console.log('Saving slide:', Object.fromEntries(formData));
-            alert('تم حفظ الشريحة بنجاح!');
-            bootstrap.Modal.getInstance(document.getElementById('sliderModal')).hide();
+            console.log('Saving offer:', Object.fromEntries(formData));
+            alert('تم حفظ العرض بنجاح!');
+            bootstrap.Modal.getInstance(document.getElementById('offerModal')).hide();
         }
 
-        // Image Upload
+        // رفع الصور
         document.addEventListener('DOMContentLoaded', function() {
-            const imageUpload = document.getElementById('imageUpload');
-            const uploadArea = document.querySelector('.upload-area');
+            const uploadArea = document.getElementById('uploadArea');
+            const offerImage = document.getElementById('offerImage');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewImg = imagePreview.querySelector('img');
 
-            if (imageUpload) {
-                imageUpload.addEventListener('change', function(e) {
-                    console.log('Images selected:', e.target.files.length);
-                    alert('تم اختيار ' + e.target.files.length + ' صورة!');
-                });
-            }
+            uploadArea.addEventListener('click', function() {
+                offerImage.click();
+            });
+
+            offerImage.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                        imagePreview.classList.remove('d-none');
+                        uploadArea.querySelector('p').classList.add('d-none');
+                        uploadArea.querySelector('i').classList.add('d-none');
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
 
             // Drag & Drop
-            if (uploadArea) {
-                uploadArea.addEventListener('dragover', function(e) {
-                    e.preventDefault();
-                    uploadArea.style.backgroundColor = '#e3f2fd';
-                });
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '#e3f2fd';
+            });
 
-                uploadArea.addEventListener('dragleave', function(e) {
-                    e.preventDefault();
-                    uploadArea.style.backgroundColor = '';
-                });
+            uploadArea.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '';
+            });
 
-                uploadArea.addEventListener('drop', function(e) {
-                    e.preventDefault();
-                    uploadArea.style.backgroundColor = '';
-                    const files = e.dataTransfer.files;
-                    console.log('Images dropped:', files.length);
-                    alert('تم رفع ' + files.length + ' صورة!');
-                });
-            }
-
-            // Form Submissions
-            const passwordForm = document.getElementById('passwordForm');
-            if (passwordForm) {
-                passwordForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('تم تغيير كلمة المرور بنجاح!');
-                });
-            }
-
-            const storeDataForm = document.getElementById('storeDataForm');
-            if (storeDataForm) {
-                storeDataForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('تم حفظ بيانات المتجر!');
-                });
-            }
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                uploadArea.style.backgroundColor = '';
+                
+                if (e.dataTransfer.files.length > 0) {
+                    const file = e.dataTransfer.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                        imagePreview.classList.remove('d-none');
+                        uploadArea.querySelector('p').classList.add('d-none');
+                        uploadArea.querySelector('i').classList.add('d-none');
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
         });
     </script>
-
-    <style>
-        .product-image, .qr-placeholder, .image-placeholder, .slide-preview, .logo-preview {
-            width: 60px;
-            height: 60px;
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .qr-container .qr-placeholder {
-            width: 200px;
-            height: 200px;
-            font-size: 48px;
-        }
-
-        .upload-area {
-            border: 2px dashed #dee2e6;
-            border-radius: 12px;
-            background: #f8f9fa;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .upload-area:hover {
-            background: #e9ecef;
-            border-color: #adb5bd;
-        }
-
-        .border-dashed {
-            border-style: dashed !important;
-        }
-
-        .image-card .image-placeholder {
-            width: 100%;
-            height: 150px;
-            font-size: 48px;
-        }
-
-        .slider-item .slide-preview {
-            width: 100%;
-            height: 120px;
-            font-size: 36px;
-        }
-
-        .logo-preview {
-            width: 100px;
-            height: 100px;
-            font-size: 36px;
-            margin: 0 auto;
-        }
-    </style>
 </body>
 </html>
