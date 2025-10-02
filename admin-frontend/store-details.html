@@ -246,7 +246,42 @@
         .black-checkbox {
   accent-color: black; /* اللون الأسود */
 }
+ .custom-switch {
+      background-color: #ddd;
+      border-radius: 50px;
+      transition: background-color 0.3s;
+  }
 
+  /* لون المقبض */
+  .custom-switch:before {
+      background-color: #fff;
+      transition: transform 0.3s;
+  }
+
+  /* عند التشغيل */
+  .custom-switch:checked {
+      background-color: #28a745; /* أخضر واضح */
+  }
+
+  /* مكب الضبط يتحرك عند التشغيل */
+  .custom-switch:checked:before {
+      transform: translateX(1.5rem); /* تعديل حسب حجم السويتش */
+  }
+
+  /* حجم السويتش */
+  .form-check-input.custom-switch {
+      width: 3rem;
+      height: 1.5rem;
+  }
+
+  .form-check-input.custom-switch:before {
+      height: 1.5rem;
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+      content: '';
+      position: absolute;
+  }
     </style>
 </head>
 <body>
@@ -325,17 +360,16 @@
                 <div class="card offer-card">
                     <div class="offer-image">
                         <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="عرض خاص على الإلكترونيات">
-                        <span class="offer-badge">عرض حصري</span>
-                        <span class="offer-discount">50% خصم</span>
+                       
                     </div>
                     <div class="offer-content">
                         <h5 class="offer-title">عرض نهاية الموسم</h5>
                         <p class="offer-description">خصم 50% على جميع المنتجات الإلكترونية لمدة محدودة. استفد من هذا العرض قبل نفاذ الكمية.</p>
                         <div class="offer-status">
                             <span class="status-badge status-active">نشط</span>
-                            <div class="form-check form-switch">
-<input class="form-check-input black-checkbox" type="checkbox" checked onchange="toggleOfferStatus(1, this)">
-                            </div>
+                                                 <div class="form-check form-switch">
+  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
+</div>
                         </div>
                     </div>
                 </div>
@@ -346,16 +380,15 @@
                 <div class="card offer-card">
                     <div class="offer-image">
                         <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="عرض 2 مقابل 1">
-                        <span class="offer-badge">عرض مميز</span>
                     </div>
                     <div class="offer-content">
                         <h5 class="offer-title">عرض 2 مقابل 1</h5>
                         <p class="offer-description">اشترِ منتجين واحصل على الثالث مجاناً. العرض ساري على جميع المنتجات المنزلية.</p>
                         <div class="offer-status">
                             <span class="status-badge status-inactive">غير نشط</span>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" onchange="toggleOfferStatus(2, this)">
-                            </div>
+                           <div class="form-check form-switch">
+  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
+</div>
                         </div>
                     </div>
                 </div>
@@ -366,17 +399,16 @@
                 <div class="card offer-card">
                     <div class="offer-image">
                         <img src="https://copon5sm.com/wp-content/uploads/2024/07/%D8%B9%D8%B1%D9%88%D8%B6-%D8%A7%D9%84%D8%B5%D9%8A%D9%81.jpg" alt="عروض الصيف">
-                        <span class="offer-badge">عرض موسمي</span>
-                        <span class="offer-discount">50% خصم</span>
+                      
                     </div>
                     <div class="offer-content">
                         <h5 class="offer-title">عروض الصيف الحصرية</h5>
                         <p class="offer-description">خصومات تصل إلى 50% على منتجات الصيف. تشمل الملابس الصيفية، المنتجات البحرية والمزيد.</p>
                         <div class="offer-status">
                             <span class="status-badge status-active">نشط</span>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" checked onchange="toggleOfferStatus(3, this)">
-                            </div>
+                                                <div class="form-check form-switch">
+  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
+</div>
                         </div>
                     </div>
                 </div>
@@ -387,16 +419,15 @@
                 <div class="card offer-card">
                     <div class="offer-image">
                         <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="عرض الهدايا">
-                        <span class="offer-badge">هدية مجانية</span>
                     </div>
                     <div class="offer-content">
                         <h5 class="offer-title">عرض الهدايا المجانية</h5>
                         <p class="offer-description">احصل على هدية مجانية مع كل عملية شراء تزيد عن 100 دينار. اختر من بين مجموعة الهدايا المتاحة.</p>
                         <div class="offer-status">
                             <span class="status-badge status-inactive">غير نشط</span>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" onchange="toggleOfferStatus(4, this)">
-                            </div>
+                                                <div class="form-check form-switch">
+  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
+</div>
                         </div>
                     </div>
                 </div>
@@ -407,17 +438,16 @@
                 <div class="card offer-card">
                     <div class="offer-image">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAh124t0QIrW4fn4-Df0-ukGiyhR-ajyJayw&s" alt="خصم على الملابس">
-                        <span class="offer-badge">عرض محدود</span>
-                        <span class="offer-discount">20% خصم</span>
+                     
                     </div>
                     <div class="offer-content">
                         <h5 class="offer-title">خصم 20% على الملابس</h5>
                         <p class="offer-description">استفد من خصم 20% على جميع الملابس لمدة أسبوع فقط. العرض يشمل جميع الفئات والأحجام.</p>
                         <div class="offer-status">
                             <span class="status-badge status-active">نشط</span>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" checked onchange="toggleOfferStatus(5, this)">
-                            </div>
+                                                  <div class="form-check form-switch">
+  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
+</div>
                         </div>
                     </div>
                 </div>
@@ -428,16 +458,15 @@
                 <div class="card offer-card">
                     <div class="offer-image">
                         <img src="https://www.easy-orders.net/blog/wp-content/uploads/2023/02/free-shipping-delivery-service-logo-badge-vector-780x470.webp" alt="توصيل مجاني">
-                        <span class="offer-badge">توصيل مجاني</span>
                     </div>
                     <div class="offer-content">
                         <h5 class="offer-title">توصيل مجاني</h5>
                         <p class="offer-description">توصيل مجاني لجميع الطلبات التي تزيد عن 50 دينار. استمتع بالتسوق بدون أي تكاليف إضافية.</p>
                         <div class="offer-status">
                             <span class="status-badge status-inactive">غير نشط</span>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" onchange="toggleOfferStatus(6, this)">
-                            </div>
+                                                   <div class="form-check form-switch">
+  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
+</div>
                         </div>
                     </div>
                 </div>

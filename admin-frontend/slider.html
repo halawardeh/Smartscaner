@@ -96,7 +96,29 @@
         }
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        }
+        }.navbar-nav .nav-link {
+  font-weight: 500;
+  margin: 0 0.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+  background-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+.navbar-nav .nav-link.active {
+  background-color: rgba(255,255,255,0.3);
+  font-weight: 600;
+}
+.dropdown-menu {
+  min-width: 200px;
+  padding: 0.5rem 0;
+}
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+  color: #667eea !important;
+}
         
         .settings-card {
             border-radius: 12px;
@@ -408,39 +430,77 @@
                 max-width: 100%;
             }
         }
+          .logo-preview {
+        width: 200px;   /* حجم المربع */
+        height: 200px;  /* حجم المربع */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa; /* لون خلفية افتراضي */
+        overflow: hidden;
+        position: relative;
+    }
+
+    .logo-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container-xxl px-3">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navMain">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
-                    <li class="nav-item"><a class="nav-link" href="products.html">ادارة المنتجات</a></li>
-                    <li class="nav-item"><a class="nav-link" href="offers.html">ادارة العروض</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="slider.html">الالوان والشعار</a></li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle" style="font-size: 1.8rem;"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-start">
-                            <li><a class="dropdown-item" href="account.html">
-                                <i class="fas fa-user-cog me-2"></i>إدارة الحساب
-                            </a></li>
-                            <li><a class="dropdown-item" href="#" id="loginAsUser">
-                                <i class="fas fa-sign-in-alt me-2"></i>تسجيل الدخول كمستخدم
-                            </a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container-xxl px-3">
+        <!-- شعار الموقع -->
+        <a class="navbar-brand text-white fw-bold fs-4" href="index.html">
+            <i class="fas fa-palette me-2"></i>لوحة الأدمن
+        </a>
+
+        <!-- زر القوائم للعرض على الموبايل -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMain">
+            <!-- الروابط الأساسية -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">الرئيسية</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">ادارة المنتجات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="store-details.html">ادارة العروض</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="slider.html">الألوان والشعار</a>
+                </li>
+            </ul>
+
+            <!-- أيقونة المستخدم -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center justify-content-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle fs-2 text-white"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-start shadow-lg rounded-3">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="account.html">
+                                <i class="fas fa-user-cog me-2 text-primary"></i> إدارة الحساب
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="#" id="loginAsUser">
+                                <i class="fas fa-sign-in-alt me-2 text-success"></i> تسجيل الدخول كمستخدم
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <header class="bg-white border-bottom">
         <div class="container-xxl px-3 py-3">
@@ -455,14 +515,14 @@
                 <div class="col-lg-6">
                     <div class="card settings-card">
                         <div class="card-header">
-                            <h6 class="mb-0">🎨 تخصيص الألوان</h6>
+                            <h6 class="mb-0"> تخصيص الألوان</h6>
                         </div>
                         <div class="card-body">
                             <div class="row g-4">
                                 <!-- اللون الأساسي -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold">اللون الأساسي</label>
-                                    <p class="text-muted small mb-2">اللون الرئيسي المستخدم في التصميم</p>
+                            <p class="text-muted small mb-2">هذا اللون يمثل الطابع الرئيسي لموقعك</p>
                                     <div class="d-flex align-items-center gap-3 mb-3">
                                         <input type="color" class="form-control form-control-color" id="primaryColor" value="#667eea" title="اختر اللون الأساسي">
                                         <div class="color-preview" id="primaryPreview" style="background-color: #667eea;"></div>
@@ -507,7 +567,7 @@
                                 <!-- اللون الثانوي -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold">اللون الثانوي</label>
-                                    <p class="text-muted small mb-2">اللون المستخدم للتدرجات والتأكيد</p>
+                            <p class="text-muted small mb-2">هذا اللون يستخدم للتأكيد أو التدرجات في الموقع</p>
                                     <div class="d-flex align-items-center gap-3 mb-3">
                                         <input type="color" class="form-control form-control-color" id="secondaryColor" value="#764ba2" title="اختر اللون الثانوي">
                                         <div class="color-preview" id="secondaryPreview" style="background-color: #764ba2;"></div>
@@ -549,52 +609,50 @@
                                     </div>
                                 </div>
                                 
-                                <!-- ألوان جاهزة -->
-                                <div class="col-12">
-                                    <label class="form-label fw-bold">ألوان جاهزة</label>
-                                    <p class="text-muted small mb-2">اختر من مجموعة الألوان الجاهزة</p>
-                                    <div class="preset-colors">
-                                        <div class="color-option active" style="background: linear-gradient(135deg, #667eea, #764ba2);" data-primary="#667eea" data-secondary="#764ba2"></div>
-                                        <div class="color-option" style="background: linear-gradient(135deg, #f093fb, #f5576c);" data-primary="#f093fb" data-secondary="#f5576c"></div>
-                                        <div class="color-option" style="background: linear-gradient(135deg, #4facfe, #00f2fe);" data-primary="#4facfe" data-secondary="#00f2fe"></div>
-                                        <div class="color-option" style="background: linear-gradient(135deg, #43e97b, #38f9d7);" data-primary="#43e97b" data-secondary="#38f9d7"></div>
-                                        <div class="color-option" style="background: linear-gradient(135deg, #fa709a, #fee140);" data-primary="#fa709a" data-secondary="#fee140"></div>
-                                        <div class="color-option" style="background: linear-gradient(135deg, #a8edea, #fed6e3);" data-primary="#a8edea" data-secondary="#fed6e3"></div>
-                                    </div>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- إعدادات الشعار -->
-                <div class="col-lg-6">
-                    <div class="card settings-card">
-                        <div class="card-header">
-                            <h6 class="mb-0">🏢 شعار المتجر</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="logo-upload-section">
-                                <div class="logo-preview mb-3" id="logoPreview">
-                                    <img src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-shopping-mall-logo-image_2235997.jpg" alt="شعار المتجر الحالي" id="logoImage">
-                                </div>
-                                <div class="logo-input-container">
-                                    <input type="file" class="form-control" id="logoInput" accept="image/*">
-                                </div>
-                            </div>
-                        </div>
+        <!-- إعدادات الشعار -->
+<div class="col-lg-6">
+    <div class="card settings-card">
+        <div class="card-header">
+            <h6 class="mb-0">لتغير شعار المتجر</h6>
+        </div>
+        <div class="card-body">
+            <div class="logo-upload-section text-center">
+                <div class="position-relative d-inline-block">
+                    <!-- معاينة الشعار -->
+                    <div class="logo-preview" id="logoPreview">
+                        <img src="https://marketplace.canva.com/EAFYzECeGEk/1/0/1600w/canva-%D8%B4%D8%B9%D8%A7%D8%B1-logo-%D9%85%D8%AA%D8%AC%D8%B1-%D9%84%D9%84%D9%85%D8%A8%D9%84%D8%A7%D8%A8%D8%B3-%D8%A7%D9%88-%D8%A7%D9%84%D8%A7%D8%B2%D9%8A%D8%A7%D8%A1-%D8%A7%D9%88-%D8%A7%D9%84%D9%85%D9%81%D8%B1%D9%88%D8%B4%D8%A7%D8%AA-vPrqHjFSvAE.jpg" 
+                             alt="شعار المتجر" 
+                             class="logo-img rounded shadow">
                     </div>
+                    <!-- زر رفع الصورة -->
+                    <button type="button" class="btn btn-sm btn-primary position-absolute bottom-0 end-0" 
+                        onclick="document.getElementById('logoInput').click()">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <!-- مدخل رفع الصورة -->
+                    <input type="file" id="logoInput" accept="image/*" style="display: none;">
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
             
             <!-- زر الحفظ في المنتصف أسفل البطاقات -->
-            <div class="text-center">
-                <button class="save-button" onclick="saveChanges()">
-                    <i class="fas fa-save"></i> حفظ التعديلات
-                </button>
-            </div>
+           <div class="text-center mt-4">
+    <button class="save-button btn btn-success" onclick="saveChanges()">
+        <i class="fas fa-save"></i> حفظ التعديلات
+    </button>
+</div>
         </div>
     </main>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -872,21 +930,16 @@
         
         // حفظ الإعدادات
         function saveChanges() {
-            const primaryColor = document.getElementById('primaryColor').value;
-            const secondaryColor = document.getElementById('secondaryColor').value;
-            
-            const settings = {
-                primaryColor: primaryColor,
-                secondaryColor: secondaryColor,
-                logo: document.querySelector('#logoPreview img') ? document.querySelector('#logoPreview img').src : null
-            };
-            
-            // في الواقع، هنا سيتم إرسال البيانات للخادم
-            console.log('Saving settings:', settings);
-            
-            // عرض رسالة نجاح
-            alert('تم حفظ الإعدادات بنجاح!');
-        }
+        // هنا تقدر تضيف الكود اللي يخزن البيانات فعليًا قبل عرض الرسالة
+        Swal.fire({
+            icon: 'success',
+            title: 'تم الحفظ!',
+            text: 'تم حفظ التعديلات بنجاح.',
+            confirmButtonText: 'حسناً',
+            timer: 2000, // الرسالة تختفي بعد ثانيتين
+            timerProgressBar: true
+        });
+    }
         
         // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', function() {
@@ -904,6 +957,26 @@
             setupAdvancedColorPicker('primary');
             setupAdvancedColorPicker('secondary');
         });
+function previewLogo(input) {
+    const preview = document.getElementById('logoPreview');
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            preview.innerHTML = `<img src="${e.target.result}" alt="شعار المتجر" style="width:150px; height:150px; object-fit:cover;" class="rounded shadow">`;
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// ربط الدالة بمدخل رفع الصورة
+document.getElementById('logoInput').addEventListener('change', function() {
+    previewLogo(this);
+});
+
+
     </script>
 </body>
 </html>
