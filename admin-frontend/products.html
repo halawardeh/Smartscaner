@@ -79,9 +79,8 @@
         }
         
        .text-muted {
-    color: rgb(0 0 0) !important;
-    font-size: larger;
-}
+             color: rgb(0 0 0) !important;
+        }
         .border-light {
     --bs-border-opacity: 1;
     border-color: #6c757d5e !important;
@@ -171,11 +170,11 @@
             }
             
             .table-mobile {
-                display: none;
+                display: none !important;
             }
             
             .mobile-cards {
-                display: block;
+                display: block !important;
             }
             
             .product-card {
@@ -216,11 +215,11 @@
         
         @media (min-width: 769px) {
             .mobile-cards {
-                display: none;
+                display: none !important;
             }
             
             .table-mobile {
-                display: table;
+                display: table !important;
             }
         }
         
@@ -278,14 +277,52 @@
             padding: 0.25rem 0.5rem;
             font-size: 0.875rem;
         }
+        
+        /* تحسينات الـ navbar */
+        .navbar-toggler {
+            border: none;
+            padding: 0.25rem 0.5rem;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        .navbar-brand {
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                text-align: center;
+                padding: 1rem 0;
+            }
+            
+            .navbar-nav .nav-link {
+                padding: 0.5rem 1rem;
+                border-bottom: 1px solid rgba(0,0,0,0.1);
+            }
+            
+            .navbar-nav .nav-link:last-child {
+                border-bottom: none;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg border-bottom  sticky-top">
+    <nav class="navbar navbar-expand-lg border-bottom sticky-top">
         <div class="container-xxl px-3">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+            <!-- العلامة التجارية أو الشعار -->
+            <a class="navbar-brand d-lg-none fw-bold text-primary" href="index.html">
+                لوحة صاحب المتجر
+            </a>
+            
+            <!-- زر البرغر مينو على اليسار -->
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
+            <!-- محتويات النافبار -->
             <div class="collapse navbar-collapse" id="navMain">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
@@ -293,12 +330,12 @@
                     <li class="nav-item"><a class="nav-link" href="store-details.html">ادارة العروض</a></li>
                     <li class="nav-item"><a class="nav-link" href="slider.html">الالوان والشعار</a></li>
                 </ul>
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-circle" style="font-size: 1.8rem;"></i>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-start">
+                        <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="account.html">
                                 <i class="fas fa-user-cog me-2"></i>إدارة الحساب
                             </a></li>
@@ -372,6 +409,7 @@
                                 <th style="width: 200px;">اسم المنتج</th>
                                 <th style="width: 250px;">وصف المنتج</th>
                                 <th style="width: 100px;">السعر</th>
+                                <th style="width: 100px;">العرض</th>
                                 <th style="width: 120px;">الوزن/الحجم</th>
                                 <th style="width: 100px;">الكمية</th>
                                 <th style="width: 110px;">حالة التوفر</th>
@@ -379,7 +417,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="product-row">
+                            <tr class="product-row" data-category="dairy" data-status="available">
                                 <td>
                                     <img src="https://i.pinimg.com/736x/50/c3/0e/50c30efb040a092fb169a0e877e63e2c.jpg" 
                                          alt="صورة المنتج" class="rounded product-image">
@@ -397,6 +435,9 @@
                                     <span class="text-muted fs-6">حليب بقري طازج كامل الدسم - 1 لتر</span>
                                 </td>
                                 <td class="fw-bold text-success fs-6">2.50 د.أ</td>
+                                <td>
+                                    <span class="fs-6">3 حبات بـ 6.00 د.أ</span>
+                                </td>
                                 <td>
                                     <span class="fs-6">1 لتر<br>1000 مل</span>
                                 </td>
@@ -420,7 +461,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="product-row">
+                            <tr class="product-row" data-category="meat" data-status="low">
                                 <td>
                                     <img src="https://i.pinimg.com/736x/bd/cb/91/bdcb915dfb03f4169a473025a180ef30.jpg" 
                                          alt="صورة المنتج" class="rounded product-image">
@@ -438,6 +479,9 @@
                                     <span class="text-muted fs-6">لحم بقري طازج مفروم ناعم - محلي</span>
                                 </td>
                                 <td class="fw-bold text-success fs-6">18.00 د.أ</td>
+                                <td>
+                                    <span class="text-muted fs-6">لا يوجد عرض</span>
+                                </td>
                                 <td>
                                     <span class="fs-6">1 كيلو<br>1000 جم</span>
                                 </td>
@@ -461,7 +505,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="product-row">
+                            <tr class="product-row" data-category="vegetables" data-status="available">
                                 <td>
                                     <img src="https://i.pinimg.com/736x/48/e7/60/48e7605f18e17b8e92acb10a206fea11.jpg" 
                                          alt="صورة المنتج" class="rounded product-image">
@@ -479,6 +523,9 @@
                                     <span class="text-muted fs-6">تفاح أحمر طازج من المزارع المحلية</span>
                                 </td>
                                 <td class="fw-bold text-success fs-6">4.50 د.أ</td>
+                                <td>
+                                    <span class="fs-6">2 كيلو بـ 8.00 د.أ</span>
+                                </td>
                                 <td>
                                     <span class="fs-6">1 كيلو<br>تقريباً 6-8 حبات</span>
                                 </td>
@@ -506,107 +553,149 @@
                     </table>
                 </div>
 
-                <!-- كروت المنتجات للموبايل -->
+                <!-- عرض البطاقات للموبايل -->
                 <div class="mobile-cards">
-                    <div class="product-card">
+                    <div class="product-card" data-category="dairy" data-status="available">
                         <div class="product-header">
-                            <img src="https://via.placeholder.com/50x50/007bff/ffffff?text=�" 
-                                 alt="صورة المنتج" class="rounded me-3" width="50" height="50">
+                            <img src="https://i.pinimg.com/736x/50/c3/0e/50c30efb040a092fb169a0e877e63e2c.jpg" 
+                                 alt="صورة المنتج" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
                             <div>
-                                <div class="fw-bold">جهاز سامسونج جالاكسي S23</div>
-                                <span class="badge ">إلكترونيات</span>
+                                <h6 class="mb-1 fw-bold">حليب طازج كامل الدسم</h6>
+                                <small class="text-muted">1234567890123</small>
                             </div>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">رقم المنتج:</span>
-                            <span class="info-value"><span class="badge  text-dark">1234567890123</span></span>
-                        </div>
-                        <div class="product-info-row">
-                            <span class="info-label">الوصف:</span>
-                            <span class="info-value"><small class="text-muted">هاتف ذكي بشاشة 6.1 بوصة وكاميرا متطورة</small></span>
+                            <span class="info-label">التصنيف:</span>
+                            <span class="info-value">ألبان ومشتقاتها</span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">السعر:</span>
-                            <span class="info-value fw-bold text-primary">899.99 د.أ</span>
+                            <span class="info-value text-success fw-bold">2.50 د.أ</span>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">الوزن/الأبعاد:</span>
-                            <span class="info-value"><small>168g - 146.3×70.9×7.6mm</small></span>
+                            <span class="info-label">العرض:</span>
+                            <span class="info-value">3 حبات بـ 6.00 د.أ</span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الكمية:</span>
-                            <span class="info-value"><span class="badge   ">15 قطعة</span></span>
+                            <span class="info-value">25 قطعة</span>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">حالة التوفر:</span>
-                            <span class="info-value"><span class="badge   ">متوفر</span></span>
+                            <span class="info-label">الحالة:</span>
+                            <span class="info-value">متوفر</span>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">الإجراءات:</span>
-                            <span class="info-value">
-                                <div class="btn-group btn-group-sm" role="group">
-                                    <button class="btn btn-outline-info" onclick="viewProduct(1)" title="عرض">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="btn btn-outline-warning" onclick="editProduct(1)" title="تعديل">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-outline-danger" onclick="deleteProduct(1)" title="حذف">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </span>
+                            <span class="info-label">الوزن:</span>
+                            <span class="info-value">1 لتر</span>
+                        </div>
+                        <div class="text-center mt-3">
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-info" onclick="viewProduct(1)" title="عرض">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-warning" onclick="editProduct(1)" title="تعديل">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" onclick="deleteProduct(1)" title="حذف">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="product-card">
+                    <div class="product-card" data-category="meat" data-status="low">
                         <div class="product-header">
-                            <img src="https://via.placeholder.com/50x50/28a745/ffffff?text=👕" 
-                                 alt="صورة المنتج" class="rounded me-3" width="50" height="50">
+                            <img src="https://i.pinimg.com/736x/bd/cb/91/bdcb915dfb03f4169a473025a180ef30.jpg" 
+                                 alt="صورة المنتج" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
                             <div>
-                                <div class="fw-bold">قميص قطني أزرق</div>
-                                <span class="badge ">ملابس</span>
+                                <h6 class="mb-1 fw-bold">لحم بقري مفروم</h6>
+                                <small class="text-muted">9876543210987</small>
                             </div>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">رقم المنتج:</span>
-                            <span class="info-value"><span class="badge  text-dark">9876543210987</span></span>
-                        </div>
-                        <div class="product-info-row">
-                            <span class="info-label">الوصف:</span>
-                            <span class="info-value"><small class="text-muted">قميص رجالي من القطن الخالص مقاس L</small></span>
+                            <span class="info-label">التصنيف:</span>
+                            <span class="info-value">لحوم وأسماك</span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">السعر:</span>
-                            <span class="info-value fw-bold text-primary">45.00 د.أ</span>
+                            <span class="info-value text-success fw-bold">18.00 د.أ</span>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">الوزن/الأبعاد:</span>
-                            <span class="info-value"><small>200g - مقاس L</small></span>
+                            <span class="info-label">العرض:</span>
+                            <span class="info-value text-muted">لا يوجد عرض</span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الكمية:</span>
-                            <span class="info-value"><span class="badge   text-dark">3 قطع</span></span>
+                            <span class="info-value">8 قطعة</span>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">حالة التوفر:</span>
-                            <span class="info-value"><span class="badge  ">قليل</span></span>
+                            <span class="info-label">الحالة:</span>
+                            <span class="info-value">قليل</span>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">الإجراءات:</span>
-                            <span class="info-value">
-                                <div class="btn-group btn-group-sm" role="group">
-                                    <button class="btn btn-outline-info" onclick="viewProduct(2)" title="عرض">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="btn btn-outline-warning" onclick="editProduct(2)" title="تعديل">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-outline-danger" onclick="deleteProduct(2)" title="حذف">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </span>
+                            <span class="info-label">الوزن:</span>
+                            <span class="info-value">500 جرام</span>
+                        </div>
+                        <div class="text-center mt-3">
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-info" onclick="viewProduct(2)" title="عرض">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-warning" onclick="editProduct(2)" title="تعديل">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" onclick="deleteProduct(2)" title="حذف">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="vegetables" data-status="available">
+                        <div class="product-header">
+                            <img src="https://i.pinimg.com/736x/48/e7/60/48e7605f18e17b8e92acb10a206fea11.jpg" 
+                                 alt="صورة المنتج" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            <div>
+                                <h6 class="mb-1 fw-bold">تفاح أحمر طبيعي</h6>
+                                <small class="text-muted">5432167890123</small>
+                            </div>
+                        </div>
+                        <div class="product-info-row">
+                            <span class="info-label">التصنيف:</span>
+                            <span class="info-value">خضار وفواكه</span>
+                        </div>
+                        <div class="product-info-row">
+                            <span class="info-label">السعر:</span>
+                            <span class="info-value text-success fw-bold">4.50 د.أ</span>
+                        </div>
+                        <div class="product-info-row">
+                            <span class="info-label">العرض:</span>
+                            <span class="info-value">2 كيلو بـ 8.00 د.أ</span>
+                        </div>
+                        <div class="product-info-row">
+                            <span class="info-label">الكمية:</span>
+                            <span class="info-value">50 قطعة</span>
+                        </div>
+                        <div class="product-info-row">
+                            <span class="info-label">الحالة:</span>
+                            <span class="info-value">متوفر</span>
+                        </div>
+                        <div class="product-info-row">
+                            <span class="info-label">الوزن:</span>
+                            <span class="info-value">1 كيلو</span>
+                        </div>
+                        <div class="text-center mt-3">
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-info" onclick="viewProduct(3)" title="عرض">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-warning" onclick="editProduct(3)" title="تعديل">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" onclick="deleteProduct(3)" title="حذف">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -673,18 +762,37 @@
                                     <option value="out_of_stock">نفد المخزون</option>
                                 </select>
                             </div>
+                           
                             <div class="col-12">
-                                <label class="form-label">الباركود</label>
+                                <label class="form-label fw-bold text-dark fs-6">الباركود</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="barcode" placeholder="أدخل رقم الباركود..." readonly>
-                                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#barcodeModal">
-                                        📷 إضافة باركود
+                                    <input type="text" class="form-control font-monospace fs-6" name="barcode" placeholder="رقم الباركود" readonly>
+                                    <button type="button" class="btn btn-outline-primary" onclick="openBarcodeModalFromAdd()">
+                                        <i class="fas fa-camera me-1"></i> مسح
                                     </button>
                                 </div>
+                                <small class="text-muted">استخدم الكاميرا لمسح الباركود</small>
                             </div>
                             <div class="col-12">
                                 <label class="form-label">صورة المنتج</label>
                                 <input type="file" class="form-control" name="productImage" accept="image/*">
+                            </div>
+                             <!-- خانات العرض -->
+                            <div class="col-12">
+                                <hr class="my-3">
+                                <h6 class="text-primary fw-bold mb-3">
+                                    <i class="fas fa-tags me-2"></i>العروض والخصومات (اختياري)
+                                </h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark fs-6">عدد الحبات في العرض</label>
+                                <input type="number" class="form-control fs-6" name="offerQuantity" min="1" placeholder="مثال: 3">
+                                <small class="text-muted">عدد الحبات التي يشملها العرض</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark fs-6">سعر العرض (د.أ)</label>
+                                <input type="number" class="form-control fs-6" name="offerPrice" step="0.01" min="0" placeholder="مثال: 5.00">
+                                <small class="text-muted">السعر الإجمالي للعرض</small>
                             </div>
                         </div>
                     </form>
@@ -704,12 +812,12 @@
     </div>
 
     <!-- Barcode Modal -->
-    <div class="modal fade" id="barcodeModal" tabindex="-1">
+    <div class="modal fade" id="barcodeModal" tabindex="-1" style="z-index: 1055;">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">إضافة باركود للمنتج</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <div class="modal-header text-white text-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h5 class="modal-title w-100">إضافة باركود للمنتج</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="text-center mb-4">
@@ -820,8 +928,126 @@
         </div>
     </div>
 
+    <style>
+        /* إصلاح z-index للبوب أبز */
+        #barcodeModal {
+            z-index: 1055 !important;
+        }
+        
+        #barcodeModal .modal-backdrop {
+            z-index: 1054 !important;
+        }
+        
+        /* توحيد ستايل البوب أبز */
+        .modal-header {
+            border-bottom: none;
+        }
+        
+        .modal-footer {
+            border-top: none;
+        }
+        
+        /* تحسين مظهر الحقول */
+        .form-control, .form-select {
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        /* تحسين أزرار البوب أب */
+        .btn-outline-primary {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: #667eea;
+            border-color: #667eea;
+        }
+    </style>
+    
+    <style>
+        /* إصلاح z-index للبوب أبز */
+        #barcodeModal {
+            z-index: 1055 !important;
+        }
+        
+        #barcodeModal .modal-backdrop {
+            z-index: 1054 !important;
+        }
+        
+        /* توحيد ستايل البوب أبز */
+        .modal-header {
+            border-bottom: none;
+        }
+        
+        .modal-footer {
+            border-top: none;
+        }
+        
+        /* تحسين مظهر الحقول */
+        .form-control, .form-select {
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        /* تحسين أزرار البوب أب */
+        .btn-outline-primary {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: #667eea;
+            border-color: #667eea;
+        }
+        
+        /* تحسين مظهر البوب أب */
+        .modal-dialog {
+            margin: 1.75rem auto;
+        }
+        
+        /* تأكد من ظهور البوب أب فوق الآخرين */
+        .modal.show {
+            z-index: 1055;
+        }
+        
+        .modal-backdrop.show {
+            z-index: 1040;
+        }
+    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // تأكد من عمل الـ navbar بشكل صحيح
+        document.addEventListener('DOMContentLoaded', function() {
+            // إعادة تهيئة جميع مكونات Bootstrap
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+            
+            // التأكد من عمل البرغر مينو
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            
+            if (navbarToggler && navbarCollapse) {
+                navbarToggler.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                });
+            }
+        });
+        
         // Barcode Variables
         let cameraStream = null;
         let scanningInterval = null;
@@ -918,7 +1144,22 @@
             const scannedCode = document.getElementById('scannedCode').textContent;
             document.querySelector('input[name="barcode"]').value = scannedCode;
             bootstrap.Modal.getInstance(document.getElementById('barcodeModal')).hide();
-            alert('تم إضافة الباركود المسوح بنجاح!');
+            
+            // إظهار مودال إضافة المنتج مرة أخرى بعد اختفاء مودال الباركود
+            setTimeout(() => {
+                new bootstrap.Modal(document.getElementById('productModal')).show();
+            }, 300);
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'تم إضافة الباركود!',
+                text: 'تم مسح وإضافة الباركود بنجاح',
+                confirmButtonText: 'حسناً',
+                confirmButtonColor: '#28a745',
+                timer: 2000,
+                timerProgressBar: true
+            });
+            
             resetBarcodeModal();
         }
 
@@ -1232,6 +1473,17 @@
                             </div>
                         </div>
 
+                        <!-- العرض -->
+                        <div class="col-12">
+                            <div class="p-3 border border-light rounded-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-tags text-primary me-2"></i>
+                                    <small class="text-muted text-uppercase fw-semibold">العرض الحالي</small>
+                                </div>
+                                <p id="viewProductOffer" class="mb-0 text-dark"></p>
+                            </div>
+                        </div>
+
                         <!-- وصف المنتج -->
                         <div class="col-12">
                             <div class="p-3 border border-light rounded-3">
@@ -1315,9 +1567,33 @@
                                 <label class="form-label fw-bold text-dark fs-6">الوزن/الحجم</label>
                                 <input type="text" class="form-control fs-6" id="editProductWeightInput" placeholder="مثال: 1 كيلو">
                             </div>
+                      
                             <div class="col-12">
                                 <label class="form-label fw-bold text-dark fs-6">رقم المنتج/الباركود</label>
-                                <input type="text" class="form-control font-monospace fs-6" id="editProductBarcodeInput" readonly>
+                                <div class="input-group">
+                                    <input type="text" class="form-control font-monospace fs-6" id="editProductBarcodeInput" readonly>
+                                    <button type="button" class="btn btn-outline-primary" id="rescanBarcodeBtn" onclick="rescanBarcode()">
+                                        <i class="fas fa-camera me-1"></i> إعادة المسح
+                                    </button>
+                                </div>
+                                <small class="text-muted">يمكنك إعادة مسح الباركود باستخدام الكاميرا</small>
+                            </div>
+                                  <!-- خانات العرض -->
+                            <div class="col-12">
+                                <hr class="my-3">
+                                <h6 class="text-primary fw-bold mb-3">
+                                    <i class="fas fa-tags me-2"></i>العروض والخصومات (اختياري)
+                                </h6>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark fs-6">عدد الحبات في العرض</label>
+                                <input type="number" class="form-control fs-6" id="editProductOfferQuantityInput" min="1" placeholder="مثال: 3">
+                                <small class="text-muted">عدد الحبات التي يشملها العرض</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark fs-6">سعر العرض (د.أ)</label>
+                                <input type="number" class="form-control fs-6" id="editProductOfferPriceInput" step="0.01" min="0" placeholder="مثال: 5.00">
+                                <small class="text-muted">السعر الإجمالي للعرض</small>
                             </div>
                         </div>
                     </form>
@@ -1336,7 +1612,6 @@
 
     <!-- تضمين Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         // بيانات المنتجات التجريبية
@@ -1353,7 +1628,9 @@
                 barcode: "1234567890123",
                 status: "available",
                 statusName: "متوفر",
-                image: "https://i.pinimg.com/736x/50/c3/0e/50c30efb040a092fb169a0e877e63e2c.jpg"
+                image: "https://i.pinimg.com/736x/50/c3/0e/50c30efb040a092fb169a0e877e63e2c.jpg",
+                offerQuantity: 3,
+                offerPrice: 6.00
             },
             2: {
                 id: 2,
@@ -1367,7 +1644,9 @@
                 barcode: "9876543210987",
                 status: "low",
                 statusName: "قليل",
-                image: "https://i.pinimg.com/736x/bd/cb/91/bdcb915dfb03f4169a473025a180ef30.jpg"
+                image: "https://i.pinimg.com/736x/bd/cb/91/bdcb915dfb03f4169a473025a180ef30.jpg",
+                offerQuantity: null,
+                offerPrice: null
             },
             3: {
                 id: 3,
@@ -1381,7 +1660,9 @@
                 barcode: "5432167890123",
                 status: "available",
                 statusName: "متوفر",
-                image: "https://i.pinimg.com/736x/48/e7/60/48e7605f18e17b8e92acb10a206fea11.jpg"
+                image: "https://i.pinimg.com/736x/48/e7/60/48e7605f18e17b8e92acb10a206fea11.jpg",
+                offerQuantity: 2,
+                offerPrice: 8.00
             },
         };
 
@@ -1400,6 +1681,14 @@
             document.getElementById('viewProductStatus').innerHTML = `${product.statusName}`;
             document.getElementById('viewProductWeight').textContent = product.weight;
             document.getElementById('viewProductBarcode').textContent = product.barcode;
+            
+            // عرض معلومات العرض
+            const offerElement = document.getElementById('viewProductOffer');
+            if (product.offerQuantity && product.offerPrice) {
+                offerElement.textContent = `${product.offerQuantity} حبات بـ ${product.offerPrice} د.أ`;
+            } else {
+                offerElement.textContent = 'لا يوجد عرض حالياً';
+            }
 
             // حفظ ID المنتج للتعديل اللاحق
             document.getElementById('viewProductModal').setAttribute('data-product-id', productId);
@@ -1423,6 +1712,10 @@
             document.getElementById('editProductQuantityInput').value = product.quantity;
             document.getElementById('editProductWeightInput').value = product.weight;
             document.getElementById('editProductBarcodeInput').value = product.barcode;
+            
+            // ملء بيانات العرض
+            document.getElementById('editProductOfferQuantityInput').value = product.offerQuantity || '';
+            document.getElementById('editProductOfferPriceInput').value = product.offerPrice || '';
 
             // إظهار مودال التعديل
             new bootstrap.Modal(document.getElementById('editProductModal')).show();
@@ -1529,63 +1822,163 @@
             const categoryFilter = document.getElementById('categoryFilter').value;
             const statusFilter = document.getElementById('statusFilter').value;
             
-            console.log('Filtering products:', { searchTerm, categoryFilter, statusFilter });
-            
-            const productRows = document.querySelectorAll('tbody .product-row');
-            let visibleCount = 0;
-            
+            const productRows = document.querySelectorAll('.product-row');
             productRows.forEach(row => {
-                // الحصول على بيانات المنتج من الخلايا
-                const cells = row.querySelectorAll('td');
-                if (cells.length < 9) return; // تأكد من وجود جميع الخلايا
-                
-                const productName = cells[3].textContent.toLowerCase().trim(); // اسم المنتج
-                const productBarcode = cells[1].textContent.toLowerCase().trim(); // الباركود
-                const productDescription = cells[4].textContent.toLowerCase().trim(); // الوصف
-                const productCategory = cells[2].textContent.trim(); // التصنيف
-                const productStatus = cells[8].textContent.trim(); // حالة التوفر
-                
-                // تحقق من البحث (في الاسم أو الباركود أو الوصف)
-                const matchesSearch = !searchTerm || 
-                    productName.includes(searchTerm) || 
-                    productBarcode.includes(searchTerm) || 
-                    productDescription.includes(searchTerm);
-                
-                // تحقق من التصنيف
-                const matchesCategory = !categoryFilter || 
-                    (categoryFilter === 'dairy' && productCategory === 'ألبان ومشتقاتها') ||
-                    (categoryFilter === 'meat' && productCategory === 'لحوم وأسماك') ||
-                    (categoryFilter === 'vegetables' && productCategory === 'خضار وفواكه') ||
-                    (categoryFilter === 'snacks' && productCategory === 'سناكات ومقرمشات') ||
-                    (categoryFilter === 'beverages' && productCategory === 'مشروبات') ||
-                    (categoryFilter === 'bakery' && productCategory === 'مخبوزات وحلويات') ||
-                    (categoryFilter === 'frozen' && productCategory === 'أطعمة مجمدة') ||
-                    (categoryFilter === 'canned' && productCategory === 'معلبات ومحفوظات') ||
-                    (categoryFilter === 'spices' && productCategory === 'بهارات وتوابل') ||
-                    (categoryFilter === 'cleaning' && productCategory === 'منظفات ومواد تنظيف');
-                
-                // تحقق من حالة التوفر
-                const matchesStatus = !statusFilter || 
-                    (statusFilter === 'available' && productStatus === 'متوفر') ||
-                    (statusFilter === 'low' && productStatus === 'قليل') ||
-                    (statusFilter === 'out_of_stock' && productStatus === 'نفد المخزون');
-                
-                // إظهار أو إخفاء الصف
+                const productName = row.querySelector('.product-name').textContent.toLowerCase();
+                const productCategory = row.querySelector('.product-category').dataset.category;
+                const productStatus = row.querySelector('.product-status').dataset.status;
+
+                const matchesSearch = productName.includes(searchTerm);
+                const matchesCategory = !categoryFilter || productCategory === categoryFilter;
+                const matchesStatus = !statusFilter || productStatus === statusFilter;
+
                 if (matchesSearch && matchesCategory && matchesStatus) {
                     row.style.display = '';
-                    visibleCount++;
                 } else {
                     row.style.display = 'none';
                 }
             });
-            
-            console.log(`عدد المنتجات المعروضة: ${visibleCount}`);
         }
 
-        // إضافة مستمع للبحث المباشر
-        document.getElementById('searchProduct').addEventListener('input', filterProducts);
-        document.getElementById('categoryFilter').addEventListener('change', filterProducts);
-        document.getElementById('statusFilter').addEventListener('change', filterProducts);
+        document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchProduct');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const productRows = document.querySelectorAll('.product-row');
+        const productCards = document.querySelectorAll('.product-card');
+
+        function filterProducts() {
+            const searchValue = searchInput.value.toLowerCase();
+            const categoryValue = categoryFilter.value;
+            const statusValue = statusFilter.value;
+
+            // فلترة صفوف الجدول
+            productRows.forEach(row => {
+                const productName = row.querySelector('.fw-semibold');
+                const nameText = productName ? productName.textContent.toLowerCase() : '';
+                const category = row.getAttribute('data-category');
+                const status = row.getAttribute('data-status');
+
+                const matchesSearch = nameText.includes(searchValue);
+                const matchesCategory = !categoryValue || category === categoryValue;
+                const matchesStatus = !statusValue || status === statusValue;
+
+                const matches = matchesSearch && matchesCategory && matchesStatus;
+                row.style.display = matches ? '' : 'none';
+            });
+
+            // فلترة بطاقات الموبايل
+            productCards.forEach(card => {
+                const productName = card.querySelector('.fw-bold');
+                const nameText = productName ? productName.textContent.toLowerCase() : '';
+                const category = card.getAttribute('data-category');
+                const status = card.getAttribute('data-status');
+
+                const matchesSearch = nameText.includes(searchValue);
+                const matchesCategory = !categoryValue || category === categoryValue;
+                const matchesStatus = !statusValue || status === statusValue;
+
+                const matches = matchesSearch && matchesCategory && matchesStatus;
+                card.style.display = matches ? '' : 'none';
+            });
+        }
+
+        searchInput.addEventListener('input', filterProducts);
+        categoryFilter.addEventListener('change', filterProducts);
+        statusFilter.addEventListener('change', filterProducts);
+
+        filterProducts(); // Apply filters on page load
+    });
+
+    // وظيفة فتح مودال الباركود من بوب أب إضافة منتج جديد
+    function openBarcodeModalFromAdd() {
+        // إخفاء مودال إضافة المنتج
+        const addModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+        addModal.hide();
+        
+        // انتظار اختفاء المودال ثم فتح مودال الباركود
+        setTimeout(() => {
+            const barcodeModal = new bootstrap.Modal(document.getElementById('barcodeModal'));
+            barcodeModal.show();
+        }, 300);
+    }
+
+    // وظيفة إعادة مسح الباركود في تعديل المنتج
+    function rescanBarcode() {
+        // إخفاء مودال التعديل
+        const editModal = bootstrap.Modal.getInstance(document.getElementById('editProductModal'));
+        editModal.hide();
+        
+        // انتظار اختفاء المودال ثم فتح مودال الباركود
+        setTimeout(() => {
+            const barcodeModal = new bootstrap.Modal(document.getElementById('barcodeModal'));
+            
+            // تعديل وظيفة confirmScannedBarcode مؤقتاً لتحديث حقل التعديل
+            window.originalConfirmScannedBarcode = window.confirmScannedBarcode;
+            window.confirmScannedBarcode = function() {
+                const scannedCode = document.getElementById('scannedCode').textContent;
+                document.getElementById('editProductBarcodeInput').value = scannedCode;
+                bootstrap.Modal.getInstance(document.getElementById('barcodeModal')).hide();
+                
+                // إظهار مودال التعديل مرة أخرى بعد اختفاء مودال الباركود
+                setTimeout(() => {
+                    new bootstrap.Modal(document.getElementById('editProductModal')).show();
+                }, 300);
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'تم تحديث الباركود!',
+                    text: 'تم مسح وتحديث الباركود بنجاح',
+                    confirmButtonText: 'حسناً',
+                    confirmButtonColor: '#28a745',
+                    timer: 2000,
+                    timerProgressBar: true
+                });
+                
+                resetBarcodeModal();
+                // إرجاع الوظيفة الأصلية
+                window.confirmScannedBarcode = window.originalConfirmScannedBarcode;
+            };
+            
+            barcodeModal.show();
+        }, 300);
+    }
+
+    // وظيفة حفظ التعديلات
+    function saveChanges() {
+        // جمع بيانات النموذج
+        const productData = {
+            id: document.getElementById('editProductId').value,
+            name: document.getElementById('editProductNameInput').value,
+            category: document.getElementById('editProductCategoryInput').value,
+            description: document.getElementById('editProductDescriptionInput').value,
+            price: document.getElementById('editProductPriceInput').value,
+            quantity: document.getElementById('editProductQuantityInput').value,
+            weight: document.getElementById('editProductWeightInput').value,
+            barcode: document.getElementById('editProductBarcodeInput').value,
+            offerQuantity: document.getElementById('editProductOfferQuantityInput').value,
+            offerPrice: document.getElementById('editProductOfferPriceInput').value
+        };
+
+        // إغلاق المودال
+        bootstrap.Modal.getInstance(document.getElementById('editProductModal')).hide();
+
+        // عرض رسالة نجاح
+        Swal.fire({
+            icon: 'success',
+            title: 'تم حفظ التغييرات!',
+            text: 'تم تحديث بيانات المنتج بنجاح',
+            confirmButtonText: 'حسناً',
+            confirmButtonColor: '#28a745',
+            timer: 3000,
+            timerProgressBar: true
+        });
+
+        // هنا يمكن إضافة كود إرسال البيانات إلى السيرفر
+        console.log('Updated product data:', productData);
+    }
+
+    // تحديث وظيفة editProduct في نهاية الملف إذا كانت موجودة في مكان آخر
     </script>
 </body>
 </html>
