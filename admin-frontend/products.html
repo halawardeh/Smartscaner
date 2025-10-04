@@ -104,7 +104,7 @@
         
         /* الزر النشط */
         .nav-button.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #1a3051;
             color: white;
             transform: scale(1.05);
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
@@ -291,10 +291,10 @@
         <div class="container-xxl px-3">
             <div class="row g-4 justify-content-center">
                 <div class="col-12 col-md-4">
-                    <a href="account.html" class="nav-button btn-accounts">
-                        <i class="fas fa-user-cog"></i>
-                        <h6>إدارة الحساب</h6>
-                        <p>إعدادات وبيانات الحساب</p>
+                    <a href="products.html" class="nav-button btn-products active">
+                        <i class="fas fa-box" style="color: #007bff !important"></i>
+                        <h6>إدارة المنتجات</h6>
+                        <p>إضافة وتعديل وحذف المنتجات</p>
                     </a>
                 </div>
                 <div class="col-12 col-md-4">
@@ -305,10 +305,10 @@
                     </a>
                 </div>
                 <div class="col-12 col-md-4">
-                    <a href="products.html" class="nav-button btn-products active">
-                        <i class="fas fa-box"></i>
-                        <h6>إدارة المنتجات</h6>
-                        <p>إضافة وتعديل وحذف المنتجات</p>
+                    <a href="account.html" class="nav-button btn-accounts">
+                        <i class="fas fa-user-cog"></i>
+                        <h6>إدارة الحساب</h6>
+                        <p>إعدادات وبيانات الحساب</p>
                     </a>
                 </div>
             </div>
@@ -758,7 +758,13 @@
             </div>
         </div>
     </div>
-
+<footer class="bg-light text-center py-3 mt-auto shadow-sm">
+  <div class="container">
+    <p class="mb-0">
+      © 2025 <a href="https://codnaitsolutions.com/" target="_blank" class="text-decoration-none text-dark">By Codna IT Solution</a>
+    </p>
+  </div>
+</footer>
     <style>
         /* إصلاح z-index للبوب أبز */
         #barcodeModal {
@@ -1133,16 +1139,6 @@
             document.getElementById('imagePreviewContainer').classList.remove('d-none');
             
             stopProductCamera();
-            
-            Swal.fire({
-                icon: 'success',
-                title: 'تم!',
-                text: 'تم التقاط الصورة بنجاح',
-                confirmButtonText: 'حسناً',
-                confirmButtonColor: '#28a745',
-                timer: 2000,
-                timerProgressBar: true
-            });
         }
 
         function stopProductCamera() {

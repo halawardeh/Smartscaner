@@ -335,14 +335,187 @@
                 display: flow-root;
   }
 }
+        /* تصميم الأزرار الجديدة */
+        .nav-buttons {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px 0;
+            margin-bottom: 20px;
+        }
+        
+        .nav-button {
+            background: white;
+            border: none;
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-button:hover::before {
+            left: 100%;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .nav-button i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover i {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .nav-button h6 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-button p {
+            margin: 0;
+            font-size: 13px;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+        
+        /* الألوان المختلفة للأزرار */
+        .btn-accounts i { 
+            color: #17a2b8;
+            background: linear-gradient(135deg, #17a2b8, #20c997);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-offers i { 
+            color: #28a745;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-products i { 
+            color: white !important;
+        }
+        
+        /* الزر النشط */
+        .nav-button.active {
+            background: #1a3051;
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-button.active h6,
+        .nav-button.active p {
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-button {
+                min-height: 120px;
+                padding: 18px 15px;
+            }
+            
+            .nav-button i {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+            }
+            
+            .nav-button h6 {
+                font-size: 14px;
+            }
+            
+            .nav-button p {
+                font-size: 11px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nav-button {
+                min-height: 110px;
+                padding: 15px 10px;
+            }
+            
+            .nav-button i {
+                font-size: 2rem;
+            }
+            
+            .nav-button h6 {
+                font-size: 13px;
+            }
+            
+            .nav-button p {
+                font-size: 10px;
+                line-height: 1.3;
+            }
+        }
     </style>
 </head>
 <body>
-  
+    <!-- أزرار التنقل الجديدة -->
+    <div class="nav-buttons">
+        <div class="container-xxl px-3">
+            <div class="row g-4 justify-content-center">
+                <div class="col-12 col-md-4">
+                    <a href="products.html" class="nav-button btn-products">
+                        <i class="fas fa-box" style="color: #007bff !important"></i>
+                        <h6>إدارة المنتجات</h6>
+                        <p>إضافة وتعديل وحذف المنتجات</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-4">
+                    <a href="store-details.html" class="nav-button btn-offers active">
+                        <i class="fas fa-tags"></i>
+                        <h6>إدارة العروض</h6>
+                        <p>إنشاء وإدارة عروض المتجر</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-4">
+                    <a href="account.html" class="nav-button btn-accounts">
+                        <i class="fas fa-user-cog"></i>
+                        <h6>إدارة الحساب</h6>
+                        <p>إعدادات وبيانات الحساب</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <header class="bg-white border-bottom">
-        <div class="container-xxl px-3 py-3">
-            <h1 class="h4 m-0">إدارة العروض</h1>
+    <header class="" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+        <div class="container-xxl px-3 py-4">
+            <h1 class="h4 m-0 fw-bold">🏷️ إدارة العروض</h1>
+            <p class="mb-0 opacity-75">إنشاء وإدارة عروض المتجر</p>
         </div>
     </header>
 
