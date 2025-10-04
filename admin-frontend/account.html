@@ -3,101 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>إدارة الحساب - لوحة الأدمن</title>
+    <title>تعديل البروفايل - لوحة الأدمن</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
         :root {
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --primary-color: #667eea;
             --secondary-color: #764ba2;
-            --light-bg: #f8f9fa;
+            --light-bg: #f5f7fb;
             --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
         
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #f5f7fb;
+            background-color: var(--light-bg);
             color: #333;
+            transition: background-color 0.3s ease;
         }
         
         .navbar {
             background: var(--primary-gradient) !important;
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
             padding: 0.75rem 0;
-        }
-        .navbar-nav .nav-link {
-            color: #ffffff !important;
-            font-weight: 500;
-            padding: 0.6rem 1rem !important;
-            margin: 0 0.2rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-size: 15px;
-        }
-        .navbar-nav .nav-link:hover {
-            background-color: rgba(255,255,255,0.15);
-            color: #ffffff !important;
-            transform: translateY(-1px);
-        }
-        .navbar-nav .nav-link.active {
-            background-color: rgba(255,255,255,0.25);
-            color: #ffffff !important;
-            font-weight: 600;
-        }
-        .navbar-nav .dropdown-toggle {
-            color: #ffffff !important;
-            font-size: 1.8rem !important;
-            padding: 0.4rem 0.8rem !important;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-        .navbar-nav .dropdown-toggle:hover {
-            background-color: rgba(255,255,255,0.15);
-            transform: scale(1.1);
-        }
-        .dropdown-menu {
-            background-color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            padding: 0.5rem 0;
-            min-width: 220px;
-            margin-top: 0.5rem;
-            position: absolute !important;
-            z-index: 1050;
-            white-space: nowrap;
-        }
-        .dropdown-menu-start {
-            right: 0 !important;
-            left: auto !important;
-        }
-        .dropdown-item {
-            color: #495057 !important;
-            padding: 0.75rem 1.25rem;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-        }
-        .dropdown-item i {
-            width: 20px;
-            text-align: center;
-            margin-left: 8px;
-        }
-        .dropdown-item:hover {
-            background-color: #f8f9fa;
-            color: #667eea !important;
-        }
-        .navbar-toggler {
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 8px;
-        }
-        .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
         
         .page-header {
@@ -125,6 +59,7 @@
             box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
             overflow: hidden;
+            margin-bottom: 1.5rem;
         }
         
         .card:hover {
@@ -229,48 +164,6 @@
             padding-left: 40px !important;
         }
         
-        .modal-backdrop {
-            z-index: 1040;
-        }
-        
-        .modal {
-            z-index: 1050;
-        }
-        
-        .modal-content {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-        
-        .modal-header {
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding: 1rem 1.25rem;
-        }
-        
-        .modal-title {
-            font-weight: 700;
-            color: #333;
-            font-size: 1.1rem;
-        }
-        
-        .modal-footer {
-            border-top: 1px solid rgba(0,0,0,0.05);
-            padding: 1rem 1.25rem;
-        }
-        
-        .compact-form .form-group {
-            margin-bottom: 0.8rem;
-        }
-        
-        .compact-form .form-control {
-            padding: 0.5rem 0.75rem;
-        }
-        
-        .compact-form .btn {
-            padding: 0.5rem 1rem;
-        }
-        
         .account-info {
             display: flex;
             align-items: center;
@@ -308,147 +201,420 @@
             font-size: 0.85rem;
         }
         
+        .form-control-color {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .form-control-color::-webkit-color-swatch {
+            border: none;
+            border-radius: 6px;
+        }
+        
+        .form-control-color::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        
+        .logo-upload-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .save-button {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 2rem auto 0;
+            font-size: 1.1rem;
+            min-width: 200px;
+        }
+        
+        .save-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .logo-preview {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            overflow: hidden;
+            position: relative;
+            border-radius: 12px;
+            border: 2px dashed #dee2e6;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .bg-color-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            background-color: var(--light-bg);
+        }
+        
+        .settings-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .logo-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .validation-error {
+            color: #dc3545;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+        
+        .logo-remove-btn {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background: rgba(220, 53, 69, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .logo-preview:hover .logo-remove-btn {
+            opacity: 1;
+        }
+
+        /* تحسينات التصميم المتكامل */
+        .unified-form-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            padding: 0;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1.5rem;
+            margin-bottom: 0;
+        }
+
+        .section-header h3 {
+            margin: 0;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-content {
+            padding: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .form-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .settings-group {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .settings-group h5 {
+            color: #495057;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .color-settings {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .color-preview-box {
+            width: 80px;
+            height: 40px;
+            border-radius: 6px;
+            border: 2px solid #dee2e6;
+            background: var(--light-bg);
+        }
+
+        .logo-upload-container {
+            text-align: center;
+            padding: 1.5rem;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .logo-upload-container:hover {
+            border-color: var(--primary-color);
+            background: #e9ecef;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
         @media (max-width: 768px) {
-            .card-body {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .section-content {
                 padding: 1rem;
             }
             
-            .profile-avatar {
-                width: 70px;
-                height: 70px;
-                font-size: 28px;
-            }
-            
-            .account-info {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .account-icon {
-                margin-left: 0;
-                margin-bottom: 0.5rem;
+            .settings-group {
+                padding: 1rem;
             }
         }
+        
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-gradient sticky-top shadow-sm">
-    <div class="container-xxl px-3">
-        <!-- شعار أو اسم الموقع -->
-        <a class="navbar-brand fw-bold" href="index.html">لوحة الأدمن</a>
-
-        <!-- زر القوائم عند الشاشات الصغيرة -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- روابط القائمة -->
-        <div class="collapse navbar-collapse" id="navMain">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link fw-medium" href="index.html">الرئيسية</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fw-medium" href="products.html">ادارة المنتجات</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fw-medium" href="store-details.html">ادارة العروض</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fw-medium" href="slider.html">الالوان والشعار</a>
-                </li>
-            </ul>
-
-            <!-- أيقونة المستخدم Dropdown -->
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-circle fs-3"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end shadow rounded-3 p-2">
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center gap-2 active" href="account.html">
-                                <i class="fas fa-user-cog fa-fw"></i>
-                                <span>إدارة الحساب</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center gap-2" href="#" id="loginAsUser">
-                                <i class="fas fa-sign-in-alt fa-fw"></i>
-                                <span>تسجيل الدخول كمستخدم</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
     </div>
-</nav>
 
+    <nav class="navbar custom-navbar">
+        <div class="container-xxl d-flex align-items-center">
+         
+            <a href="index.html" class="back-btn text-white">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            
+      
+            
+        
+        </div>
+    </nav>
     <header class="page-header">
         <div class="container-xxl px-3">
-            <h1 class="page-title">إدارة الحساب</h1>
-            <p class="page-subtitle">قم بإدارة معلومات حسابك الشخصي وتغيير كلمة المرور</p>
+            <h1 class="page-title">تعديل البروفايل</h1>
+            <p class="page-subtitle">قم بإدارة معلومات حسابك الشخصي وتغيير كلمة المرور وإعدادات المظهر</p>
         </div>
     </header>
 
-  <main class="container-xxl px-3 my-4">
-    <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h6 class="mb-0"><i class="fas fa-user me-2"></i>معلومات الملف الشخصي</h6>
-                </div>
-                <div class="card-body">
-                    <div class="account-info">
-                        <div class="account-icon">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="account-details">
-                            <div class="account-name">أحمد محمد</div>
-                            <div class="account-role"> صاحب المتجر</div>
-                        </div>
-                    </div>
-                    
-                    <form id="profileForm" class="compact-form">
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <label class="form-label">الاسم الكامل</label>
-                                <input type="text" class="form-control" value="أحمد محمد" readonly>
+    <main class="container-xxl px-3 my-4">
+        <form id="unifiedProfileForm" class="unified-form-section">
+            <div class="section-header">
+                <h3><i class="fas fa-user-cog"></i>معلومات الحساب الشخصي</h3>
+            </div>
+            
+            <div class="section-content">
+                <div class="form-grid">
+                    <div class="form-column">
+                        <div class="settings-group">
+                            <h5><i class="fas fa-id-card"></i>المعلومات الشخصية</h5>
+                            
+                            <div class="account-info">
+                                <div class="account-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="account-details">
+                                    <div class="account-name">أحمد محمد</div>
+                                    <div class="account-role">صاحب المتجر</div>
+                                </div>
                             </div>
                             
-                            <div class="col-12">
-                                <label class="form-label">رقم الهاتف</label>
-                                <input type="tel" class="form-control" value="+970 59 123 4567" readonly>
+                            <div class="mb-3">
+                                <label class="form-label">الاسم الكامل</label>
+                                <input type="text" class="form-control" value="أحمد محمد" name="fullName" id="fullName" required>
+                                <div class="validation-error" id="fullNameError">الاسم الكامل مطلوب</div>
                             </div>
-                            <div class="col-12"> <label class="form-label">كلمة المرور</label> <div class="password-input-group"> <input type="password" class="form-control password-field" value="1234" id="passwordField" readonly> <button type="button" class="password-toggle" id="togglePassword"> <i class="fas fa-eye"></i> </button> </div> </div>
-                            <div class="col-12 mt-4 d-flex justify-content-center">
+                            
+                            <div class="mb-3">
+                                <label class="form-label">رقم الهاتف</label>
+                                <input type="tel" class="form-control" value="+970 59 123 4567" name="phoneNumber" id="phoneNumber" required>
+                                <div class="validation-error" id="phoneNumberError">رقم الهاتف غير صحيح</div>
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h5><i class="fas fa-lock"></i>الأمان</h5>
+                            <div class="mb-3">
+                                <label class="form-label">كلمة المرور الحالية</label>
+                                <div class="password-input-group">
+                                    <input type="password" class="form-control password-field" value="1234" name="passwordField" id="passwordField" readonly>
+                                    <button type="button" class="password-toggle" id="togglePassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-center">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                                     <i class="fas fa-key me-2"></i>تغيير كلمة المرور
                                 </button>
                             </div>
-                            
                         </div>
-                    </form>
+                    </div>
+
+                    <div class="form-column">
+                       <div class="settings-group">
+  <h5><i class="fas fa-palette"></i> إعدادات المظهر</h5>
+
+  <div class="mb-3">
+    <label class="form-label fw-bold">لون خلفية الموقع</label>
+    <p class="text-muted small mb-2">اختر اللون الذي تظهر به خلفية الصفحة الرئيسية</p>
+    <div class="color-settings d-flex align-items-center gap-3">
+      
+      <input type="color" 
+             class="form-control form-control-color border" 
+             name="backgroundColor" 
+             id="backgroundColor" 
+             value="#f5f7fb" 
+             title="اختر لون الخلفية">
+
+      <div class="color-preview-box" id="bgPreview"></div>
+    </div>
+  </div>
+</div>
+
+                        <div class="settings-group">
+                            <h5><i class="fas fa-image"></i>شعار المتجر</h5>
+                            <div class="logo-upload-container">
+                                <div class="logo-preview" id="logoPreview">
+                                    <img src="https://marketplace.canva.com/EAFYzECeGEk/1/0/1600w/canva-%D8%B4%D8%B9%D8%A7%D8%B1-logo-%D9%85%D8%AA%D8%AC%D8%B1-%D9%84%D9%84%D9%85%D8%A8%D9%84%D8%A7%D8%A8%D8%B3-%D8%A7%D9%88-%D8%A7%D9%84%D8%A7%D8%B2%D9%8A%D8%A7%D8%A1-%D8%A7%D9%88-%D8%A7%D9%84%D9%85%D9%81%D8%B1%D9%88%D8%B4%D8%A7%D8%AA-vPrqHjFSvAE.jpg" 
+                                         alt="شعار المتجر" 
+                                         class="logo-img">
+                                    <button type="button" class="logo-remove-btn" id="removeLogoBtn">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="logo-actions mt-3">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('logoInput').click()">
+                                        <i class="fas fa-upload me-1"></i> رفع شعار جديد
+                                    </button>
+                                    <input type="file" id="logoInput" name="logoInput" accept="image/*" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- أزرار الإجراءات -->
+                <div class="action-buttons">
+                 
+                    <button type="submit" class="save-button">
+                        <i class="fas fa-save me-2"></i>حفظ جميع التعديلات
+                    </button>
                 </div>
             </div>
-        </div>
-    </div>
-</main>
+        </form>
+    </main>
 
-
-    <!-- نافذة تغيير كلمة المرور -->
-    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal fade" id="changePasswordModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="changePasswordModalLabel"><i class="fas fa-key me-2"></i>تغيير كلمة المرور</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title"><i class="fas fa-key me-2"></i>تغيير كلمة المرور</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="changePasswordForm" class="compact-form">
+                    <form id="changePasswordForm">
                         <div class="mb-3">
-                            <label for="currentPassword" class="form-label">كلمة المرور الحالية</label>
+                            <label class="form-label">كلمة المرور الحالية</label>
                             <div class="password-input-group">
                                 <input type="password" class="form-control password-field" id="currentPassword" placeholder="ادخل كلمة المرور الحالية" required>
                                 <button type="button" class="password-toggle toggle-current-password">
@@ -458,17 +624,18 @@
                         </div>
                         
                         <div class="mb-3">
-                            <label for="newPassword" class="form-label">كلمة المرور الجديدة</label>
+                            <label class="form-label">كلمة المرور الجديدة</label>
                             <div class="password-input-group">
                                 <input type="password" class="form-control password-field" id="newPassword" placeholder="ادخل كلمة المرور الجديدة" required>
                                 <button type="button" class="password-toggle toggle-new-password">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
+                            <div class="text-muted small mt-1">يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل</div>
                         </div>
                         
                         <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">تأكيد كلمة المرور الجديدة</label>
+                            <label class="form-label">تأكيد كلمة المرور الجديدة</label>
                             <div class="password-input-group">
                                 <input type="password" class="form-control password-field" id="confirmPassword" placeholder="اعد إدخال كلمة المرور الجديدة" required>
                                 <button type="button" class="password-toggle toggle-confirm-password">
@@ -488,101 +655,199 @@
             </div>
         </div>
     </div>
+  <footer class="bg-light text-center py-3 mt-auto shadow-sm">
+  <div class="container">
+    <p class="mb-0">© 2025 By Codna IT Solution</p>
+  </div>
+</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // وظيفة إظهار/إخفاء كلمة المرور
         document.addEventListener('DOMContentLoaded', function() {
-            // كلمة المرور في صفحة الحساب
-            const togglePassword = document.getElementById('togglePassword');
-            const passwordField = document.getElementById('passwordField');
-            
-            togglePassword.addEventListener('click', function() {
-                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordField.setAttribute('type', type);
-                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
-            });
-            
-            // كلمة المرور في النافذة المنبثقة
-            const toggleCurrentPassword = document.querySelector('.toggle-current-password');
-            const currentPassword = document.getElementById('currentPassword');
-            
-            toggleCurrentPassword.addEventListener('click', function() {
-                const type = currentPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-                currentPassword.setAttribute('type', type);
-                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
-            });
-            
-            const toggleNewPassword = document.querySelector('.toggle-new-password');
-            const newPassword = document.getElementById('newPassword');
-            
-            toggleNewPassword.addEventListener('click', function() {
-                const type = newPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-                newPassword.setAttribute('type', type);
-                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
-            });
-            
-            const toggleConfirmPassword = document.querySelector('.toggle-confirm-password');
-            const confirmPassword = document.getElementById('confirmPassword');
-            
-            toggleConfirmPassword.addEventListener('click', function() {
-                const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-                confirmPassword.setAttribute('type', type);
-                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
-            });
-            
-            // التحقق من تطابق كلمات المرور
-            const savePasswordBtn = document.getElementById('savePasswordBtn');
-            const passwordMatchError = document.getElementById('passwordMatchError');
-            
-            savePasswordBtn.addEventListener('click', function() {
-                const newPass = newPassword.value;
-                const confirmPass = confirmPassword.value;
-                
-                if (newPass !== confirmPass) {
-                    passwordMatchError.style.display = 'block';
-                    confirmPassword.classList.add('is-invalid');
-                } else {
-                    passwordMatchError.style.display = 'none';
-                    confirmPassword.classList.remove('is-invalid');
-                    
-                    // هنا يتم عرض SweetAlert2 بدل الـ alert
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'تم تغيير كلمة المرور!',
-                        text: 'تم تحديث كلمة المرور بنجاح.',
-                        confirmButtonText: 'حسنًا'
-                    }).then(() => {
-                        // إغلاق النافذة المنبثقة بعد الضغط على "حسنًا"
-                        const modal = bootstrap.Modal.getInstance(document.getElementById('changePasswordModal'));
-                        modal.hide();
+            // إعداد إظهار/إخفاء كلمة المرور
+            const setupPasswordToggle = (toggleBtn, passwordField) => {
+                toggleBtn.addEventListener('click', function() {
+                    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordField.setAttribute('type', type);
+                    this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+                });
+            };
 
-                        // إعادة تعيين النموذج
-                        document.getElementById('changePasswordForm').reset();
-                    });
+            // إعداد جميع حقول كلمة المرور
+            setupPasswordToggle(document.getElementById('togglePassword'), document.getElementById('passwordField'));
+            setupPasswordToggle(document.querySelector('.toggle-current-password'), document.getElementById('currentPassword'));
+            setupPasswordToggle(document.querySelector('.toggle-new-password'), document.getElementById('newPassword'));
+            setupPasswordToggle(document.querySelector('.toggle-confirm-password'), document.getElementById('confirmPassword'));
+
+            // تحديث الألوان في الوقت الحقيقي
+            function updateColors() {
+                const backgroundColor = document.getElementById('backgroundColor').value;
+                document.getElementById('bgPreview').style.backgroundColor = backgroundColor;
+                document.body.style.backgroundColor = backgroundColor;
+                document.documentElement.style.setProperty('--light-bg', backgroundColor);
+            }
+
+            document.getElementById('backgroundColor').addEventListener('input', updateColors);
+            updateColors();
+
+            // إعداد رفع الشعار
+            const logoInput = document.getElementById('logoInput');
+            const logoPreview = document.getElementById('logoPreview');
+            
+            logoInput.addEventListener('change', function(e) {
+                if (e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        logoPreview.innerHTML = `
+                            <img src="${e.target.result}" alt="شعار المتجر" class="logo-img">
+                            <button type="button" class="logo-remove-btn" id="removeLogoBtn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        `;
+                        
+                        document.getElementById('removeLogoBtn').addEventListener('click', removeLogo);
+                    };
+                    
+                    reader.readAsDataURL(file);
                 }
             });
+
+            function removeLogo() {
+                Swal.fire({
+                    title: 'هل أنت متأكد؟',
+                    text: "سيتم إزالة الشعار الحالي",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'نعم، إزالة',
+                    cancelButtonText: 'إلغاء'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        logoPreview.innerHTML = `
+                            <div class="placeholder">
+                                <i class="fas fa-image fa-3x text-muted"></i>
+                                <p class="mt-2 text-muted">لا يوجد شعار</p>
+                            </div>
+                            <button type="button" class="logo-remove-btn" id="removeLogoBtn" style="display: none;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        `;
+                        
+                        Swal.fire('تم الحذف!', 'تم إزالة الشعار بنجاح.', 'success');
+                    }
+                });
+            }
+
+            document.getElementById('removeLogoBtn').addEventListener('click', removeLogo);
+
+            // التحقق من صحة المدخلات
+            const fullNameInput = document.getElementById('fullName');
+            const phoneNumberInput = document.getElementById('phoneNumber');
             
-            // إعادة تعيين رسالة الخطأ عند تغيير المدخلات
-            confirmPassword.addEventListener('input', function() {
-                if (this.value === newPassword.value) {
-                    passwordMatchError.style.display = 'none';
+            fullNameInput.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    document.getElementById('fullNameError').style.display = 'block';
+                    this.classList.add('is-invalid');
+                } else {
+                    document.getElementById('fullNameError').style.display = 'none';
                     this.classList.remove('is-invalid');
                 }
             });
             
-            // منع إرسال النموذج عند الضغط على Enter
-            document.getElementById('profileForm').addEventListener('submit', function(e) {
+            phoneNumberInput.addEventListener('blur', function() {
+                const phoneRegex = /^\+?[\d\s-]{10,}$/;
+                if (!phoneRegex.test(this.value)) {
+                    document.getElementById('phoneNumberError').style.display = 'block';
+                    this.classList.add('is-invalid');
+                } else {
+                    document.getElementById('phoneNumberError').style.display = 'none';
+                    this.classList.remove('is-invalid');
+                }
+            });
+
+            // إرسال النموذج الموحد
+            const unifiedForm = document.getElementById('unifiedProfileForm');
+            unifiedForm.addEventListener('submit', function(e) {
                 e.preventDefault();
+                saveChanges();
+            });
+
+            // تغيير كلمة المرور
+            document.getElementById('savePasswordBtn').addEventListener('click', function() {
+                const newPass = document.getElementById('newPassword').value;
+                const confirmPass = document.getElementById('confirmPassword').value;
+                const passwordMatchError = document.getElementById('passwordMatchError');
+                
+                if (newPass !== confirmPass) {
+                    passwordMatchError.style.display = 'block';
+                    document.getElementById('confirmPassword').classList.add('is-invalid');
+                } else if (newPass.length < 8) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطأ',
+                        text: 'يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل',
+                        confirmButtonText: 'حسنًا'
+                    });
+                } else {
+                    passwordMatchError.style.display = 'none';
+                    document.getElementById('confirmPassword').classList.remove('is-invalid');
+                    
+                    document.getElementById('loadingOverlay').style.display = 'flex';
+                    
+                    setTimeout(() => {
+                        document.getElementById('loadingOverlay').style.display = 'none';
+                        
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'تم تغيير كلمة المرور!',
+                            text: 'تم تحديث كلمة المرور بنجاح.',
+                            confirmButtonText: 'حسنًا'
+                        }).then(() => {
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('changePasswordModal'));
+                            modal.hide();
+                            document.getElementById('changePasswordForm').reset();
+                        });
+                    }, 1500);
+                }
+            });
+        });
+
+        function saveChanges() {
+            const fullName = document.getElementById('fullName').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            
+            if (fullName.trim() === '') {
+                document.getElementById('fullNameError').style.display = 'block';
+                document.getElementById('fullName').classList.add('is-invalid');
+                return;
+            }
+            
+            const phoneRegex = /^\+?[\d\s-]{10,}$/;
+            if (!phoneRegex.test(phoneNumber)) {
+                document.getElementById('phoneNumberError').style.display = 'block';
+                document.getElementById('phoneNumber').classList.add('is-invalid');
+                return;
+            }
+            
+            document.getElementById('loadingOverlay').style.display = 'flex';
+            
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+                
                 Swal.fire({
                     icon: 'success',
                     title: 'تم الحفظ!',
-                    text: 'تم تحديث معلومات الملف الشخصي بنجاح.',
-                    confirmButtonText: 'حسنًا'
+                    text: 'تم حفظ جميع التعديلات بنجاح.',
+                    confirmButtonText: 'حسناً',
+                    timer: 2000,
+                    timerProgressBar: true
                 });
-            });
-        });
+            }, 1500);
+        }
     </script>
 </body>
 </html>

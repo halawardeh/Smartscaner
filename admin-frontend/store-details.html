@@ -243,45 +243,98 @@
             margin-bottom: 1rem;
             color: #dee2e6;
         }
+        
         .black-checkbox {
-  accent-color: black; /* اللون الأسود */
+            accent-color: black;
+        }
+        
+        .custom-switch {
+            background-color: #ddd;
+            border-radius: 50px;
+            transition: background-color 0.3s;
+        }
+
+        .custom-switch:before {
+            background-color: #fff;
+            transition: transform 0.3s;
+        }
+
+        .custom-switch:checked {
+            background-color: #28a745;
+        }
+
+        .custom-switch:checked:before {
+            transform: translateX(1.5rem);
+        }
+
+        .form-check-input.custom-switch {
+            width: 3rem;
+            height: 1.5rem;
+        }
+
+        .form-check-input.custom-switch:before {
+            height: 1.5rem;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            content: '';
+            position: absolute;
+        }
+        
+        /* تحسينات التنقل بين الصفحات */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            padding: 1rem 0;
+        }
+        
+        .pagination {
+            direction: ltr;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .page-link {
+            color: var(--primary-color);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link:hover {
+            background-color: #f8f9fa;
+            color: var(--secondary-color);
+        }
+        
+        .page-info {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .results-count {
+            background-color: #e9ecef;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+       @media screen and (max-width: 400px) {
+            .pagination-container {
+                margin-top: 1rem;         /* مسافة أقل */
+                padding: 0.5rem 0;   
+                display: flow-root;
+  }
 }
- .custom-switch {
-      background-color: #ddd;
-      border-radius: 50px;
-      transition: background-color 0.3s;
-  }
-
-  /* لون المقبض */
-  .custom-switch:before {
-      background-color: #fff;
-      transition: transform 0.3s;
-  }
-
-  /* عند التشغيل */
-  .custom-switch:checked {
-      background-color: #28a745; /* أخضر واضح */
-  }
-
-  /* مكب الضبط يتحرك عند التشغيل */
-  .custom-switch:checked:before {
-      transform: translateX(1.5rem); /* تعديل حسب حجم السويتش */
-  }
-
-  /* حجم السويتش */
-  .form-check-input.custom-switch {
-      width: 3rem;
-      height: 1.5rem;
-  }
-
-  .form-check-input.custom-switch:before {
-      height: 1.5rem;
-      border-radius: 50%;
-      top: 0;
-      left: 0;
-      content: '';
-      position: absolute;
-  }
     </style>
 </head>
 <body>
@@ -325,7 +378,6 @@
     <main class="container-xxl px-3 my-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h5 class="mb-0">🎁 إدارة عروض المتجر</h5>
-           
         </div>
 
         <!-- فلتر البحث -->
@@ -346,6 +398,8 @@
                     <option value="discount">خصومات</option>
                     <option value="bundle">عروض مجمعة</option>
                     <option value="seasonal">عروض موسمية</option>
+                    <option value="gift">هدايا</option>
+                    <option value="free_shipping">توصيل مجاني</option>
                 </select>
             </div>
             <div class="col-md-2">
@@ -355,122 +409,7 @@
 
         <!-- شبكة العروض -->
         <div class="row g-4" id="offersGrid">
-            <!-- عرض 1 -->
-            <div class="col-md-6 col-lg-4 offer-item" data-status="active" data-category="discount" data-title="عرض نهاية الموسم">
-                <div class="card offer-card">
-                    <div class="offer-image">
-                        <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="عرض خاص على الإلكترونيات">
-                       
-                    </div>
-                    <div class="offer-content">
-                        <h5 class="offer-title">عرض نهاية الموسم</h5>
-                        <p class="offer-description">خصم 50% على جميع المنتجات الإلكترونية لمدة محدودة. استفد من هذا العرض قبل نفاذ الكمية.</p>
-                        <div class="offer-status">
-                            <span class="status-badge status-active">نشط</span>
-                                                 <div class="form-check form-switch">
-  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
-</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- عرض 2 -->
-            <div class="col-md-6 col-lg-4 offer-item" data-status="inactive" data-category="bundle" data-title="عرض 2 مقابل 1">
-                <div class="card offer-card">
-                    <div class="offer-image">
-                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="عرض 2 مقابل 1">
-                    </div>
-                    <div class="offer-content">
-                        <h5 class="offer-title">عرض 2 مقابل 1</h5>
-                        <p class="offer-description">اشترِ منتجين واحصل على الثالث مجاناً. العرض ساري على جميع المنتجات المنزلية.</p>
-                        <div class="offer-status">
-                            <span class="status-badge status-inactive">غير نشط</span>
-                           <div class="form-check form-switch">
-  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
-</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- عرض 3 -->
-            <div class="col-md-6 col-lg-4 offer-item" data-status="active" data-category="seasonal" data-title="عروض الصيف الحصرية">
-                <div class="card offer-card">
-                    <div class="offer-image">
-                        <img src="https://copon5sm.com/wp-content/uploads/2024/07/%D8%B9%D8%B1%D9%88%D8%B6-%D8%A7%D9%84%D8%B5%D9%8A%D9%81.jpg" alt="عروض الصيف">
-                      
-                    </div>
-                    <div class="offer-content">
-                        <h5 class="offer-title">عروض الصيف الحصرية</h5>
-                        <p class="offer-description">خصومات تصل إلى 50% على منتجات الصيف. تشمل الملابس الصيفية، المنتجات البحرية والمزيد.</p>
-                        <div class="offer-status">
-                            <span class="status-badge status-active">نشط</span>
-                                                <div class="form-check form-switch">
-  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
-</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- عرض 4 -->
-            <div class="col-md-6 col-lg-4 offer-item" data-status="inactive" data-category="gift" data-title="عرض الهدايا المجانية">
-                <div class="card offer-card">
-                    <div class="offer-image">
-                        <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="عرض الهدايا">
-                    </div>
-                    <div class="offer-content">
-                        <h5 class="offer-title">عرض الهدايا المجانية</h5>
-                        <p class="offer-description">احصل على هدية مجانية مع كل عملية شراء تزيد عن 100 دينار. اختر من بين مجموعة الهدايا المتاحة.</p>
-                        <div class="offer-status">
-                            <span class="status-badge status-inactive">غير نشط</span>
-                                                <div class="form-check form-switch">
-  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
-</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- عرض 5 -->
-            <div class="col-md-6 col-lg-4 offer-item" data-status="active" data-category="discount" data-title="خصم 20% على الملابس">
-                <div class="card offer-card">
-                    <div class="offer-image">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAh124t0QIrW4fn4-Df0-ukGiyhR-ajyJayw&s" alt="خصم على الملابس">
-                     
-                    </div>
-                    <div class="offer-content">
-                        <h5 class="offer-title">خصم 20% على الملابس</h5>
-                        <p class="offer-description">استفد من خصم 20% على جميع الملابس لمدة أسبوع فقط. العرض يشمل جميع الفئات والأحجام.</p>
-                        <div class="offer-status">
-                            <span class="status-badge status-active">نشط</span>
-                                                  <div class="form-check form-switch">
-  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
-</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- عرض 6 -->
-            <div class="col-md-6 col-lg-4 offer-item" data-status="inactive" data-category="free_shipping" data-title="توصيل مجاني">
-                <div class="card offer-card">
-                    <div class="offer-image">
-                        <img src="https://www.easy-orders.net/blog/wp-content/uploads/2023/02/free-shipping-delivery-service-logo-badge-vector-780x470.webp" alt="توصيل مجاني">
-                    </div>
-                    <div class="offer-content">
-                        <h5 class="offer-title">توصيل مجاني</h5>
-                        <p class="offer-description">توصيل مجاني لجميع الطلبات التي تزيد عن 50 دينار. استمتع بالتسوق بدون أي تكاليف إضافية.</p>
-                        <div class="offer-status">
-                            <span class="status-badge status-inactive">غير نشط</span>
-                                                   <div class="form-check form-switch">
-  <input class="form-check-input custom-switch" type="checkbox" id="offerSwitch" onchange="toggleOfferStatus(2, this)">
-</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- سيتم إضافة العروض ديناميكياً -->
         </div>
         
         <!-- رسالة عدم وجود نتائج -->
@@ -479,11 +418,21 @@
             <h5>لا توجد عروض تطابق معايير البحث</h5>
             <p class="text-muted">جرب تغيير كلمات البحث أو معايير التصفية</p>
         </div>
+        
+        <!-- تنقل بين الصفحات -->
+        <div class="pagination-container">
+            <nav aria-label="تنقل بين الصفحات">
+                <ul class="pagination" id="pagination">
+                    <!-- سيتم إضافة أزرار الصفحات ديناميكياً -->
+                </ul>
+            </nav>
+        </div>
     </main>
-
-    <!-- Modal إضافة عرض جديد -->
-    
-
+<footer class="bg-light text-center py-3 mt-auto shadow-sm">
+  <div class="container">
+    <p class="mb-0">© 2025 By Codna IT Solution</p>
+  </div>
+</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // بيانات العروض
@@ -510,7 +459,7 @@
                 description: "خصومات تصل إلى 50% على منتجات الصيف. تشمل الملابس الصيفية، المنتجات البحرية والمزيد.",
                 status: "active",
                 category: "seasonal",
-                image: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                image: "https://copon5sm.com/wp-content/uploads/2024/07/%D8%B9%D8%B1%D9%88%D8%B6-%D8%A7%D9%84%D8%B5%D9%8A%D9%81.jpg"
             },
             {
                 id: 4,
@@ -526,7 +475,7 @@
                 description: "استفد من خصم 20% على جميع الملابس لمدة أسبوع فقط. العرض يشمل جميع الفئات والأحجام.",
                 status: "active",
                 category: "discount",
-                image: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAh124t0QIrW4fn4-Df0-ukGiyhR-ajyJayw&s"
             },
             {
                 id: 6,
@@ -535,8 +484,166 @@
                 status: "inactive",
                 category: "free_shipping",
                 image: "https://www.easy-orders.net/blog/wp-content/uploads/2023/02/free-shipping-delivery-service-logo-badge-vector-780x470.webp"
+            },
+            {
+                id: 7,
+                title: "عرض خاص على الأجهزة المنزلية",
+                description: "خصم 30% على جميع الأجهزة المنزلية لمدة أسبوع. العرض يشمل الثلاجات، الغسالات والمزيد.",
+                status: "active",
+                category: "discount",
+                image: "https://zagzoog.com/uploads/project_thumb/781-Zagzoog_image_1.jpg"
+            },
+            {
+                id: 8,
+                title: "عرض العودة إلى المدارس",
+                description: "خصومات تصل إلى 40% على جميع مستلزمات المدارس والقرطاسية. استعد للموسم الدراسي الجديد.",
+                status: "active",
+                category: "seasonal",
+                image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 9,
+                title: "عرض المنتجات المميزة",
+                description: "خصم 25% على مجموعة المنتجات المميزة لمدة محدودة. استفد من هذا العرض الحصري.",
+                status: "inactive",
+                category: "discount",
+                image: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 10,
+                title: "عرض عيد الأم",
+                description: "خصومات خاصة بمناسبة عيد الأم على مجموعة مختارة من الهدايا والعطور.",
+                status: "active",
+                category: "seasonal",
+                image: "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/best-template-happy-mother-day-poster-%26-flyer-design-e6b88cfbe31cb55d8a7390ca9ab97956_screen.jpg?ts=1651853512"
+            },
+            {
+                id: 11,
+                title: "عرض المنتجات الجديدة",
+                description: "خصم 15% على جميع المنتجات الجديدة لمدة أسبوع. كن أول من يحصل عليها.",
+                status: "active",
+                category: "discount",
+                image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 12,
+                title: "عرض التوصيل السريع",
+                description: "توصيل مجاني وسريع خلال 24 ساعة لجميع الطلبات التي تزيد عن 100 دينار.",
+                status: "inactive",
+                category: "free_shipping",
+                image: "https://vid.alarabiya.net/images/2024/03/30/e4c105ad-3bf5-469a-b5a1-4f84e6ad8555/e4c105ad-3bf5-469a-b5a1-4f84e6ad8555_16x9_1200x676.jpg?width=555&format=jpg"
             }
         ];
+
+        // متغيرات التنقل بين الصفحات
+        let currentPage = 1;
+        const offersPerPage = 6;
+        let filteredOffers = [...offers];
+
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            renderOffers();
+            setupPagination();
+            updateResultsCount();
+        });
+
+        // عرض العروض
+        function renderOffers() {
+            const offersGrid = document.getElementById('offersGrid');
+            offersGrid.innerHTML = '';
+            
+            const startIndex = (currentPage - 1) * offersPerPage;
+            const endIndex = startIndex + offersPerPage;
+            const currentOffers = filteredOffers.slice(startIndex, endIndex);
+            
+            if (currentOffers.length === 0) {
+                document.getElementById('noResults').classList.remove('d-none');
+                return;
+            } else {
+                document.getElementById('noResults').classList.add('d-none');
+            }
+            
+            currentOffers.forEach(offer => {
+                const offerElement = document.createElement('div');
+                offerElement.className = 'col-md-6 col-lg-4 offer-item';
+                offerElement.setAttribute('data-status', offer.status);
+                offerElement.setAttribute('data-category', offer.category);
+                offerElement.setAttribute('data-title', offer.title);
+                
+                const statusText = offer.status === 'active' ? 'نشط' : 'غير نشط';
+                const statusClass = offer.status === 'active' ? 'status-active' : 'status-inactive';
+                const isChecked = offer.status === 'active';
+                
+                offerElement.innerHTML = `
+                    <div class="card offer-card">
+                        <div class="offer-image">
+                            <img src="${offer.image}" alt="${offer.title}">
+                        </div>
+                        <div class="offer-content">
+                            <h5 class="offer-title">${offer.title}</h5>
+                            <p class="offer-description">${offer.description}</p>
+                            <div class="offer-status">
+                                <span class="status-badge ${statusClass}">${statusText}</span>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input custom-switch" type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleOfferStatus(${offer.id}, this)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                offersGrid.appendChild(offerElement);
+            });
+        }
+
+        // إعداد التنقل بين الصفحات
+        function setupPagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            const totalPages = Math.ceil(filteredOffers.length / offersPerPage);
+            
+            // زر الصفحة السابقة
+            const prevLi = document.createElement('li');
+            prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+            prevLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage - 1})">السابق</a>`;
+            pagination.appendChild(prevLi);
+            
+            // أزرار الصفحات
+            for (let i = 1; i <= totalPages; i++) {
+                const pageLi = document.createElement('li');
+                pageLi.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${i})">${i}</a>`;
+                pagination.appendChild(pageLi);
+            }
+            
+            // زر الصفحة التالية
+            const nextLi = document.createElement('li');
+            nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage + 1})">التالي</a>`;
+            pagination.appendChild(nextLi);
+        }
+
+        // تغيير الصفحة
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredOffers.length / offersPerPage);
+            
+            if (page < 1 || page > totalPages) return;
+            
+            currentPage = page;
+            renderOffers();
+            setupPagination();
+            updateResultsCount();
+        }
+
+        // تحديث عدد النتائج المعروضة
+        function updateResultsCount() {
+            const startIndex = (currentPage - 1) * offersPerPage + 1;
+            const endIndex = Math.min(currentPage * offersPerPage, filteredOffers.length);
+            
+            document.getElementById('currentCount').textContent = `${startIndex}-${endIndex}`;
+            document.getElementById('totalCount').textContent = filteredOffers.length;
+        }
 
         // فلتر العروض
         function filterOffers() {
@@ -544,128 +651,31 @@
             const statusFilter = document.getElementById('statusFilter').value;
             const categoryFilter = document.getElementById('categoryFilter').value;
             
-            const offerItems = document.querySelectorAll('.offer-item');
-            let visibleCount = 0;
-            
-            offerItems.forEach(item => {
-                const title = item.getAttribute('data-title').toLowerCase();
-                const status = item.getAttribute('data-status');
-                const category = item.getAttribute('data-category');
+            filteredOffers = offers.filter(offer => {
+                const matchesSearch = offer.title.toLowerCase().includes(searchTerm);
+                const matchesStatus = !statusFilter || offer.status === statusFilter;
+                const matchesCategory = !categoryFilter || offer.category === categoryFilter;
                 
-                const matchesSearch = title.includes(searchTerm);
-                const matchesStatus = !statusFilter || status === statusFilter;
-                const matchesCategory = !categoryFilter || category === categoryFilter;
-                
-                if (matchesSearch && matchesStatus && matchesCategory) {
-                    item.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    item.style.display = 'none';
-                }
+                return matchesSearch && matchesStatus && matchesCategory;
             });
             
-            // إظهار أو إخفاء رسالة عدم وجود نتائج
-            const noResults = document.getElementById('noResults');
-            if (visibleCount === 0) {
-                noResults.classList.remove('d-none');
-            } else {
-                noResults.classList.add('d-none');
-            }
+            currentPage = 1;
+            renderOffers();
+            setupPagination();
+            updateResultsCount();
         }
 
         function toggleOfferStatus(id, checkbox) {
-            const statusBadge = checkbox.closest('.offer-status').querySelector('.status-badge');
+            const offer = offers.find(o => o.id === id);
+            if (!offer) return;
             
-            if (checkbox.checked) {
-                // تفعيل العرض
-                statusBadge.textContent = 'نشط';
-                statusBadge.classList.remove('status-inactive');
-                statusBadge.classList.add('status-active');
-                
-                // تحديث البيانات
-                const offer = offers.find(o => o.id === id);
-                if (offer) offer.status = 'active';
-                
-                console.log('Activated offer:', id);
-            } else {
-                // تعطيل العرض
-                statusBadge.textContent = 'غير نشط';
-                statusBadge.classList.remove('status-active');
-                statusBadge.classList.add('status-inactive');
-                
-                // تحديث البيانات
-                const offer = offers.find(o => o.id === id);
-                if (offer) offer.status = 'inactive';
-                
-                console.log('Deactivated offer:', id);
-            }
+            offer.status = checkbox.checked ? 'active' : 'inactive';
+            
+            // إعادة التصفية إذا كان هناك فلتر نشط
+            filterOffers();
+            
+            console.log(`${checkbox.checked ? 'Activated' : 'Deactivated'} offer:`, id);
         }
-
-        function saveOffer() {
-            const form = document.getElementById('offerForm');
-            const formData = new FormData(form);
-            console.log('Saving offer:', Object.fromEntries(formData));
-            alert('تم حفظ العرض بنجاح!');
-            bootstrap.Modal.getInstance(document.getElementById('offerModal')).hide();
-        }
-
-        // رفع الصور
-        document.addEventListener('DOMContentLoaded', function() {
-            const uploadArea = document.getElementById('uploadArea');
-            const offerImage = document.getElementById('offerImage');
-            const imagePreview = document.getElementById('imagePreview');
-            const previewImg = imagePreview.querySelector('img');
-
-            uploadArea.addEventListener('click', function() {
-                offerImage.click();
-            });
-
-            offerImage.addEventListener('change', function(e) {
-                if (e.target.files.length > 0) {
-                    const file = e.target.files[0];
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(e) {
-                        previewImg.src = e.target.result;
-                        imagePreview.classList.remove('d-none');
-                        uploadArea.querySelector('p').classList.add('d-none');
-                        uploadArea.querySelector('i').classList.add('d-none');
-                    };
-                    
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            // Drag & Drop
-            uploadArea.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                uploadArea.style.backgroundColor = '#e3f2fd';
-            });
-
-            uploadArea.addEventListener('dragleave', function(e) {
-                e.preventDefault();
-                uploadArea.style.backgroundColor = '';
-            });
-
-            uploadArea.addEventListener('drop', function(e) {
-                e.preventDefault();
-                uploadArea.style.backgroundColor = '';
-                
-                if (e.dataTransfer.files.length > 0) {
-                    const file = e.dataTransfer.files[0];
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(e) {
-                        previewImg.src = e.target.result;
-                        imagePreview.classList.remove('d-none');
-                        uploadArea.querySelector('p').classList.add('d-none');
-                        uploadArea.querySelector('i').classList.add('d-none');
-                    };
-                    
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
     </script>
 </body>
 </html>
