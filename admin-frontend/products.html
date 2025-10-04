@@ -9,159 +9,119 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
     <style>
-        /* تحسين الناف بار */
-        .navbar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-            padding: 0.75rem 0;
+        /* تصميم الأزرار الجديدة */
+        .nav-buttons {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px 0;
+            margin-bottom: 20px;
         }
         
-        .navbar-nav .nav-link {
-            color: #ffffff !important;
-            font-weight: 500;
-            padding: 0.6rem 1rem !important;
-            margin: 0 0.2rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-size: 15px;
-        }
-        
-        .navbar-nav .nav-link:hover {
-            background-color: rgba(255,255,255,0.15);
-            color: #ffffff !important;
-            transform: translateY(-1px);
-        }
-        
-        .navbar-nav .nav-link.active {
-            background-color: rgba(255,255,255,0.25);
-            color: #ffffff !important;
-            font-weight: 600;
-        }
-        
-        /* تحسين أيقونة الحساب */
-        .navbar-nav .dropdown-toggle {
-            color: #ffffff !important;
-            font-size: 1.8rem !important;
-            padding: 0.4rem 0.8rem !important;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-        
-        .navbar-nav .dropdown-toggle:hover {
-            background-color: rgba(255,255,255,0.15);
-            transform: scale(1.1);
-        }
-        
-        .navbar-nav .dropdown-toggle:focus {
-            box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25);
-        }
-        
-        /* تحسين القائمة المنسدلة */
-        .dropdown-menu {
-            background-color: #ffffff;
+        .nav-button {
+            background: white;
             border: none;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            padding: 0.5rem 0;
-            min-width: 220px;
-            margin-top: 0.5rem;
-            animation: dropdownSlide 0.3s ease;
-            position: absolute !important;
-            z-index: 1050;
-            white-space: nowrap;
-            overflow: visible;
+            border-radius: 20px;
+            padding: 25px 20px;
+            text-align: center;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
         
-        /* إصلاح موضع القائمة للعربية */
-        .dropdown-menu-start {
-            right: 0 !important;
-            left: auto !important;
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
         }
         
-       .text-muted {
+        .nav-button:hover::before {
+            left: 100%;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .nav-button i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover i {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .nav-button h6 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .nav-button p {
+            margin: 0;
+            font-size: 13px;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+        
+        /* الألوان المختلفة للأزرار */
+        .btn-accounts i { 
+            color: #17a2b8;
+            background: linear-gradient(135deg, #17a2b8, #20c997);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-offers i { 
+            color: #28a745;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-products i { 
+            color: white !important;
+        }
+        
+        /* الزر النشط */
+        .nav-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .nav-button.active h6,
+        .nav-button.active p {
+            color: white;
+        }
+        
+        .text-muted {
              color: rgb(0 0 0) !important;
         }
         .border-light {
     --bs-border-opacity: 1;
     border-color: #6c757d5e !important;
 }
-        @keyframes dropdownSlide {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .dropdown-item {
-            color: #495057 !important;
-            padding: 0.75rem 1.25rem;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            border-left: 3px solid transparent;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: flex;
-            align-items: center;
-        }
-        
-        .dropdown-item i {
-            width: 20px;
-            text-align: center;
-            margin-left: 8px;
-        }
-        
-        .dropdown-item:hover {
-            background-color: #f8f9fa;
-            color: #667eea !important;
-            border-left-color: #667eea;
-            transform: translateX(5px);
-        }
-        
-        .dropdown-item:active {
-            background-color: #e9ecef;
-            color: #667eea !important;
-        }
-        
-        /* تحسين زر التبديل للموبايل */
-        .navbar-toggler {
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 8px;
-            padding: 0.4rem 0.6rem;
-        }
-        
-        .navbar-toggler:focus {
-            box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25);
-        }
-        
-        .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        }
-        
-        /* تحسين للموبايل */
-        @media (max-width: 768px) {
-            .navbar-nav {
-                background-color: rgba(255,255,255,0.1);
-                border-radius: 12px;
-                margin-top: 1rem;
-                padding: 0.5rem;
-            }
-            
-            .navbar-nav .nav-link {
-                color: #ffffff !important;
-                margin: 0.2rem 0;
-            }
-            
-            .dropdown-menu {
-                background-color: rgba(255,255,255,0.95);
-                backdrop-filter: blur(10px);
-            }
-        }
         
         /* تحسين الجدول للموبايل - حل مبسط */
         @media (max-width: 768px) {
@@ -278,76 +238,82 @@
             font-size: 0.875rem;
         }
         
-        /* تحسينات الـ navbar */
-        .navbar-toggler {
-            border: none;
-            padding: 0.25rem 0.5rem;
-        }
-        
-        .navbar-toggler:focus {
-            box-shadow: none;
-        }
-        
-        .navbar-brand {
-            font-size: 1.1rem;
-        }
-        
-        @media (max-width: 991.98px) {
-            .navbar-nav {
-                text-align: center;
-                padding: 1rem 0;
+        /* تحسينات للموبايل */
+        @media (max-width: 768px) {
+            .nav-buttons {
+                padding: 20px 0;
             }
             
-            .navbar-nav .nav-link {
-                padding: 0.5rem 1rem;
-                border-bottom: 1px solid rgba(0,0,0,0.1);
+            .nav-button {
+                min-height: 120px;
+                padding: 20px 15px;
+                border-radius: 15px;
             }
             
-            .navbar-nav .nav-link:last-child {
-                border-bottom: none;
+            .nav-button i {
+                font-size: 2.2rem;
+                margin-bottom: 10px;
+            }
+            
+            .nav-button h6 {
+                font-size: 14px;
+            }
+            
+            .nav-button p {
+                font-size: 11px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nav-button {
+                min-height: 110px;
+                padding: 15px 10px;
+            }
+            
+            .nav-button i {
+                font-size: 2rem;
+            }
+            
+            .nav-button h6 {
+                font-size: 13px;
+            }
+            
+            .nav-button p {
+                font-size: 10px;
+                line-height: 1.3;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg border-bottom sticky-top">
+    <!-- أزرار التنقل الجديدة -->
+    <div class="nav-buttons">
         <div class="container-xxl px-3">
-            <!-- العلامة التجارية أو الشعار -->
-            <a class="navbar-brand d-lg-none fw-bold text-primary" href="index.html">
-                لوحة صاحب المتجر
-            </a>
-            
-            <!-- زر البرغر مينو على اليسار -->
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <!-- محتويات النافبار -->
-            <div class="collapse navbar-collapse" id="navMain">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="products.html">ادارة المنتجات</a></li>
-                    <li class="nav-item"><a class="nav-link" href="store-details.html">ادارة العروض</a></li>
-                    <li class="nav-item"><a class="nav-link" href="slider.html">الالوان والشعار</a></li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle" style="font-size: 1.8rem;"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="account.html">
-                                <i class="fas fa-user-cog me-2"></i>إدارة الحساب
-                            </a></li>
-                            <li><a class="dropdown-item" href="#" id="loginAsUser">
-                                <i class="fas fa-sign-in-alt me-2"></i>تسجيل الدخول كمستخدم
-                            </a></li>
-                        </ul>
-                    </li>
-                </ul>
+            <div class="row g-4 justify-content-center">
+                <div class="col-12 col-md-4">
+                    <a href="account.html" class="nav-button btn-accounts">
+                        <i class="fas fa-user-cog"></i>
+                        <h6>إدارة الحساب</h6>
+                        <p>إعدادات وبيانات الحساب</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-4">
+                    <a href="store-details.html" class="nav-button btn-offers">
+                        <i class="fas fa-tags"></i>
+                        <h6>إدارة العروض</h6>
+                        <p>إنشاء وإدارة عروض المتجر</p>
+                    </a>
+                </div>
+                <div class="col-12 col-md-4">
+                    <a href="products.html" class="nav-button btn-products active">
+                        <i class="fas fa-box"></i>
+                        <h6>إدارة المنتجات</h6>
+                        <p>إضافة وتعديل وحذف المنتجات</p>
+                    </a>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
 
     <header class="" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
         <div class="container-xxl px-3 py-4">
@@ -369,32 +335,9 @@
                 <div class="row g-3 mb-4">
                     <div class="col-md-6">
                         <div class="position-relative">
-                            <input type="text" class="form-control ps-5" placeholder="البحث في المنتجات (الاسم، الباركود، الوصف...)" id="searchProduct">
+                            <input type="text" class="form-control ps-5" placeholder="البحث في المنتجات (الاسم، الباركود...)" id="searchProduct">
                             <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-select" id="categoryFilter">
-                            <option value="">جميع التصنيفات</option>
-                            <option value="dairy">ألبان ومشتقاتها</option>
-                            <option value="meat">لحوم وأسماك</option>
-                            <option value="vegetables">خضار وفواكه</option>
-                            <option value="snacks">سناكات ومقرمشات</option>
-                            <option value="beverages">مشروبات</option>
-                            <option value="bakery">مخبوزات وحلويات</option>
-                            <option value="frozen">أطعمة مجمدة</option>
-                            <option value="canned">معلبات ومحفوظات</option>
-                            <option value="spices">بهارات وتوابل</option>
-                            <option value="cleaning">منظفات ومواد تنظيف</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <select class="form-select" id="statusFilter">
-                            <option value="">جميع الحالات</option>
-                            <option value="available">متوفر</option>
-                            <option value="low">قليل</option>
-                            <option value="out_of_stock">نفد المخزون</option>
-                        </select>
                     </div>
                 </div>
 
@@ -404,20 +347,16 @@
                         <thead class="table-light">
                             <tr>
                                 <th style="width: 80px;">صورة المنتج</th>
-                                <th style="width: 140px;">رقم المنتج/الباركود</th>
-                                <th style="width: 120px;">التصنيف</th>
-                                <th style="width: 200px;">اسم المنتج</th>
-                                <th style="width: 250px;">وصف المنتج</th>
-                                <th style="width: 100px;">السعر</th>
-                                <th style="width: 100px;">العرض</th>
-                                <th style="width: 120px;">الوزن/الحجم</th>
-                                <th style="width: 100px;">الكمية</th>
-                                <th style="width: 110px;">حالة التوفر</th>
-                                <th style="width: 130px;">الإجراءات</th>
+                                <th style="width: 180px;">رقم المنتج/الباركود</th>
+                                <th style="width: 250px;">اسم المنتج</th>
+                                <th style="width: 120px;">السعر</th>
+                                <th style="width: 150px;">العرض</th>
+                                <th style="width: 150px;">الوزن/الحجم</th>
+                                <th style="width: 150px;">الإجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="product-row" data-category="dairy" data-status="available">
+                            <tr class="product-row">
                                 <td>
                                     <img src="https://i.pinimg.com/736x/50/c3/0e/50c30efb040a092fb169a0e877e63e2c.jpg" 
                                          alt="صورة المنتج" class="rounded product-image">
@@ -426,13 +365,7 @@
                                     <span class="badge  text-dark fs-6">1234567890123</span>
                                 </td>
                                 <td>
-                                    <span class="fs-6">ألبان ومشتقاتها</span>
-                                </td>
-                                <td>
                                     <div class="fw-semibold fs-6">حليب طازج كامل الدسم</div>
-                                </td>
-                                <td>
-                                    <span class="text-muted fs-6">حليب بقري طازج كامل الدسم - 1 لتر</span>
                                 </td>
                                 <td class="fw-bold text-success fs-6">2.50 د.أ</td>
                                 <td>
@@ -440,12 +373,6 @@
                                 </td>
                                 <td>
                                     <span class="fs-6">1 لتر<br>1000 مل</span>
-                                </td>
-                                <td>
-                                    <span class="badge fs-6">25 قطعة</span>
-                                </td>
-                                <td>
-                                    <span class="badge fs-6">متوفر</span>
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group">
@@ -461,7 +388,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="product-row" data-category="meat" data-status="low">
+                            <tr class="product-row">
                                 <td>
                                     <img src="https://i.pinimg.com/736x/bd/cb/91/bdcb915dfb03f4169a473025a180ef30.jpg" 
                                          alt="صورة المنتج" class="rounded product-image">
@@ -470,13 +397,7 @@
                                     <span class="badge  text-dark fs-6">9876543210987</span>
                                 </td>
                                 <td>
-                                    <span class="badge  fs-6">لحوم وأسماك</span>
-                                </td>
-                                <td>
                                     <div class="fw-semibold fs-6">لحم بقري مفروم</div>
-                                </td>
-                                <td>
-                                    <span class="text-muted fs-6">لحم بقري طازج مفروم ناعم - محلي</span>
                                 </td>
                                 <td class="fw-bold text-success fs-6">18.00 د.أ</td>
                                 <td>
@@ -484,12 +405,6 @@
                                 </td>
                                 <td>
                                     <span class="fs-6">1 كيلو<br>1000 جم</span>
-                                </td>
-                                <td>
-                                    <span class="badge text-dark fs-6">8 قطع</span>
-                                </td>
-                                <td>
-                                    <span class="badge fs-6">قليل</span>
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group">
@@ -505,7 +420,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="product-row" data-category="vegetables" data-status="available">
+                            <tr class="product-row">
                                 <td>
                                     <img src="https://i.pinimg.com/736x/48/e7/60/48e7605f18e17b8e92acb10a206fea11.jpg" 
                                          alt="صورة المنتج" class="rounded product-image">
@@ -514,13 +429,7 @@
                                     <span class="badge  text-dark fs-6">5432167890123</span>
                                 </td>
                                 <td>
-                                    <span class="badge    fs-6">خضار وفواكه</span>
-                                </td>
-                                <td>
                                     <div class="fw-semibold fs-6">تفاح أحمر طبيعي</div>
-                                </td>
-                                <td>
-                                    <span class="text-muted fs-6">تفاح أحمر طازج من المزارع المحلية</span>
                                 </td>
                                 <td class="fw-bold text-success fs-6">4.50 د.أ</td>
                                 <td>
@@ -528,12 +437,6 @@
                                 </td>
                                 <td>
                                     <span class="fs-6">1 كيلو<br>تقريباً 6-8 حبات</span>
-                                </td>
-                                <td>
-                                    <span class="badge    fs-6">50 قطعة</span>
-                                </td>
-                                <td>
-                                    <span class="badge    fs-6">متوفر</span>
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group">
@@ -555,7 +458,7 @@
 
                 <!-- عرض البطاقات للموبايل -->
                 <div class="mobile-cards">
-                    <div class="product-card" data-category="dairy" data-status="available">
+                    <div class="product-card">
                         <div class="product-header">
                             <img src="https://i.pinimg.com/736x/50/c3/0e/50c30efb040a092fb169a0e877e63e2c.jpg" 
                                  alt="صورة المنتج" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
@@ -565,24 +468,12 @@
                             </div>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">التصنيف:</span>
-                            <span class="info-value">ألبان ومشتقاتها</span>
-                        </div>
-                        <div class="product-info-row">
                             <span class="info-label">السعر:</span>
                             <span class="info-value text-success fw-bold">2.50 د.أ</span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">العرض:</span>
                             <span class="info-value">3 حبات بـ 6.00 د.أ</span>
-                        </div>
-                        <div class="product-info-row">
-                            <span class="info-label">الكمية:</span>
-                            <span class="info-value">25 قطعة</span>
-                        </div>
-                        <div class="product-info-row">
-                            <span class="info-label">الحالة:</span>
-                            <span class="info-value">متوفر</span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الوزن:</span>
@@ -603,7 +494,7 @@
                         </div>
                     </div>
 
-                    <div class="product-card" data-category="meat" data-status="low">
+                    <div class="product-card">
                         <div class="product-header">
                             <img src="https://i.pinimg.com/736x/bd/cb/91/bdcb915dfb03f4169a473025a180ef30.jpg" 
                                  alt="صورة المنتج" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
@@ -613,24 +504,12 @@
                             </div>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">التصنيف:</span>
-                            <span class="info-value">لحوم وأسماك</span>
-                        </div>
-                        <div class="product-info-row">
                             <span class="info-label">السعر:</span>
                             <span class="info-value text-success fw-bold">18.00 د.أ</span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">العرض:</span>
                             <span class="info-value text-muted">لا يوجد عرض</span>
-                        </div>
-                        <div class="product-info-row">
-                            <span class="info-label">الكمية:</span>
-                            <span class="info-value">8 قطعة</span>
-                        </div>
-                        <div class="product-info-row">
-                            <span class="info-label">الحالة:</span>
-                            <span class="info-value">قليل</span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الوزن:</span>
@@ -651,7 +530,7 @@
                         </div>
                     </div>
 
-                    <div class="product-card" data-category="vegetables" data-status="available">
+                    <div class="product-card">
                         <div class="product-header">
                             <img src="https://i.pinimg.com/736x/48/e7/60/48e7605f18e17b8e92acb10a206fea11.jpg" 
                                  alt="صورة المنتج" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
@@ -661,24 +540,12 @@
                             </div>
                         </div>
                         <div class="product-info-row">
-                            <span class="info-label">التصنيف:</span>
-                            <span class="info-value">خضار وفواكه</span>
-                        </div>
-                        <div class="product-info-row">
                             <span class="info-label">السعر:</span>
                             <span class="info-value text-success fw-bold">4.50 د.أ</span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">العرض:</span>
                             <span class="info-value">2 كيلو بـ 8.00 د.أ</span>
-                        </div>
-                        <div class="product-info-row">
-                            <span class="info-label">الكمية:</span>
-                            <span class="info-value">50 قطعة</span>
-                        </div>
-                        <div class="product-info-row">
-                            <span class="info-label">الحالة:</span>
-                            <span class="info-value">متوفر</span>
                         </div>
                         <div class="product-info-row">
                             <span class="info-label">الوزن:</span>
@@ -697,6 +564,8 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+                    
                     </div>
                 </div>
             </div>
@@ -725,42 +594,9 @@
                                     <span class="input-group-text">د.أ</span>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <label class="form-label">وصف المنتج</label>
-                                <textarea class="form-control" name="description" rows="3"></textarea>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">التصنيف *</label>
-                                <select class="form-control" name="category" required>
-                                    <option value="">اختر التصنيف</option>
-                                    <option value="dairy">ألبان ومشتقاتها</option>
-                                    <option value="meat">لحوم وأسماك</option>
-                                    <option value="vegetables">خضار وفواكه</option>
-                                    <option value="snacks">سناكات ومقرمشات</option>
-                                    <option value="beverages">مشروبات</option>
-                                    <option value="bakery">مخبوزات وحلويات</option>
-                                    <option value="frozen">أطعمة مجمدة</option>
-                                    <option value="canned">معلبات ومحفوظات</option>
-                                    <option value="spices">بهارات وتوابل</option>
-                                    <option value="cleaning">منظفات ومواد تنظيف</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">الكمية المتوفرة *</label>
-                                <input type="number" class="form-control" name="quantity" min="0" required>
-                            </div>
                             <div class="col-md-6">
                                 <label class="form-label">الوزن/الحجم</label>
                                 <input type="text" class="form-control" name="weight" placeholder="مثال: 1 كيلو، 500 مل">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">حالة التوفر *</label>
-                                <select class="form-control" name="status" required>
-                                    <option value="">اختر الحالة</option>
-                                    <option value="available">متوفر</option>
-                                    <option value="low">قليل</option>
-                                    <option value="out_of_stock">نفد المخزون</option>
-                                </select>
                             </div>
                            
                             <div class="col-12">
@@ -774,8 +610,39 @@
                                 <small class="text-muted">استخدم الكاميرا لمسح الباركود</small>
                             </div>
                             <div class="col-12">
-                                <label class="form-label">صورة المنتج</label>
-                                <input type="file" class="form-control" name="productImage" accept="image/*">
+                                <label class="form-label fw-bold text-dark fs-6">صورة المنتج</label>
+                                <div class="d-flex gap-2">
+                                    <input type="file" id="productImageFile" name="productImage" accept="image/*" style="display: none;" onchange="handleImageUpload(this)">
+                                    <button type="button" class="btn btn-outline-primary flex-fill" onclick="document.getElementById('productImageFile').click()">
+                                        <i class="fas fa-upload me-1"></i> رفع صورة
+                                    </button>
+                                    <button type="button" class="btn btn-outline-primary flex-fill" onclick="openProductCamera()">
+                                        <i class="fas fa-camera me-1"></i> التقاط صورة
+                                    </button>
+                                </div>
+                                
+                                <!-- قسم الكاميرا المباشرة -->
+                                <div id="cameraSection" class="mt-3" style="display: none;">
+                                    <video id="productCameraVideo" autoplay playsinline style="width: 100%; max-width: 400px; height: 300px; border-radius: 8px; border: 2px solid #667eea; display: block; margin: 0 auto;"></video>
+                                    <canvas id="productSnapshot" style="display: none"></canvas>
+                                    <div class="mt-2 text-center">
+                                        <button type="button" class="btn btn-success me-2" onclick="captureProductImage()">
+                                            <i class="fas fa-camera me-1"></i> التقاط
+                                        </button>
+                                        <button type="button" class="btn btn-danger" onclick="stopProductCamera()">
+                                            <i class="fas fa-stop me-1"></i> إيقاف
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div id="imagePreviewContainer" class="mt-2 d-none">
+                                    <img id="imagePreview" src="" alt="معاينة الصورة" class="img-thumbnail" style="max-width: 150px; max-height: 150px;">
+                                    <button type="button" class="btn btn-sm btn-danger ms-2" onclick="removeImage()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <small class="text-muted">يمكنك رفع صورة من الجهاز أو التقاطها بالكاميرا</small>
+                                <input type="hidden" id="productImageBase64" name="productImageBase64">
                             </div>
                              <!-- خانات العرض -->
                             <div class="col-12">
@@ -816,63 +683,27 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header text-white text-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                    <h5 class="modal-title w-100">إضافة باركود للمنتج</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title w-100">مسح الباركود (UPC/EAN/Code128)</h5>
+                    <button type="button" class="btn-close btn-close-white" onclick="closeBarcodeModal()"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="text-center mb-4">
-                        <p class="text-muted">يرجى توجيه الكاميرا نحو الباركود:</p>
+                    <div class="text-center mb-3">
+                        <p class="text-muted">وجه الكاميرا نحو الباركود</p>
                     </div>
 
-                    <!-- Camera Scanner Section -->
-                    <div id="cameraSection">
-                        <div class="text-center mb-3">
-                            <video id="cameraVideo" autoplay playsinline width="100%" height="250" style="border-radius: 8px; border: 1px solid #ddd;"></video>
-                        </div>
-                        <div id="scanResult" class="mt-3 d-none">
-                            <div class="alert alert-success" role="alert">
-                                <strong>تم المسح بنجاح!</strong>
-                                <p class="mb-2">الباركود: <span id="scannedCode"></span></p>
-                                <button type="button" class="btn btn-primary btn-sm" onclick="confirmScannedBarcode()">
-                                    ✅ تأكيد الباركود
-                                </button>
-                            </div>
+                    <!-- هدف QuaggaJS: المكتبة تبني الفيديو/الكانفس داخله -->
+                    <div id="barcode-target" style="width: 100%; max-width: 400px; height: 300px; margin: 0 auto; border: 2px solid #667eea; border-radius: 8px;"></div>
+
+                    <div id="scanResult" class="mt-3 d-none">
+                        <div class="alert alert-success" role="alert">
+                            <strong>تم المسح بنجاح!</strong>
+                            <p class="mb-2">الباركود: <span id="scannedCode"></span></p>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="confirmScannedBarcode()">
+                                ✅ تأكيد الباركود
+                            </button>
                         </div>
                     </div>
                 </div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const cameraModal = document.getElementById('barcodeModal');
-                        const video = document.getElementById('cameraVideo');
-
-                        cameraModal.addEventListener('show.bs.modal', () => {
-                            navigator.mediaDevices.getUserMedia({ video: true })
-                                .then((stream) => {
-                                    video.srcObject = stream;
-                                })
-                                .catch((err) => {
-                                    console.error('Error accessing camera:', err);
-                                });
-                        });
-
-                        cameraModal.addEventListener('hide.bs.modal', () => {
-                            const stream = video.srcObject;
-                            if (stream) {
-                                const tracks = stream.getTracks();
-                                tracks.forEach((track) => track.stop());
-                                video.srcObject = null;
-                            }
-                        });
-
-                        // Fix modal not hiding properly
-                        document.querySelectorAll('.btn-primary.btn-sm').forEach(button => {
-                            button.addEventListener('click', () => {
-                                const modal = bootstrap.Modal.getInstance(cameraModal);
-                                modal.hide();
-                            });
-                        });
-                    });
-                </script>
             </div>
         </div>
     </div>
@@ -1027,6 +858,8 @@
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- تحميل مكتبة QuaggaJS لمسح الباركود الخطي -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
     <script>
         // تأكد من عمل الـ navbar بشكل صحيح
         document.addEventListener('DOMContentLoaded', function() {
@@ -1163,48 +996,39 @@
             resetBarcodeModal();
         }
 
-        function resetBarcodeModal() {
-            document.getElementById('manualSection').classList.add('d-none');
-            document.getElementById('cameraSection').classList.add('d-none');
-            document.getElementById('scanResult').classList.add('d-none');
-            document.getElementById('manualBarcode').value = '';
-            stopCamera();
-        }
-
-        // Reset modal when closed
-        document.getElementById('barcodeModal').addEventListener('hidden.bs.modal', function () {
-            resetBarcodeModal();
-        });
 
         // Product Management Functions
         function filterProducts() {
-            const searchTerm = document.getElementById('searchProduct').value.toLowerCase();
-            const categoryFilter = document.getElementById('categoryFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
-            
+            const searchValue = document.getElementById('searchProduct').value.toLowerCase();
             const productRows = document.querySelectorAll('.product-row');
+            let hasVisibleProducts = false;
+
             productRows.forEach(row => {
-                const productName = row.querySelector('.product-name').textContent.toLowerCase();
-                const productCategory = row.querySelector('.product-category').dataset.category;
-                const productStatus = row.querySelector('.product-status').dataset.status;
+                const name = row.querySelector('.fw-semibold').textContent.toLowerCase();
+                const barcode = row.querySelector('.badge').textContent.toLowerCase();
 
-                const matchesSearch = productName.includes(searchTerm);
-                const matchesCategory = !categoryFilter || productCategory === categoryFilter;
-                const matchesStatus = !statusFilter || productStatus === statusFilter;
+                const matchesSearch = name.includes(searchValue) || barcode.includes(searchValue);
 
-                if (matchesSearch && matchesCategory && matchesStatus) {
+                if (matchesSearch) {
                     row.style.display = '';
+                    hasVisibleProducts = true;
                 } else {
                     row.style.display = 'none';
                 }
             });
+
+            // عرض رسالة عدم وجود نتائج
+            const noResults = document.getElementById('noResults');
+            if (noResults) {
+                if (hasVisibleProducts) {
+                    noResults.classList.add('d-none');
+                } else {
+                    noResults.classList.remove('d-none');
+                }
+            }
         }
 
-        function editProduct(id) {
-            console.log('Editing product:', id);
-            document.getElementById('productModal').querySelector('.modal-title').textContent = 'تعديل المنتج';
-            new bootstrap.Modal(document.getElementById('productModal')).show();
-        }
+        // تم نقل دالة editProduct إلى الأسفل مع الدوال الجديدة
 
         function viewBarcode(id) {
             // محاكاة بيانات المنتج
@@ -1239,15 +1063,103 @@
             }
         }
 
-        function deleteProduct(id) {
-            if (confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) {
-                console.log('Deleting product:', id);
-                alert('تم حذف المنتج!');
-            }
-        }
+        // تم نقل دالة deleteProduct إلى الأسفل مع الدوال الجديدة
 
         function viewBarcode(id) {
             alert('عرض باركود المنتج رقم: ' + id);
+        }
+
+        // دوال التعامل مع الصورة
+        let productCameraStream = null;
+
+        function handleImageUpload(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('productImageBase64').value = e.target.result;
+                    document.getElementById('imagePreviewContainer').classList.remove('d-none');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        async function openProductCamera() {
+            const cameraSection = document.getElementById('cameraSection');
+            const video = document.getElementById('productCameraVideo');
+            
+            cameraSection.style.display = 'block';
+            
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { 
+                        facingMode: 'environment',
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    }
+                });
+                productCameraStream = stream;
+                video.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'خطأ!',
+                    text: 'لا يمكن فتح الكاميرا. تأكد من منح الصلاحيات واستخدام HTTPS.',
+                    confirmButtonText: 'حسناً',
+                    confirmButtonColor: '#dc3545'
+                });
+                cameraSection.style.display = 'none';
+            }
+        }
+
+        function captureProductImage() {
+            const video = document.getElementById('productCameraVideo');
+            const canvas = document.getElementById('productSnapshot');
+            const ctx = canvas.getContext('2d');
+            
+            if (!video.srcObject) {
+                alert('الكاميرا غير مفعلة');
+                return;
+            }
+            
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            const dataUrl = canvas.toDataURL('image/png');
+            document.getElementById('productImageBase64').value = dataUrl;
+            document.getElementById('imagePreview').src = dataUrl;
+            document.getElementById('imagePreviewContainer').classList.remove('d-none');
+            
+            stopProductCamera();
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'تم!',
+                text: 'تم التقاط الصورة بنجاح',
+                confirmButtonText: 'حسناً',
+                confirmButtonColor: '#28a745',
+                timer: 2000,
+                timerProgressBar: true
+            });
+        }
+
+        function stopProductCamera() {
+            if (productCameraStream) {
+                productCameraStream.getTracks().forEach(track => track.stop());
+                productCameraStream = null;
+            }
+            const video = document.getElementById('productCameraVideo');
+            video.srcObject = null;
+            document.getElementById('cameraSection').style.display = 'none';
+        }
+
+        function removeImage() {
+            document.getElementById('productImageFile').value = '';
+            document.getElementById('productImageBase64').value = '';
+            document.getElementById('imagePreview').src = '';
+            document.getElementById('imagePreviewContainer').classList.add('d-none');
         }
 
         function saveProduct() {
@@ -1257,15 +1169,12 @@
             // التحقق من صحة البيانات
             const productName = formData.get('productName');
             const price = formData.get('price');
-            const category = formData.get('category');
-            const quantity = formData.get('quantity');
-            const status = formData.get('status');
             
-            if (!productName || !price || !category || !quantity || !status) {
+            if (!productName || !price) {
                 Swal.fire({
                     icon: 'error',
                     title: 'خطأ!',
-                    text: 'يرجى ملء جميع الحقول المطلوبة',
+                    text: 'يرجى ملء جميع الحقول المطلوبة (اسم المنتج والسعر)',
                     confirmButtonText: 'حسناً',
                     confirmButtonColor: '#dc3545'
                 });
@@ -1290,6 +1199,7 @@
             
             // إعادة تعيين النموذج
             form.reset();
+            removeImage();
             
             // هنا يمكن إضافة كود لإرسال البيانات للخادم وإضافة المنتج للجدول
         }
@@ -1329,6 +1239,16 @@
 
         #barcodeModal .modal-body {
             min-height: 300px;
+        }
+
+        /* إصلاح أبعاد فيديو QuaggaJS داخل barcode-target */
+        #barcode-target video,
+        #barcode-target canvas {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 400px !important;
+            max-height: 300px !important;
+            object-fit: cover;
         }
 
         .input-group .btn {
@@ -1390,119 +1310,47 @@
                     <h5 class="modal-title w-100">تفاصيل المنتج</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body p-4">
-                    <!-- صورة المنتج -->
-                    <div class="text-center mb-4">
-                        <div class="position-relative d-inline-block">
-                            <img id="viewProductImage" src="" alt="صورة المنتج" 
-                                 class="img-fluid rounded-3 shadow-sm border" 
-                                 style="width: 180px; height: 180px; object-fit: cover;">
-                        </div>
-                    </div>
-
-                    <!-- تفاصيل المنتج -->
-                    <div class="row g-3">
-                        <!-- اسم المنتج -->
-                        <div class="col-12">
-                            <div class="p-3 border border-light rounded-3">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="fas fa-box text-primary me-2"></i>
-                                    <small class="text-muted text-uppercase fw-semibold">اسم المنتج</small>
+                <div class="modal-body">
+                    <form>
+                        <div class="row g-3">
+                            <!-- صورة المنتج -->
+                            <div class="col-12 text-center mb-3">
+                                <img id="viewProductImage" src="" alt="صورة المنتج" class="rounded shadow" style="width: 150px; height: 150px; object-fit: cover;">
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="form-label">اسم المنتج</label>
+                                <input type="text" class="form-control" id="viewProductName" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">السعر</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="viewProductPrice" readonly>
+                                    <span class="input-group-text">د.أ</span>
                                 </div>
-                                <p id="viewProductName" class="mb-0 fw-bold"></p>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الوزن/الحجم</label>
+                                <input type="text" class="form-control" id="viewProductWeight" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">العرض</label>
+                                <input type="text" class="form-control" id="viewProductOffer" readonly>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark fs-6">الباركود</label>
+                                <input type="text" class="form-control font-monospace fs-6" id="viewProductBarcode" readonly>
                             </div>
                         </div>
-
-                        <!-- التصنيف والباركود -->
-                        <div class="col-md-6">
-                            <div class="p-3 border border-light rounded-3">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="fas fa-tags text-success me-2"></i>
-                                    <small class="text-muted text-uppercase fw-semibold">التصنيف</small>
-                                </div>
-                                <p id="viewProductCategory" class="mb-0 text-dark"></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-3 border border-light rounded-3">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="fas fa-barcode text-info me-2"></i>
-                                    <small class="text-muted text-uppercase fw-semibold">الباركود</small>
-                                </div>
-                                <p id="viewProductBarcode" class="mb-0 text-dark font-monospace"></p>
-                            </div>
-                        </div>
-
-                        <!-- السعر والكمية -->
-                        <div class="col-md-6">
-                            <div class="p-3 border border-light rounded-3">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="fas fa-dollar-sign text-warning me-2"></i>
-                                    <small class="text-muted text-uppercase fw-semibold">السعر</small>
-                                </div>
-                                <p id="viewProductPrice" class="mb-0 text-dark"></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-3 border border-light rounded-3">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="fas fa-cubes text-danger me-2"></i>
-                                    <small class="text-muted text-uppercase fw-semibold">الكمية المتوفرة</small>
-                                </div>
-                                <p id="viewProductQuantity" class="mb-0 text-dark"></p>
-                            </div>
-                        </div>
-
-                        <!-- الوزن وحالة التوفر -->
-                        <div class="col-md-6">
-                            <div class="p-3 border border-light rounded-3">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="fas fa-weight text-secondary me-2"></i>
-                                    <small class="text-muted text-uppercase fw-semibold">الوزن/الحجم</small>
-                                </div>
-                                <p id="viewProductWeight" class="mb-0 text-dark"></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="p-3 border border-light rounded-3">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="fas fa-check-circle text-success me-2"></i>
-                                    <small class="text-muted text-uppercase fw-semibold">حالة التوفر</small>
-                                </div>
-                                <p id="viewProductStatus" class="mb-0 text-dark"></p>
-                            </div>
-                        </div>
-
-                        <!-- العرض -->
-                        <div class="col-12">
-                            <div class="p-3 border border-light rounded-3">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="fas fa-tags text-primary me-2"></i>
-                                    <small class="text-muted text-uppercase fw-semibold">العرض الحالي</small>
-                                </div>
-                                <p id="viewProductOffer" class="mb-0 text-dark"></p>
-                            </div>
-                        </div>
-
-                        <!-- وصف المنتج -->
-                        <div class="col-12">
-                            <div class="p-3 border border-light rounded-3">
-                                <div class="d-flex align-items-center mb-2">
-                                    <i class="fas fa-align-left text-muted me-2"></i>
-                                    <small class="text-muted text-uppercase fw-semibold">وصف المنتج</small>
-                                </div>
-                                <p id="viewProductDescription" class="mb-0 text-dark lh-lg"></p>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
-                <div class="modal-footer border-0 pt-0 pb-4 px-4 justify-content-center">
+                <div class="modal-footer justify-content-center">
                     <div class="d-flex gap-3">
-                        <button type="button" class="btn btn-primary px-4 py-2 fw-semibold" onclick="editProductFromView()">
+                        <button type="button" class="btn btn-warning px-4 py-2 fw-semibold" onclick="editProductFromView()">
                             <i class="fas fa-edit me-2"></i>تعديل المنتج
                         </button>
                         <button type="button" class="btn btn-outline-secondary px-4 py-2 fw-semibold" data-bs-dismiss="modal">
-                            إلغاء
+                            إغلاق
                         </button>
                     </div>
                 </div>
@@ -1536,34 +1384,10 @@
                                 <input type="text" class="form-control fs-6" id="editProductNameInput" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-bold text-dark fs-6">التصنيف <span class="text-danger">*</span></label>
-                                <select class="form-select fs-6" id="editProductCategoryInput" required>
-                                    <option value="">اختر التصنيف</option>
-                                    <option value="dairy">ألبان ومشتقاتها</option>
-                                    <option value="meat">لحوم وأسماك</option>
-                                    <option value="vegetables">خضار وفواكه</option>
-                                    <option value="snacks">سناكات ومقرمشات</option>
-                                    <option value="beverages">مشروبات</option>
-                                    <option value="bakery">مخبوزات وحلويات</option>
-                                    <option value="frozen">أطعمة مجمدة</option>
-                                    <option value="canned">معلبات ومحفوظات</option>
-                                    <option value="spices">بهارات وتوابل</option>
-                                    <option value="cleaning">منظفات ومواد تنظيف</option>
-                                </select>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label fw-bold text-dark fs-6">وصف المنتج</label>
-                                <textarea class="form-control fs-6" id="editProductDescriptionInput" rows="3"></textarea>
-                            </div>
-                            <div class="col-md-4 ms-auto">
                                 <label class="form-label fw-bold text-dark fs-6">السعر (د.أ) <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control fs-6" id="editProductPriceInput" step="0.01" min="0" required>
                             </div>
-                            <div class="col-md-4 ms-auto">
-                                <label class="form-label fw-bold text-dark fs-6">الكمية <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control fs-6" id="editProductQuantityInput" min="0" required>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="form-label fw-bold text-dark fs-6">الوزن/الحجم</label>
                                 <input type="text" class="form-control fs-6" id="editProductWeightInput" placeholder="مثال: 1 كيلو">
                             </div>
@@ -1598,13 +1422,15 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer border-0 pt-0 pb-4 px-4 justify-content-center">
-                    <button type="button" class="btn btn-success text-white px-4 py-2 fw-semibold" onclick="saveChanges()">
-                        <i class="fas fa-save me-2"></i>حفظ التغييرات
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary px-4 py-2 fw-semibold" data-bs-dismiss="modal">
-                        إلغاء
-                    </button>
+                <div class="modal-footer justify-content-center">
+                    <div class="d-flex gap-3">
+                        <button type="button" class="btn btn-success px-4 py-2 fw-semibold" onclick="saveChanges()">
+                            <i class="fas fa-save me-2"></i>حفظ التغييرات
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary px-4 py-2 fw-semibold" data-bs-dismiss="modal">
+                            إلغاء
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1651,15 +1477,9 @@
             3: {
                 id: 3,
                 name: "تفاح أحمر طبيعي",
-                category: "vegetables",
-                categoryName: "خضار وفواكه",
-                description: "تفاح أحمر طازج من المزارع المحلية",
                 price: 4.50,
-                quantity: 50,
                 weight: "1 كيلو - تقريباً 6-8 حبات",
                 barcode: "5432167890123",
-                status: "available",
-                statusName: "متوفر",
                 image: "https://i.pinimg.com/736x/48/e7/60/48e7605f18e17b8e92acb10a206fea11.jpg",
                 offerQuantity: 2,
                 offerPrice: 8.00
@@ -1673,21 +1493,17 @@
 
             // ملء البيانات في المودال
             document.getElementById('viewProductImage').src = product.image;
-            document.getElementById('viewProductName').textContent = product.name;
-            document.getElementById('viewProductCategory').innerHTML = `<span>${product.categoryName}</span>`;
-            document.getElementById('viewProductDescription').textContent = product.description;
-            document.getElementById('viewProductPrice').textContent = `${product.price} د.أ`;
-            document.getElementById('viewProductQuantity').innerHTML = `${product.quantity} قطعة`;
-            document.getElementById('viewProductStatus').innerHTML = `${product.statusName}`;
-            document.getElementById('viewProductWeight').textContent = product.weight;
-            document.getElementById('viewProductBarcode').textContent = product.barcode;
+            document.getElementById('viewProductName').value = product.name;
+            document.getElementById('viewProductPrice').value = product.price;
+            document.getElementById('viewProductWeight').value = product.weight;
+            document.getElementById('viewProductBarcode').value = product.barcode;
             
             // عرض معلومات العرض
-            const offerElement = document.getElementById('viewProductOffer');
+            const offerInput = document.getElementById('viewProductOffer');
             if (product.offerQuantity && product.offerPrice) {
-                offerElement.textContent = `${product.offerQuantity} حبات بـ ${product.offerPrice} د.أ`;
+                offerInput.value = `${product.offerQuantity} حبات بـ ${product.offerPrice} د.أ`;
             } else {
-                offerElement.textContent = 'لا يوجد عرض حالياً';
+                offerInput.value = 'لا يوجد عرض حالياً';
             }
 
             // حفظ ID المنتج للتعديل اللاحق
@@ -1706,10 +1522,7 @@
             document.getElementById('editProductId').value = productId;
             document.getElementById('editProductImagePreview').src = product.image;
             document.getElementById('editProductNameInput').value = product.name;
-            document.getElementById('editProductCategoryInput').value = product.category;
-            document.getElementById('editProductDescriptionInput').value = product.description;
             document.getElementById('editProductPriceInput').value = product.price;
-            document.getElementById('editProductQuantityInput').value = product.quantity;
             document.getElementById('editProductWeightInput').value = product.weight;
             document.getElementById('editProductBarcodeInput').value = product.barcode;
             
@@ -1816,77 +1629,40 @@
             });
         }
 
-        // وظيفة البحث والفلترة
-        function filterProducts() {
-            const searchTerm = document.getElementById('searchProduct').value.toLowerCase();
-            const categoryFilter = document.getElementById('categoryFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
-            
-            const productRows = document.querySelectorAll('.product-row');
-            productRows.forEach(row => {
-                const productName = row.querySelector('.product-name').textContent.toLowerCase();
-                const productCategory = row.querySelector('.product-category').dataset.category;
-                const productStatus = row.querySelector('.product-status').dataset.status;
-
-                const matchesSearch = productName.includes(searchTerm);
-                const matchesCategory = !categoryFilter || productCategory === categoryFilter;
-                const matchesStatus = !statusFilter || productStatus === statusFilter;
-
-                if (matchesSearch && matchesCategory && matchesStatus) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
+        // تم حذف الدوال المكررة - الدوال الصحيحة موجودة في الأعلى
 
         document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('searchProduct');
-        const categoryFilter = document.getElementById('categoryFilter');
-        const statusFilter = document.getElementById('statusFilter');
         const productRows = document.querySelectorAll('.product-row');
         const productCards = document.querySelectorAll('.product-card');
 
         function filterProducts() {
             const searchValue = searchInput.value.toLowerCase();
-            const categoryValue = categoryFilter.value;
-            const statusValue = statusFilter.value;
 
             // فلترة صفوف الجدول
             productRows.forEach(row => {
                 const productName = row.querySelector('.fw-semibold');
                 const nameText = productName ? productName.textContent.toLowerCase() : '';
-                const category = row.getAttribute('data-category');
-                const status = row.getAttribute('data-status');
+                const barcode = row.querySelector('.badge');
+                const barcodeText = barcode ? barcode.textContent.toLowerCase() : '';
 
-                const matchesSearch = nameText.includes(searchValue);
-                const matchesCategory = !categoryValue || category === categoryValue;
-                const matchesStatus = !statusValue || status === statusValue;
-
-                const matches = matchesSearch && matchesCategory && matchesStatus;
-                row.style.display = matches ? '' : 'none';
+                const matchesSearch = nameText.includes(searchValue) || barcodeText.includes(searchValue);
+                row.style.display = matchesSearch ? '' : 'none';
             });
 
             // فلترة بطاقات الموبايل
             productCards.forEach(card => {
                 const productName = card.querySelector('.fw-bold');
                 const nameText = productName ? productName.textContent.toLowerCase() : '';
-                const category = card.getAttribute('data-category');
-                const status = card.getAttribute('data-status');
+                const barcode = card.querySelector('.text-muted');
+                const barcodeText = barcode ? barcode.textContent.toLowerCase() : '';
 
-                const matchesSearch = nameText.includes(searchValue);
-                const matchesCategory = !categoryValue || category === categoryValue;
-                const matchesStatus = !statusValue || status === statusValue;
-
-                const matches = matchesSearch && matchesCategory && matchesStatus;
-                card.style.display = matches ? '' : 'none';
+                const matchesSearch = nameText.includes(searchValue) || barcodeText.includes(searchValue);
+                card.style.display = matchesSearch ? '' : 'none';
             });
         }
 
         searchInput.addEventListener('input', filterProducts);
-        categoryFilter.addEventListener('change', filterProducts);
-        statusFilter.addEventListener('change', filterProducts);
-
         filterProducts(); // Apply filters on page load
     });
 
@@ -1896,12 +1672,125 @@
         const addModal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
         addModal.hide();
         
-        // انتظار اختفاء المودال ثم فتح مودال الباركود
+        // انتظار اختفاء المودال ثم فتح مودال الباركود وبدء المسح
         setTimeout(() => {
             const barcodeModal = new bootstrap.Modal(document.getElementById('barcodeModal'));
             barcodeModal.show();
+            
+            // بدء مسح الباركود تلقائياً
+            setTimeout(() => {
+                startBarcodeScanner();
+            }, 500);
         }, 300);
     }
+
+    // وظيفة بدء مسح الباركود باستخدام QuaggaJS
+    function startBarcodeScanner() {
+        document.getElementById('scanResult').classList.add('d-none');
+        
+        Quagga.init({
+            inputStream: {
+                name: 'Live',
+                type: 'LiveStream',
+                target: document.querySelector('#barcode-target'),
+                constraints: { 
+                    width: 640, 
+                    height: 480, 
+                    facingMode: 'environment' 
+                }
+            },
+            locator: { 
+                patchSize: 'medium', 
+                halfSample: true 
+            },
+            decoder: {
+                readers: [
+                    'code_128_reader',
+                    'ean_reader',
+                    'ean_8_reader',
+                    'upc_reader',
+                    'upc_e_reader'
+                ]
+            },
+            locate: true
+        }, function(err) {
+            if (err) {
+                console.error(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'خطأ!',
+                    text: 'تعذّر تشغيل الماسح. استخدم HTTPS وأذن بالكاميرا.',
+                    confirmButtonText: 'حسناً',
+                    confirmButtonColor: '#dc3545'
+                });
+                return;
+            }
+            Quagga.start();
+        });
+
+        Quagga.offDetected(); // تنظيف أي مستمع قديم
+        Quagga.onDetected(function(result) {
+            const code = result && result.codeResult && result.codeResult.code;
+            if (!code) return;
+            
+            // عرض النتيجة
+            document.getElementById('scannedCode').textContent = code;
+            document.getElementById('scanResult').classList.remove('d-none');
+            
+            // إيقاف المسح بعد القراءة الأولى
+            Quagga.stop();
+        });
+    }
+
+    // وظيفة إيقاف مسح الباركود
+    function stopBarcodeScanner() {
+        try {
+            Quagga.stop();
+        } catch(e) {
+            // تجاهل الخطأ إذا لم يكن الماسح شغال
+        }
+        document.getElementById('scanResult').classList.add('d-none');
+    }
+
+    // وظيفة تأكيد الباركود الممسوح
+    function confirmScannedBarcode() {
+        const scannedCode = document.getElementById('scannedCode').textContent;
+        document.querySelector('input[name="barcode"]').value = scannedCode;
+        
+        stopBarcodeScanner();
+        bootstrap.Modal.getInstance(document.getElementById('barcodeModal')).hide();
+        
+        // إظهار مودال إضافة المنتج مرة أخرى بعد اختفاء مودال الباركود
+        setTimeout(() => {
+            new bootstrap.Modal(document.getElementById('productModal')).show();
+        }, 300);
+        
+        Swal.fire({
+            icon: 'success',
+            title: 'تم إضافة الباركود!',
+            text: 'تم مسح وإضافة الباركود بنجاح: ' + scannedCode,
+            confirmButtonText: 'حسناً',
+            confirmButtonColor: '#28a745',
+            timer: 2000,
+            timerProgressBar: true
+        });
+    }
+
+    // دالة إغلاق modal الباركود وإعادة فتح modal إضافة المنتج
+    function closeBarcodeModal() {
+        stopBarcodeScanner();
+        bootstrap.Modal.getInstance(document.getElementById('barcodeModal')).hide();
+        
+        // إعادة فتح modal إضافة المنتج بعد إغلاق modal الباركود
+        setTimeout(() => {
+            new bootstrap.Modal(document.getElementById('productModal')).show();
+        }, 300);
+    }
+
+    // إيقاف المسح عند إغلاق المودال
+    document.getElementById('barcodeModal').addEventListener('hidden.bs.modal', function() {
+        stopBarcodeScanner();
+    });
 
     // وظيفة إعادة مسح الباركود في تعديل المنتج
     function rescanBarcode() {
@@ -1918,6 +1807,8 @@
             window.confirmScannedBarcode = function() {
                 const scannedCode = document.getElementById('scannedCode').textContent;
                 document.getElementById('editProductBarcodeInput').value = scannedCode;
+                
+                stopBarcodeScanner();
                 bootstrap.Modal.getInstance(document.getElementById('barcodeModal')).hide();
                 
                 // إظهار مودال التعديل مرة أخرى بعد اختفاء مودال الباركود
@@ -1928,19 +1819,23 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'تم تحديث الباركود!',
-                    text: 'تم مسح وتحديث الباركود بنجاح',
+                    text: 'تم مسح وتحديث الباركود بنجاح: ' + scannedCode,
                     confirmButtonText: 'حسناً',
                     confirmButtonColor: '#28a745',
                     timer: 2000,
                     timerProgressBar: true
                 });
                 
-                resetBarcodeModal();
                 // إرجاع الوظيفة الأصلية
                 window.confirmScannedBarcode = window.originalConfirmScannedBarcode;
             };
             
             barcodeModal.show();
+            
+            // بدء مسح الباركود تلقائياً
+            setTimeout(() => {
+                startBarcodeScanner();
+            }, 500);
         }, 300);
     }
 
@@ -1950,15 +1845,24 @@
         const productData = {
             id: document.getElementById('editProductId').value,
             name: document.getElementById('editProductNameInput').value,
-            category: document.getElementById('editProductCategoryInput').value,
-            description: document.getElementById('editProductDescriptionInput').value,
             price: document.getElementById('editProductPriceInput').value,
-            quantity: document.getElementById('editProductQuantityInput').value,
             weight: document.getElementById('editProductWeightInput').value,
             barcode: document.getElementById('editProductBarcodeInput').value,
             offerQuantity: document.getElementById('editProductOfferQuantityInput').value,
             offerPrice: document.getElementById('editProductOfferPriceInput').value
         };
+
+        // التحقق من صحة البيانات
+        if (!productData.name || !productData.price) {
+            Swal.fire({
+                icon: 'error',
+                title: 'خطأ!',
+                text: 'يرجى ملء جميع الحقول المطلوبة (اسم المنتج والسعر)',
+                confirmButtonText: 'حسناً',
+                confirmButtonColor: '#dc3545'
+            });
+            return;
+        }
 
         // إغلاق المودال
         bootstrap.Modal.getInstance(document.getElementById('editProductModal')).hide();
@@ -1980,5 +1884,105 @@
 
     // تحديث وظيفة editProduct في نهاية الملف إذا كانت موجودة في مكان آخر
     </script>
+    
+<!-- تحميل مكتبة QuaggaJS لمسح الباركود الخطي -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+
+<script>
+    (()=>{
+      /* مراجع العناصر المستعملة */
+      let currentStream = null;                         // آخر ستريم كاميرا مفتوح لإيقافه عند التبديل
+      const barcodeSection = document.getElementById('barcodeSection');  // حاوية المسح
+      const photoSection   = document.getElementById('photoSection');    // حاوية التصوير
+      const productCam     = document.getElementById('productCam');      // فيديو التصوير
+      const snapshot       = document.getElementById('snapshot');        // كانفس التقاط الصورة
+      const ctx            = snapshot.getContext('2d');                  // سياق الرسم للكانفس
+
+      /* وظيفة عامة: إيقاف أي كاميرا أو مسح نشط وإخفاء الأقسام */
+      function stopAll(){
+        try { Quagga.stop(); } catch(_) {}
+        if(currentStream){
+          currentStream.getTracks().forEach(t => t.stop());
+          currentStream = null;
+        }
+        barcodeSection.style.display = 'none';
+        photoSection.style.display   = 'none';
+        productCam.srcObject = null;
+      }
+
+      /* فتح وضع مسح الباركود:
+         - يوقف أي شيء شغال
+         - يُظهر قسم المسح
+         - يهيّئ Quagga على الـ DIV الهدف
+         - عند القراءة: يملأ حقل Barcode ويوقف المسح */
+      function openBarcodeScanner(){
+        stopAll();
+        barcodeSection.style.display = 'block';
+
+        Quagga.init({
+          inputStream: {
+            name: 'Live',
+            type: 'LiveStream',
+            target: document.querySelector('#barcode-target'),
+            constraints: { width: 640, height: 480, facingMode: 'environment' }
+          },
+          locator: { patchSize: 'medium', halfSample: true },
+          decoder: {
+            readers: ['code_128_reader','ean_reader','ean_8_reader','upc_reader','upc_e_reader']
+          },
+          locate: true
+        }, err => {
+          if(err){ console.error(err); alert('تعذّر تشغيل الماسح. استخدم HTTPS وأذن بالكاميرا.'); return; }
+          Quagga.start();
+        });
+
+        Quagga.offDetected(); // تنظيف أي مستمع قديم
+        Quagga.onDetected(res=>{
+          const code = res && res.codeResult && res.codeResult.code;
+          if(!code) return;                       // لو القراءة فاضية تجاهل
+          document.getElementById('Barcode').value = code; // تعبئة تلقائية
+          Quagga.stop();                          // إيقاف بعد أول قراءة (سلوك أبسط)
+          alert('تمت القراءة: ' + code);         // تأكيد بسيط للمستخدم
+        });
+      }
+
+      /* فتح وضع تصوير المنتج:
+         - يوقف أي شيء شغال
+         - يُظهر قسم التصوير
+         - يطلب كاميرا الخلفية ويعرضها في <video> */
+      async function openProductCamera(){
+        stopAll();
+        photoSection.style.display = 'block';
+        try{
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
+          });
+          currentStream = stream;
+          productCam.srcObject = stream;
+        }catch(e){
+          console.error(e);
+          alert('لا يمكن فتح الكاميرا. فعّل HTTPS وأذونات الكاميرا.');
+        }
+      }
+
+      /* التقاط الصورة:
+         - يرسم إطار الفيديو على الكانفس
+         - يحول الصورة إلى Base64
+         - يخزن الناتج في input hidden للإرسال مع الفورم */
+      function takePicture(){
+        if(!productCam.srcObject){ alert('الكاميرا غير شغّالة'); return; }
+        ctx.drawImage(productCam, 0, 0, snapshot.width, snapshot.height);
+        const dataUrl = snapshot.toDataURL('image/png');
+        document.getElementById('productImageBase64').value = dataUrl;
+        alert('تم التقاط الصورة');
+      }
+
+      /* ربط الأزرار بالوظائف السابقة */
+      document.getElementById('btnBarcode').addEventListener('click', openBarcodeScanner);
+      document.getElementById('btnPhoto').addEventListener('click', openProductCamera);
+      document.getElementById('btnShot').addEventListener('click', takePicture);
+      document.getElementById('btnStop').addEventListener('click', stopAll);
+    })();
+</script>
 </body>
 </html>
