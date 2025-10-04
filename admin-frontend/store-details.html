@@ -338,36 +338,7 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container-xxl px-3">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navMain">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
-                    <li class="nav-item"><a class="nav-link" href="products.html">ادارة المنتجات</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="offers.html">ادارة العروض</a></li>
-                    <li class="nav-item"><a class="nav-link" href="slider.html">الالوان والشعار</a></li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle" style="font-size: 1.8rem;"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-start">
-                            <li><a class="dropdown-item" href="account.html">
-                                <i class="fas fa-user-cog me-2"></i>إدارة الحساب
-                            </a></li>
-                            <li><a class="dropdown-item" href="#" id="loginAsUser">
-                                <i class="fas fa-sign-in-alt me-2"></i>تسجيل الدخول كمستخدم
-                            </a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+  
 
     <header class="bg-white border-bottom">
         <div class="container-xxl px-3 py-3">
@@ -376,36 +347,24 @@
     </header>
 
     <main class="container-xxl px-3 my-4">
-        <div class="d-flex align-items-center justify-content-between mb-4">
-            <h5 class="mb-0">🎁 إدارة عروض المتجر</h5>
-        </div>
+       
 
         <!-- فلتر البحث -->
-        <div class="row g-2 mb-4">
-            <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="البحث عن عرض..." id="searchOffer" onkeyup="filterOffers()">
-            </div>
-            <div class="col-md-3">
-                <select class="form-control" id="statusFilter" onchange="filterOffers()">
-                    <option value="">جميع الحالات</option>
-                    <option value="active">نشط</option>
-                    <option value="inactive">غير نشط</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <select class="form-control" id="categoryFilter" onchange="filterOffers()">
-                    <option value="">جميع الفئات</option>
-                    <option value="discount">خصومات</option>
-                    <option value="bundle">عروض مجمعة</option>
-                    <option value="seasonal">عروض موسمية</option>
-                    <option value="gift">هدايا</option>
-                    <option value="free_shipping">توصيل مجاني</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-outline-primary w-100" onclick="filterOffers()">🔍 بحث</button>
-            </div>
-        </div>
+      <!-- البحث عن عرض -->
+<div class="row g-2 mb-4 justify-content-center">
+  <div class="col-md-4">
+    <input type="text" class="form-control " placeholder="البحث عن عرض..." id="searchOffer" onkeyup="filterOffers()">
+  </div>
+  <div class="col-md-3">
+    <select class="form-control " id="statusFilter" onchange="filterOffers()">
+      <option value="">جميع الحالات</option>
+      <option value="active">نشط</option>
+      <option value="inactive">غير نشط</option>
+    </select>
+  </div>
+</div>
+
+
 
         <!-- شبكة العروض -->
         <div class="row g-4" id="offersGrid">
@@ -430,9 +389,12 @@
     </main>
 <footer class="bg-light text-center py-3 mt-auto shadow-sm">
   <div class="container">
-    <p class="mb-0">© 2025 By Codna IT Solution</p>
+    <p class="mb-0">
+      © 2025 <a href="https://codnaitsolutions.com/" target="_blank" class="text-decoration-none text-dark">By Codna IT Solution</a>
+    </p>
   </div>
 </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // بيانات العروض
@@ -646,24 +608,23 @@
         }
 
         // فلتر العروض
-        function filterOffers() {
-            const searchTerm = document.getElementById('searchOffer').value.toLowerCase();
-            const statusFilter = document.getElementById('statusFilter').value;
-            const categoryFilter = document.getElementById('categoryFilter').value;
-            
-            filteredOffers = offers.filter(offer => {
-                const matchesSearch = offer.title.toLowerCase().includes(searchTerm);
-                const matchesStatus = !statusFilter || offer.status === statusFilter;
-                const matchesCategory = !categoryFilter || offer.category === categoryFilter;
-                
-                return matchesSearch && matchesStatus && matchesCategory;
-            });
-            
-            currentPage = 1;
-            renderOffers();
-            setupPagination();
-            updateResultsCount();
-        }
+      function filterOffers() {
+    const searchTerm = document.getElementById('searchOffer').value.toLowerCase();
+    const statusFilter = document.getElementById('statusFilter').value;
+
+    filteredOffers = offers.filter(offer => {
+        const matchesSearch = offer.title.toLowerCase().includes(searchTerm) 
+                           || offer.description.toLowerCase().includes(searchTerm); // بحث بالوصف كمان
+        const matchesStatus = !statusFilter || offer.status === statusFilter;
+        return matchesSearch && matchesStatus;
+    });
+
+    currentPage = 1;
+    renderOffers();
+    setupPagination();
+    updateResultsCount();
+}
+
 
         function toggleOfferStatus(id, checkbox) {
             const offer = offers.find(o => o.id === id);
